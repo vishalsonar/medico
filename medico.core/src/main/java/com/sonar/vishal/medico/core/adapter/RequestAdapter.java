@@ -1,0 +1,69 @@
+package com.sonar.vishal.medico.core.adapter;
+
+import com.google.gson.JsonObject;
+import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.message.common.Message;
+import com.sonar.vishal.medico.common.structure.BillData;
+import com.sonar.vishal.medico.common.structure.Data;
+import com.sonar.vishal.medico.common.structure.Header;
+import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.ProductData;
+import com.sonar.vishal.medico.common.structure.RoleData;
+import com.sonar.vishal.medico.common.structure.StoreData;
+import com.sonar.vishal.medico.common.structure.UserData;
+import com.sonar.vishal.medico.core.definition.BusinessAdapter;
+import com.sonar.vishal.medico.core.definition.BusinessLogic;
+import com.sonar.vishal.medico.core.logic.BillLogic;
+import com.sonar.vishal.medico.core.logic.LoginLogic;
+import com.sonar.vishal.medico.core.logic.ProductLogic;
+import com.sonar.vishal.medico.core.logic.RoleLogic;
+import com.sonar.vishal.medico.core.logic.StoreLogic;
+import com.sonar.vishal.medico.core.logic.UserLogic;
+
+public class RequestAdapter implements BusinessAdapter {
+
+	private BusinessLogic logic;
+	private Header header;
+	private Data messageData;
+	private String response;
+
+	@Override
+	public JsonObject process(JsonObject data) {
+		try {
+			MacVerification(data);
+			JsonObject headerObject = data.get(Constant.HEADER).getAsJsonObject();
+			JsonObject dataObject = data.get(Constant.DATA).getAsJsonObject();
+			header = gson.fromJson(headerObject, Header.class);
+			String functionName = header.getFunction();
+			if (functionName.contains("Bill")) {
+				logic = new BillLogic();
+				messageData = gson.fromJson(dataObject, BillData.class);
+			}
+			if (functionName.contains("Login")) {
+				logic = new LoginLogic();
+				messageData = gson.fromJson(dataObject, LoginData.class);
+			}
+			if (functionName.contains("Product")) {
+				logic = new ProductLogic();
+				messageData = gson.fromJson(dataObject, ProductData.class);
+			}
+			if (functionName.contains("Role")) {
+				logic = new RoleLogic();
+				messageData = gson.fromJson(dataObject, RoleData.class);
+			}
+			if (functionName.contains("Store")) {
+				logic = new StoreLogic();
+				messageData = gson.fromJson(dataObject, StoreData.class);
+			}
+			if (functionName.contains("User")) {
+				logic = new UserLogic();
+				messageData = gson.fromJson(dataObject, UserData.class);
+			}
+			Message responesMessage = logic.execute(functionName, messageData);
+			response = gson.toJson(responesMessage);
+		} catch (Exception e) {
+			response = getErrorMessageAsString(e.getMessage());
+		}
+		return generateFinalMessage(response);
+	}
+}
