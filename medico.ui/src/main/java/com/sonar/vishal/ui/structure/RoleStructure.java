@@ -4,10 +4,13 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.window.AddRoleWindow;
+import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 public class RoleStructure implements CRUDStructure {
@@ -31,7 +34,7 @@ public class RoleStructure implements CRUDStructure {
 		list();
 		table.addColumn(Role::getId).setCaption("Id");
 		table.addColumn(Role::getName).setCaption("Name");
-		table.addColumn(Role::getModule).setCaption("Module");
+		table.addColumn(Role::getModule).setCaption("Option");
 		table.addSelectionListener(new SelectionListener<Role>() {
 			private static final long serialVersionUID = 1L;
 
@@ -51,7 +54,9 @@ public class RoleStructure implements CRUDStructure {
 
 	@Override
 	public void add() {
-		System.out.println("add click");
+		MedicoWindow window = new AddRoleWindow();
+		window.setWindow();
+		UI.getCurrent().addWindow(window);
 	}
 
 	@Override
