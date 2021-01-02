@@ -5,7 +5,7 @@ addons:
  sonarcloud:
   organization: "vishalsonar"
   token:
-   secure: "bb0ef31995b4d10c1aeb8e9806cfb9524317950b"
+   secure: "751d2b1ccee5256053bee45a54eae1d27b7460d9"
 script: mvn clean install sonar:sonar -Dsonar.projectKey=vishalsonar_medico -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 notification:
  email: vsonar908@gmail.com
