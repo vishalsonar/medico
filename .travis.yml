@@ -1,11 +1,14 @@
 language: java
+env:
+ global:
+  - SONAR_TOKEN=99450b20c9fee3d54e02b007eb6f2729772048b5
 jdk:
  - openjdk8
 addons:
  sonarcloud:
   organization: "vishalsonar"
   token:
-   secure: "99450b20c9fee3d54e02b007eb6f2729772048b5"
+   secure:
 script: mvn clean install sonar:sonar -Dsonar.projectKey=vishalsonar_medico -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 notification:
  email: vsonar908@gmail.com
