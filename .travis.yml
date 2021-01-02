@@ -1,9 +1,11 @@
 language: java
+dist: xenial
+sudo: required
 env:
  global:
   - SONAR_TOKEN=99450b20c9fee3d54e02b007eb6f2729772048b5
 jdk:
- - openjdk8
+ - openjdk11
 addons:
  sonarcloud:
   organization: "vishalsonar"
