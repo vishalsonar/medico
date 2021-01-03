@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
@@ -25,7 +26,7 @@ public class BillLogic implements BusinessLogic {
 			Criteria criteria = session.createCriteria(Bill.class);
 			criteria.createCriteria(Constant.PATIENT);
 			criteria.createCriteria(Constant.STORE);
-			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			List<Bill> list = (List<Bill>) hibernate.executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_BILL_LIST, Constant.NULL);

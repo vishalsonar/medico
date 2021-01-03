@@ -7,16 +7,14 @@ import com.sonar.vishal.medico.common.security.Security;
 
 public interface BusinessAdapter extends BussinessObject {
 
-	public static final Security SECURITY = Security.getIntance().init();
-
-	public default void MacVerification(JsonObject data) throws Exception {
+	public default void macVerification(JsonObject data) throws IllegalAccessException {
 		JsonObject header = data.get(Constant.HEADER).getAsJsonObject();
 		String mac = header.get(Constant.MAC).getAsString();
 		header.remove(Constant.MAC);
 		String dataString = data.toString();
-		String newMac = SECURITY.generateMac(dataString);
+		String newMac = Security.generateMac(dataString);
 		if (!mac.equals(newMac)) {
-			throw new Exception("Invalid MAC");
+			throw new IllegalAccessException("Invalid MAC");
 		}
 	}
 
@@ -24,7 +22,7 @@ public interface BusinessAdapter extends BussinessObject {
 		JsonObject dataObject = JsonParser.parseString(data).getAsJsonObject();
 		JsonObject headerObject = dataObject.get(Constant.HEADER).getAsJsonObject();
 		headerObject.remove(Constant.MAC);
-		String mac = SECURITY.generateMac(dataObject.toString());
+		String mac = Security.generateMac(dataObject.toString());
 		headerObject.addProperty(Constant.MAC, mac);
 		return dataObject;
 	}

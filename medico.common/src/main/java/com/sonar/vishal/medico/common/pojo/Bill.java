@@ -29,7 +29,7 @@ public class Bill {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Store store;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Product> products = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<>();
 
 	public int getId() {
 		return id;

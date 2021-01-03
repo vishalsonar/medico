@@ -14,6 +14,7 @@ import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.core.definition.BusinessAdapter;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 import com.sonar.vishal.medico.core.logic.BillLogic;
+import com.sonar.vishal.medico.core.logic.KeyLogic;
 import com.sonar.vishal.medico.core.logic.LoginLogic;
 import com.sonar.vishal.medico.core.logic.ProductLogic;
 import com.sonar.vishal.medico.core.logic.RoleLogic;
@@ -22,15 +23,15 @@ import com.sonar.vishal.medico.core.logic.UserLogic;
 
 public class RequestAdapter implements BusinessAdapter {
 
-	private BusinessLogic logic;
-	private Header header;
-	private Data messageData;
-	private String response;
-
 	@Override
 	public JsonObject process(JsonObject data) {
+		Header header = null;
+		Data messageData = null;
+		BusinessLogic logic = new KeyLogic();
+		String response = getErrorMessageAsString("Invalid Function Name");
+		
 		try {
-			MacVerification(data);
+			macVerification(data);
 			JsonObject headerObject = data.get(Constant.HEADER).getAsJsonObject();
 			JsonObject dataObject = data.get(Constant.DATA).getAsJsonObject();
 			header = gson.fromJson(headerObject, Header.class);

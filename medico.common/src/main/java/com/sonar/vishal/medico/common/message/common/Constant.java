@@ -2,6 +2,10 @@ package com.sonar.vishal.medico.common.message.common;
 
 public class Constant {
 
+	private Constant() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static final String SUCCESS = "Success";
 	public static final String ERROR = "Error";
 	public static final String ADDRESS = "address";
@@ -60,7 +64,7 @@ public class Constant {
 	public static final String VALIDATION_EXCEPTION = "Please Enter Required Feilds";
 	public static final String SELECT_ROW_TO_UPDATE = "Please Select row to Update";
 	public static final String SELECT_ROW_TO_DELETE = "Please Select row to Delete";
-	
+
 	public static final String ADD_ROLE_SUCCESS_MESSAGE = "Role Added";
 	public static final String UPDATE_ROLE_SUCCESS_MESSAGE = "Role Updated";
 	public static final String DELETE_ROLE_SUCESS_MESSAGE = "Role Deleted";

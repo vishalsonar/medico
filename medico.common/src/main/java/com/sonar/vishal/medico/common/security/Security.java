@@ -7,59 +7,49 @@ import javax.crypto.Mac;
 
 public class Security {
 
-	private static Mac MAC;
-	private static Key KEY;
-	private static Security SECURITY;
+	private static Mac mac;
+	private static Key key;
 
 	private Security() {
-
+		throw new IllegalStateException("Utility class");
 	}
 
-	public static Security getIntance() {
-		if (SECURITY == null) {
-			SECURITY = new Security();
-		}
-		return SECURITY;
-	}
-
-	public Security init() {
+	public static synchronized void init() {
 		try {
 			KeyGenerator keyGen = KeyGenerator.getInstance("AES");
-			MAC = Mac.getInstance("HmacSHA256");
+			mac = Mac.getInstance("HmacSHA256");
 			keyGen.init(256);
-			KEY = keyGen.generateKey();
-			MAC.init(KEY);
-			return this;
+			key = keyGen.generateKey();
+			mac.init(key);
 		} catch (Exception e) {
-			return null;
+			// Do Nothing
 		}
 	}
 
-	public Security init(Key KEY) {
+	public static synchronized void init(Key key) {
 		try {
-			Security.KEY = KEY;
-			MAC.init(KEY);
-			return this;
+			Security.key = key;
+			mac.init(key);
 		} catch (Exception e) {
-			return null;
+			// Do Nothing
 		}
 	}
 
-	public boolean isValidMessage(String message, String mac) {
+	public static synchronized boolean isValidMessage(String message, String mac) {
 		String messageMac = generateMac(message);
 		return mac.equals(messageMac);
 	}
 
-	public String generateMac(String message) {
+	public static synchronized String generateMac(String message) {
 		StringBuilder builder = new StringBuilder();
-		byte[] byteMessage = MAC.doFinal(message.getBytes());
+		byte[] byteMessage = mac.doFinal(message.getBytes());
 		for (byte singleByte : byteMessage) {
 			builder.append(Math.abs(singleByte));
 		}
 		return builder.toString();
 	}
 
-	public Key getKey() {
-		return KEY;
+	public static synchronized Key getKey() {
+		return key;
 	}
 }

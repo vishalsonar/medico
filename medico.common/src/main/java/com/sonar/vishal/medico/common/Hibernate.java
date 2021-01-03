@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.util.HibernateUtil;
@@ -105,7 +106,7 @@ public class Hibernate {
 			Criteria criteria = session.createCriteria(clazz);
 			criteria.createCriteria(mappingCriteria);
 			criteria.add(Restrictions.idEq(id));
-			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			object = criteria.list().get(0);
 			session.getTransaction().commit();
 		} catch (Exception e) {
