@@ -7,6 +7,7 @@ import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.structure.RoleData;
 import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.role.AddRoleWindow;
@@ -53,7 +54,7 @@ public class RoleStructure implements CRUDStructure {
 						selectedRole = optionalRole.get();
 					}
 				} catch(Exception e) {
-					
+					// Do Nothing.
 				}
 			}
 		});
@@ -94,7 +95,7 @@ public class RoleStructure implements CRUDStructure {
 			RoleData data = new RoleData();
 			data.setRole(selectedRole);
 			backend = new RestBackend(Constant.DELETE_ROLE);
-			RestBackend.message.setData(data);
+			Backend.message.setData(data);
 			boolean response = backend.doPostRespondHeader();
 			if (response) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_ROLE_SUCESS_MESSAGE);

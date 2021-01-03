@@ -15,9 +15,9 @@ import com.vaadin.ui.TextField;
 public class UpdateRoleWindow extends MedicoWindow {
 
 	private static final long serialVersionUID = -3029061649785789120L;
-	private Binder<Role> roleBinder = new Binder<Role>();
+	private Binder<Role> roleBinder = new Binder<>();
 	private Role selectedRole;
-	private CRUDStructure structure;
+	private transient CRUDStructure structure;
 
 	public UpdateRoleWindow(CRUDStructure structure, Role selectedRole) {
 		super("Update Role", structure);
@@ -34,7 +34,7 @@ public class UpdateRoleWindow extends MedicoWindow {
 		roleBinder.bind(name, Role::getName, Role::setName);
 		name.setValue(selectedRole.getName());
 		String[] optionArray = selectedRole.getModule().split(",");
-		optionGroup.setValue(new HashSet<String>(Arrays.asList(optionArray)));
+		optionGroup.setValue(new HashSet<>(Arrays.asList(optionArray)));
 		addComponents(name, optionGroup);
 		addAction();
 		addCancelListener(this);

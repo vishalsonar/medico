@@ -16,9 +16,9 @@ public class CRUDListener implements ClickListener {
 
 	private static final long serialVersionUID = -7246052250751624975L;
 	private Notification notification;
-	private RestBackend backend;
 	private MedicoWindow window;
-	private CRUDStructure structure;
+	private transient RestBackend backend;
+	private transient CRUDStructure structure;
 
 	public CRUDListener(CRUDStructure structure, String message, MedicoWindow window) {
 		this.backend = new RestBackend(message);
@@ -54,7 +54,7 @@ public class CRUDListener implements ClickListener {
 	}
 	
 	protected void doAction() {
-		
+		// Do Nothing, override method.
 	}
 
 	@Override

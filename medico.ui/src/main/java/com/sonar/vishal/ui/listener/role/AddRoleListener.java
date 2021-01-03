@@ -3,7 +3,7 @@ package com.sonar.vishal.ui.listener.role;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.structure.RoleData;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.exception.ValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
@@ -26,18 +26,16 @@ public class AddRoleListener extends CRUDListener {
 			Role role = new Role();
 			RoleData data = new RoleData();
 			this.roleBinder.writeBean(role);
-			role.setModule(RoleOptionValueListener.selectedOption);
+			role.setModule(RoleOptionValueListener.getSelectedOption());
 			validateString(role.getName());
 			validateString(role.getModule());
 			data.setRole(role);
-			RestBackend.message.setData(data);
+			Backend.message.setData(data);
 			doPostRespondHeader(Constant.ADD_ROLE_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
+		} catch (ValidationException e) {
+			notifyError(Constant.VALIDATION_EXCEPTION);
 		} catch (Exception e) {
-			if (e instanceof ValidationException) {
-				notifyError(Constant.VALIDATION_EXCEPTION);
-			} else {
-				notifyError(Constant.GENERAL_ERROR_MESSAGE);
-			}
+			notifyError(Constant.GENERAL_ERROR_MESSAGE);
 		}
 	}
 

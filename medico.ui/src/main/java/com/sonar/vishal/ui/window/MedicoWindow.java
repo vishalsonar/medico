@@ -22,7 +22,7 @@ public class MedicoWindow extends Window {
 	private HorizontalLayout action;
 	private Button submit;
 	private Button cancel;
-	protected CRUDStructure structure;
+	protected transient CRUDStructure structure;
 	protected Component COMPONENT = Component.getInstance();
 
 	public MedicoWindow(String label, CRUDStructure structure) {
