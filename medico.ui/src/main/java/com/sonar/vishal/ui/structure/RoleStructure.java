@@ -2,14 +2,19 @@ package com.sonar.vishal.ui.structure;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
+import com.sonar.vishal.medico.common.structure.RoleData;
 import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.window.AddRoleWindow;
 import com.sonar.vishal.ui.window.MedicoWindow;
+import com.sonar.vishal.ui.window.role.AddRoleWindow;
+import com.sonar.vishal.ui.window.role.UpdateRoleWindow;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -19,9 +24,9 @@ public class RoleStructure implements CRUDStructure {
 	private Grid<Role> table;
 	private RestBackend backend;
 	private Role selectedRole;
+	private Notification notification;
 
 	public RoleStructure() {
-		backend = new RestBackend(Constant.GET_ROLE_LIST);
 		layout = new VerticalLayout();
 		table = new Grid<Role>();
 		table.setSizeFull();
@@ -40,7 +45,11 @@ public class RoleStructure implements CRUDStructure {
 
 			@Override
 			public void selectionChange(SelectionEvent<Role> event) {
-				selectedRole = event.getFirstSelectedItem().get();
+				try {
+					selectedRole = event.getFirstSelectedItem().get();
+				} catch(Exception e) {
+					
+				}
 			}
 		});
 		return layout;
@@ -48,25 +57,48 @@ public class RoleStructure implements CRUDStructure {
 
 	@Override
 	public void list() {
+		backend = new RestBackend(Constant.GET_ROLE_LIST);
 		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
 		table.setItems(data);
 	}
 
 	@Override
 	public void add() {
-		MedicoWindow window = new AddRoleWindow();
+		MedicoWindow window = new AddRoleWindow(this);
 		window.setWindow();
 		UI.getCurrent().addWindow(window);
 	}
 
 	@Override
 	public void update() {
-		System.out.println("update");
+		try {
+			MedicoWindow window = new UpdateRoleWindow(this, selectedRole);
+			window.setWindow();
+			UI.getCurrent().addWindow(window);
+		} catch (Exception e) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
+			notification.show(Page.getCurrent());
+		}
 	}
 
 	@Override
 	public void delete() {
-		System.out.println("delete");
+		if (selectedRole == null) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_DELETE);
+		} else {
+			RoleData data = new RoleData();
+			data.setRole(selectedRole);
+			backend = new RestBackend(Constant.DELETE_ROLE);
+			RestBackend.message.setData(data);
+			boolean response = backend.doPostRespondHeader();
+			if (response) {
+				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_ROLE_SUCESS_MESSAGE);
+				list();
+			} else {
+				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
+			}
+		}
+		notification.show(Page.getCurrent());
 	}
 
 }

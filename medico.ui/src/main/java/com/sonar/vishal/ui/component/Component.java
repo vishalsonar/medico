@@ -9,6 +9,7 @@ import com.vaadin.shared.Position;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.CheckBoxGroup;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.Notification;
@@ -147,5 +148,12 @@ public class Component {
 		button.setSizeFull();
 		button.addClickListener(new GoToOptionListener());
 		return button;
+	}
+
+	public CheckBoxGroup<String> getCheckBoxGroup(String label, String... items) {
+		CheckBoxGroup<String> option = new CheckBoxGroup<String>();
+		option.setCaption(label);
+		option.setItems(items);
+		return option;
 	}
 }

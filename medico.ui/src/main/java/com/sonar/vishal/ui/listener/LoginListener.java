@@ -5,14 +5,15 @@ import java.util.Base64;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import com.mysql.cj.util.StringUtils;
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.structure.KeyData;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.exception.ValidationException;
 import com.vaadin.data.Binder;
-import com.vaadin.data.ValidationException;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button.ClickEvent;
@@ -41,6 +42,9 @@ public class LoginListener implements ClickListener {
 	public void buttonClick(ClickEvent event) {
 		try {
 			binder.writeBean(data);
+			if (StringUtils.isEmptyOrWhitespaceOnly(data.getUserName()) || StringUtils.isEmptyOrWhitespaceOnly(data.getPassword())) {
+				throw new ValidationException();
+			}
 			this.backend = new RestBackend(Constant.LOGIN);
 			RestBackend.message.setData(data);
 			boolean result = this.backend.doPostRespondHeader();
@@ -51,8 +55,12 @@ public class LoginListener implements ClickListener {
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
 			}
-		} catch (ValidationException e) {
-			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
+		} catch (Exception e) {
+			if (e instanceof ValidationException) {
+				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.VALIDATION_EXCEPTION);
+			} else {
+				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
+			}
 		}
 		notification.show(Page.getCurrent());
 	}

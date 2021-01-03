@@ -1,16 +1,17 @@
 package com.sonar.vishal.ui.window;
 
 import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.listener.WindowCloseListener;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vaadin.ui.themes.ValoTheme;
 
 public class MedicoWindow extends Window {
 
@@ -21,9 +22,11 @@ public class MedicoWindow extends Window {
 	private HorizontalLayout action;
 	private Button submit;
 	private Button cancel;
+	protected CRUDStructure structure;
 	protected Component COMPONENT = Component.getInstance();
 
-	public MedicoWindow(String label) {
+	public MedicoWindow(String label, CRUDStructure structure) {
+		this.structure = structure;
 		panel = new Panel();
 		form = new FormLayout();
 		layout = new VerticalLayout();

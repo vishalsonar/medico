@@ -56,4 +56,12 @@ public class Constant {
 	public static final String APPLICATION_JSON = "application/json";
 
 	public static final String LOGIN_FAILURE_MESSAGE = "Invalid Credentials";
+	public static final String GENERAL_ERROR_MESSAGE = "Operation Failed";
+	public static final String VALIDATION_EXCEPTION = "Please Enter Required Feilds";
+	public static final String SELECT_ROW_TO_UPDATE = "Please Select row to Update";
+	public static final String SELECT_ROW_TO_DELETE = "Please Select row to Delete";
+	
+	public static final String ADD_ROLE_SUCCESS_MESSAGE = "Role Added";
+	public static final String UPDATE_ROLE_SUCCESS_MESSAGE = "Role Updated";
+	public static final String DELETE_ROLE_SUCESS_MESSAGE = "Role Deleted";
 }

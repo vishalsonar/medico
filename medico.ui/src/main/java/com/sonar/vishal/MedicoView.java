@@ -37,8 +37,8 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 		leftLayout.setComponentAlignment(logo, Alignment.MIDDLE_LEFT);
 	}
 
-	public MedicoView(String logString, String add, String update, String delete) {
-		this(logString);
+	public MedicoView(String logoString, String add, String update, String delete) {
+		this(logoString);
 		addButton = component.getMenuButton(add, VaadinIcons.FILE_ADD);
 		updateButton = component.getMenuButton(update, VaadinIcons.FILE_REFRESH);
 		deleteButton = component.getMenuButton(delete, VaadinIcons.FILE_REMOVE);

@@ -9,4 +9,5 @@ public interface CRUDStructure extends Structure {
 	public void update();
 
 	public void delete();
+
 }
