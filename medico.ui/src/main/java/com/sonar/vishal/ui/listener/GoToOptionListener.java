@@ -10,7 +10,7 @@ public class GoToOptionListener implements ClickListener {
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		MedicoUI.navigator.navigateTo("optionpage");
+		MedicoUI.getNavigatorUI().navigateTo("optionpage");
 	}
 
 }

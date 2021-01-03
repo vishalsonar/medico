@@ -23,7 +23,7 @@ public class MedicoWindow extends Window {
 	private Button submit;
 	private Button cancel;
 	protected transient CRUDStructure structure;
-	protected Component COMPONENT = Component.getInstance();
+	protected transient Component COMPONENT = Component.getInstance();
 
 	public MedicoWindow(String label, CRUDStructure structure) {
 		this.structure = structure;
@@ -45,7 +45,7 @@ public class MedicoWindow extends Window {
 	}
 
 	public void setWindow() {
-
+		// Do Nothing.
 	}
 
 	public void addSubmitListener(ClickListener listener) {

@@ -25,10 +25,10 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	protected final VerticalLayout leftLayout;
 	protected final Label logo;
 	protected VerticalLayout rightLayout;
-	protected Component component = Component.getInstance();
 	protected boolean isDirty = false;
-	protected CRUDStructure structure;
-
+	protected transient CRUDStructure structure;
+	protected transient Component component = Component.getInstance();
+	
 	public MedicoView(String logoString) {
 		leftLayout = new VerticalLayout();
 		rightLayout = new VerticalLayout();
@@ -60,7 +60,7 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	}
 
 	public void setUI() {
-
+		// Do Nothing.
 	}
 
 	public void displayUI() {

@@ -18,7 +18,7 @@ public interface Backend {
 	public static final Gson gson = new Gson();
 
 	public default void init(String functionName) {
-		String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()).toString();
+		String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		Header header = new Header();
 		header.setDateTime(date);
 		header.setType(Constant.REQUEST);

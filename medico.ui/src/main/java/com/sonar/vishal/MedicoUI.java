@@ -14,16 +14,26 @@ import com.vaadin.ui.UI;
 public class MedicoUI extends UI {
 
 	private static final long serialVersionUID = -112040433551458450L;
-	public static Navigator navigator;
+	private static Navigator navigator;
+
+	public static Navigator getNavigatorUI() {
+		return navigator;
+	}
+
+	public static void setNavigatorUI(Navigator navigator) {
+		if (navigator != null) {
+			MedicoUI.navigator = navigator;
+		}
+	}
 
 	@Override
 	protected void init(VaadinRequest vaadinRequest) {
-		navigator = new Navigator(this, this);
-		navigator.addView("", new LoginView());
-		navigator.addView("optionpage", new OptionView());
-		navigator.addView("role", new RoleView());
-		navigator.navigateTo("");
-		navigator.addViewChangeListener(new ChangeListener());
+		setNavigatorUI(new Navigator(this, this));
+		getNavigatorUI().addView("", new LoginView());
+		getNavigatorUI().addView("optionpage", new OptionView());
+		getNavigatorUI().addView("role", new RoleView());
+		getNavigatorUI().navigateTo("");
+		getNavigatorUI().addViewChangeListener(new ChangeListener());
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "MedicoUI", asyncSupported = true)

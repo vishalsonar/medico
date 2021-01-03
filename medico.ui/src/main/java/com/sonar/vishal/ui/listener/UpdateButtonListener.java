@@ -7,7 +7,7 @@ import com.vaadin.ui.Button.ClickListener;
 public class UpdateButtonListener implements ClickListener {
 
 	private static final long serialVersionUID = -2546912365344481582L;
-	private CRUDStructure structure;
+	private transient CRUDStructure structure;
 
 	public UpdateButtonListener(CRUDStructure structure) {
 		this.structure = structure;
