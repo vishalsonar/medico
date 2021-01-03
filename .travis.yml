@@ -11,11 +11,11 @@ cache:
 services:
  - mysql
 before_install:
- - mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root')"
  - mysql -e 'CREATE DATABASE IF NOT EXISTS medico;'
+ - mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('root')"
 addons:
  sonarcloud:
   organization: "vishalsonar"
-script: mvn clean install sonar:sonar -Dsonar.projectKey=vishalsonar_medico -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script: mvn clean install sonar:sonar -Dsonar.projectKey=vishalsonar_medico -DskipTests=false -Dmaven.javadoc.skip=true -B -V
 notification:
  email: vsonar908@gmail.com
