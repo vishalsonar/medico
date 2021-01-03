@@ -18,7 +18,7 @@ public class LoginStructure implements Structure {
 	private Panel panel = new Panel();
 	private FormLayout formLayout = new FormLayout();
 	private Label login = COMPONENT.getLabel("Login");
-	private Binder<LoginData> binder = new Binder<LoginData>();
+	private Binder<LoginData> binder = new Binder<>();
 	private LoginData data = new LoginData();
 
 	public LoginStructure() {

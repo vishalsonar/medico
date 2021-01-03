@@ -87,7 +87,7 @@ public class Component {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				MedicoUI.navigator.navigateTo(navigateTo);
+				MedicoUI.getNavigatorUI().navigateTo(navigateTo);
 			}
 		});
 		return button;

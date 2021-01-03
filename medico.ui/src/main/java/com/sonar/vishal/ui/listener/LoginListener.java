@@ -12,6 +12,7 @@ import com.sonar.vishal.medico.common.structure.KeyData;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.exception.ValidationException;
 import com.vaadin.data.Binder;
 import com.vaadin.server.Page;
@@ -24,9 +25,8 @@ public class LoginListener implements ClickListener {
 
 	private static final long serialVersionUID = -1992503875386942892L;
 	private Binder<LoginData> binder;
-	private LoginData data;
-	private RestBackend backend;
-	private Notification notification;
+	private transient LoginData data;
+	private transient RestBackend backend;
 
 	public LoginListener(Binder<LoginData> binder, LoginData data) {
 		this.binder = binder;
@@ -40,18 +40,20 @@ public class LoginListener implements ClickListener {
 
 	@Override
 	public void buttonClick(ClickEvent event) {
+		Notification notification = null;
+		
 		try {
 			binder.writeBean(data);
 			if (StringUtils.isEmptyOrWhitespaceOnly(data.getUserName()) || StringUtils.isEmptyOrWhitespaceOnly(data.getPassword())) {
 				throw new ValidationException();
 			}
 			this.backend = new RestBackend(Constant.LOGIN);
-			RestBackend.message.setData(data);
+			Backend.message.setData(data);
 			boolean result = this.backend.doPostRespondHeader();
 			if (result) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, "Logged In");
 				VaadinSession.getCurrent().setAttribute("UserName", data.getUserName());
-				MedicoUI.navigator.navigateTo("optionpage");
+				MedicoUI.getNavigatorUI().navigateTo("optionpage");
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
 			}

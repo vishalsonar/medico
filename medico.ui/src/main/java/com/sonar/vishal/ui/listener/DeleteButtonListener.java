@@ -7,7 +7,7 @@ import com.vaadin.ui.Button.ClickListener;
 public class DeleteButtonListener implements ClickListener {
 
 	private static final long serialVersionUID = 3725027732893318339L;
-	private CRUDStructure structure;
+	private transient CRUDStructure structure;
 
 	public DeleteButtonListener(CRUDStructure structure) {
 		this.structure = structure;

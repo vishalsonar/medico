@@ -9,12 +9,13 @@ public class ChangeListener implements ViewChangeListener {
 
 	@Override
 	public boolean beforeViewChange(ViewChangeEvent event) {
+		boolean state = true;
 		Object userName = VaadinSession.getCurrent().getAttribute("UserName");
 		Object role = VaadinSession.getCurrent().getAttribute("Role");
 		if (userName == null || role == null) {
-			return false;
+			state = false;
 		}
-		return true;
+		return state;
 	}
 
 }

@@ -16,7 +16,7 @@ import com.vaadin.server.VaadinSession;
 
 public class RestBackend implements Backend {
 
-	private String URL;
+	private String url;
 	
 	static {
 		Security.init();
@@ -28,9 +28,9 @@ public class RestBackend implements Backend {
 
 	public RestBackend(String functionName) {
 		init(functionName);
-		URL = Constant.REQUEST_URL;
+		url = Constant.REQUEST_URL;
 		if (functionName.equals(Constant.GET_KEY)) {
-			URL = Constant.KEY_URL;
+			url = Constant.KEY_URL;
 		}
 	}
 
@@ -44,9 +44,8 @@ public class RestBackend implements Backend {
 
 	private ClientResponse doPost() {
 		String request = getMacRequest();
-		WebResource webResource = client.resource(URL);
-		ClientResponse response = webResource.type(Constant.APPLICATION_JSON).post(ClientResponse.class, request);
-		return response;
+		WebResource webResource = client.resource(url);
+		return webResource.type(Constant.APPLICATION_JSON).post(ClientResponse.class, request);
 	}
 
 	private boolean responseHeader(JsonObject responseObject) {
