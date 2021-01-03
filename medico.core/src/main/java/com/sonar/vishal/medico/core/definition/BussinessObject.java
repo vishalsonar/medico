@@ -17,7 +17,7 @@ public interface BussinessObject {
 	public static final Hibernate hibernate = new Hibernate();
 
 	public default Header getHeader() {
-		String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()).toString();
+		String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		Header header = new Header();
 		header.setDateTime(date);
 		return header;

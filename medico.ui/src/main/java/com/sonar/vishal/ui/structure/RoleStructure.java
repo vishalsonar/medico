@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.Optional;
+
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.structure.RoleData;
@@ -46,7 +48,10 @@ public class RoleStructure implements CRUDStructure {
 			@Override
 			public void selectionChange(SelectionEvent<Role> event) {
 				try {
-					selectedRole = event.getFirstSelectedItem().get();
+					Optional<Role> optionalRole = event.getFirstSelectedItem();
+					if (optionalRole.isPresent()) {
+						selectedRole = optionalRole.get();
+					}
 				} catch(Exception e) {
 					
 				}

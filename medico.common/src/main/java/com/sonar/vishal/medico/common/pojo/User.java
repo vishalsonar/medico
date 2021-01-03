@@ -29,7 +29,7 @@ public class User implements Serializable {
 	@Column(name = "password", nullable = false, length = 20)
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Role> role = new ArrayList<Role>();
+	private List<Role> role = new ArrayList<>();
 
 	public int getId() {
 		return id;

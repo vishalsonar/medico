@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
@@ -23,7 +24,7 @@ public class LoginLogic extends BusinessLogicAdapter {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.add(Restrictions.eq("userName", data.getUserName()));
 			criteria.add(Restrictions.eq("password", data.getPassword()));
-			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			List<?> list = hibernate.executeCriteria(session, criteria);
 			if (list != null && list.size() == 1) {
 				setSucessMessage(Constant.LOGIN);

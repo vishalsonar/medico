@@ -27,7 +27,6 @@ public class UnitTest extends TestCase {
 
 	private Api api;
 	private UnitTestData data;
-	private static Security security;
 	private static Gson gson;
 
 	static {
@@ -35,7 +34,7 @@ public class UnitTest extends TestCase {
 	}
 
 	public UnitTest() throws InvalidKeyException, NoSuchAlgorithmException {
-		security = Security.getIntance().init();
+		Security.init();
 		api = new Api();
 		data = new UnitTestData();
 	}
@@ -45,7 +44,7 @@ public class UnitTest extends TestCase {
 		JsonObject messageData = JsonParser.parseString(messageString).getAsJsonObject();
 		JsonObject header = messageData.get(Constant.HEADER).getAsJsonObject();
 		header.remove(Constant.MAC);
-		String mac = security.generateMac(messageString);
+		String mac = Security.generateMac(messageString);
 		return mac;
 	}
 
@@ -61,7 +60,7 @@ public class UnitTest extends TestCase {
 		byte[] decodedKey = Base64.getDecoder().decode(keyData.getKey());
 		Key key = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
 		try {
-			security = Security.getIntance().init(key);
+			Security.init(key);
 		} catch (Exception e) {
 
 		}

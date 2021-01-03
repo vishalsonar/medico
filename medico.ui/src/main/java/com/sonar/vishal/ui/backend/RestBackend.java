@@ -17,10 +17,13 @@ import com.vaadin.server.VaadinSession;
 public class RestBackend implements Backend {
 
 	private String URL;
-	private static Security security = Security.getIntance().init();
+	
+	static {
+		Security.init();
+	}
 
 	public void setKey(Key key) {
-		security = Security.getIntance().init(key);
+		Security.init(key);
 	}
 
 	public RestBackend(String functionName) {
@@ -34,7 +37,7 @@ public class RestBackend implements Backend {
 	private String getMacRequest() {
 		JsonObject object = JsonParser.parseString(gson.toJson(message)).getAsJsonObject();
 		object.get(Constant.HEADER).getAsJsonObject().remove(Constant.MAC);
-		String mac = security.generateMac(object.toString());
+		String mac = Security.generateMac(object.toString());
 		object.get(Constant.HEADER).getAsJsonObject().addProperty(Constant.MAC, mac);
 		return object.toString();
 	}
@@ -113,7 +116,7 @@ public class RestBackend implements Backend {
 			JsonObject header = object.get(Constant.HEADER).getAsJsonObject();
 			String mac = header.get(Constant.MAC).getAsString();
 			header.remove(Constant.MAC);
-			String newMac = security.generateMac(object.toString());
+			String newMac = Security.generateMac(object.toString());
 			state = mac.equals(newMac);
 		}
 		return state;
