@@ -55,12 +55,10 @@ public class LoginListener implements ClickListener {
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
 			}
+		} catch(ValidationException e) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.VALIDATION_EXCEPTION);
 		} catch (Exception e) {
-			if (e instanceof ValidationException) {
-				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.VALIDATION_EXCEPTION);
-			} else {
-				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
-			}
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);
 		}
 		notification.show(Page.getCurrent());
 	}

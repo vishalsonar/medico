@@ -151,7 +151,7 @@ public class Component {
 	}
 
 	public CheckBoxGroup<String> getCheckBoxGroup(String label, String... items) {
-		CheckBoxGroup<String> option = new CheckBoxGroup<String>();
+		CheckBoxGroup<String> option = new CheckBoxGroup<>();
 		option.setCaption(label);
 		option.setItems(items);
 		return option;

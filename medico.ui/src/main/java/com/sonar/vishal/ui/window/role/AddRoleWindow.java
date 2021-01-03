@@ -12,7 +12,7 @@ import com.vaadin.ui.TextField;
 public class AddRoleWindow extends MedicoWindow {
 
 	private static final long serialVersionUID = 791231962125024417L;
-	private Binder<Role> roleBinder = new Binder<Role>();
+	private Binder<Role> roleBinder = new Binder<>();
 
 	public AddRoleWindow(RoleStructure structure) {
 		super("Add Role", structure);
