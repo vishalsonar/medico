@@ -11,7 +11,9 @@ cache:
 services:
  - mysql
 before_install:
- - mysql -e 'CREATE DATABASE myapp_test;' 
+ - mysql -e 'CREATE USER "root"@"localhost" IDENTIFIED BY "root";'
+ - mysql -u root --password="root"
+ - mysql -e 'CREATE DATABASE IF NOT EXISTS medico;'
 addons:
  sonarcloud:
   organization: "vishalsonar"
