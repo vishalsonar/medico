@@ -11,9 +11,7 @@ cache:
 services:
  - mysql
 before_install:
- - mysql -e 'CREATE USER "root01"@"localhost" IDENTIFIED BY "root";'
- - mysql -e 'GRANT ALL PRIVILEGES ON * . * TO "root01"@"localhost";'
- - mysql -e 'CREATE DATABASE IF NOT EXISTS medico;'
+ - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\nCREATE DATABASE IF NOT EXISTS medico;\n" | mysql -u root
 addons:
  sonarcloud:
   organization: "vishalsonar"
