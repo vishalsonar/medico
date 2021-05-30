@@ -1,5 +1,6 @@
 package com.sonar.vishal.medico.core.logic;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -29,7 +30,7 @@ public class LoginLogic extends BusinessLogicAdapter {
 			if (list != null && list.size() == 1) {
 				setSucessMessage(Constant.LOGIN);
 				User user = (User) list.get(0);
-				roleData.setRoleList(user.getRole());
+				roleData.setRoleList(Arrays.asList(user.getRole()));
 			} else {
 				setErrorMessage(Constant.LOGIN, Constant.EXCEPTION);
 			}

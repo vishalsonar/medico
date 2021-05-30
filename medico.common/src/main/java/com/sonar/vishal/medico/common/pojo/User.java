@@ -1,18 +1,17 @@
 package com.sonar.vishal.medico.common.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "userlogin")
@@ -28,8 +27,11 @@ public class User implements Serializable {
 	private String userName;
 	@Column(name = "password", nullable = false, length = 20)
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-	private List<Role> role = new ArrayList<>();
+	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name = "role_id", referencedColumnName = "id")
+	private Role role;
+	@Transient
+	private String roleAsString;
 
 	public int getId() {
 		return id;
@@ -55,12 +57,23 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public List<Role> getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(List<Role> role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
+	public String getRoleAsString() {
+		return roleAsString;
+	}
+
+	public void setRoleAsString(String roleAsString) {
+		this.roleAsString = roleAsString;
+	}
+
+	public void update() {
+		setRoleAsString(getRole().getName());
+	}
 }

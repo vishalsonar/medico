@@ -1,0 +1,114 @@
+package com.sonar.vishal.ui.structure;
+
+import java.util.Optional;
+
+import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.structure.UserData;
+import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.window.MedicoWindow;
+import com.sonar.vishal.ui.window.user.AddUserWindow;
+import com.sonar.vishal.ui.window.user.UpdateUserWindow;
+import com.vaadin.event.selection.SelectionEvent;
+import com.vaadin.event.selection.SelectionListener;
+import com.vaadin.server.Page;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+
+public class UserStructure implements CRUDStructure {
+
+	private VerticalLayout layout;
+	private Grid<User> table;
+	private RestBackend backend;
+	private User selectedUser;
+	private Notification notification;
+
+	public UserStructure() {
+		layout = new VerticalLayout();
+		table = new Grid<>();
+		table.setSizeFull();
+		table.setSelectionMode(SelectionMode.SINGLE);
+		layout.addComponent(table);
+	}
+
+	@Override
+	public Object get() {
+		list();
+		table.addColumn(User::getId).setCaption("Id");
+		table.addColumn(User::getUserName).setCaption("Name");
+		table.addColumn(User::getPassword).setCaption("Password");
+		table.addColumn(User::getRoleAsString).setCaption("Role");
+		table.addSelectionListener(new SelectionListener<User>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void selectionChange(SelectionEvent<User> event) {
+				try {
+					Optional<User> optionalRole = event.getFirstSelectedItem();
+					if (optionalRole.isPresent()) {
+						selectedUser = optionalRole.get();
+					}
+				} catch (Exception e) {
+					// Do Nothing.
+				}
+			}
+		});
+		return layout;
+	}
+
+	@Override
+	public void list() {
+		backend = new RestBackend(Constant.GET_USER_LIST);
+		User[] data = (User[]) backend.doPostRespondData(User[].class);
+		for (User user : data) {
+			user.update();
+		}
+		table.setItems(data);
+	}
+
+	@Override
+	public void add() {
+		MedicoWindow window = new AddUserWindow(this);
+		window.setWindow();
+		UI.getCurrent().addWindow(window);
+	}
+
+	@Override
+	public void update() {
+		try {
+			MedicoWindow window = new UpdateUserWindow(this, selectedUser);
+			window.setWindow();
+			UI.getCurrent().addWindow(window);
+		} catch (Exception e) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
+			notification.show(Page.getCurrent());
+		}
+	}
+
+	@Override
+	public void delete() {
+		if (selectedUser == null) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_DELETE);
+		} else {
+			UserData data = new UserData();
+			data.setUser(selectedUser);
+			backend = new RestBackend(Constant.DELETE_USER);
+			Backend.message.setData(data);
+			boolean response = backend.doPostRespondHeader();
+			if (response) {
+				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_USER_SUCESS_MESSAGE);
+				list();
+			} else {
+				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
+			}
+		}
+		notification.show(Page.getCurrent());
+	}
+
+}

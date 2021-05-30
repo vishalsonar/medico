@@ -8,7 +8,6 @@ import org.hibernate.criterion.CriteriaSpecification;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
-import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
@@ -70,7 +69,7 @@ public class UserLogic implements BusinessLogic {
 	public void delete(Object data) {
 		Data replyData = new Data();
 		User user = (User) data;
-		boolean result = hibernate.delete(Product.class, user.getId());
+		boolean result = hibernate.delete(User.class, user.getId());
 		if (result) {
 			setSucessMessage(Constant.DELETE_USER);
 		} else {

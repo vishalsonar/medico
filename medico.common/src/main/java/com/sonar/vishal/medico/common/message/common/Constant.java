@@ -68,4 +68,8 @@ public class Constant {
 	public static final String ADD_ROLE_SUCCESS_MESSAGE = "Role Added";
 	public static final String UPDATE_ROLE_SUCCESS_MESSAGE = "Role Updated";
 	public static final String DELETE_ROLE_SUCESS_MESSAGE = "Role Deleted";
+	
+	public static final String ADD_USER_SUCCESS_MESSAGE = "User Added";
+	public static final String UPDATE_USER_SUCCESS_MESSAGE = "User Updated";
+	public static final String DELETE_USER_SUCESS_MESSAGE = "User Deleted";
 }
