@@ -26,7 +26,7 @@ public class OptionStructure implements Structure {
 		grid.addComponent(COMPONENT.getOptionButton("Bill", "", VaadinIcons.ALIGN_JUSTIFY));
 		grid.addComponent(COMPONENT.getOptionButton("Product", "", VaadinIcons.CLIPBOARD_CROSS));
 		grid.addComponent(COMPONENT.getOptionButton("Patient", "", VaadinIcons.USER_HEART));
-		grid.addComponent(COMPONENT.getOptionButton("Store", "", VaadinIcons.SHOP));
+		grid.addComponent(COMPONENT.getOptionButton("Store", "store", VaadinIcons.SHOP));
 		grid.addComponent(COMPONENT.getOptionButton("User", "user", VaadinIcons.USER));
 		grid.addComponent(COMPONENT.getOptionButton("Role", "role", VaadinIcons.TASKS));
 		return panel;
