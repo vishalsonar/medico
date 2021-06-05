@@ -76,4 +76,8 @@ public class Constant {
 	public static final String ADD_STORE_SUCCESS_MESSAGE = "Store Added";
 	public static final String UPDATE_STORE_SUCCESS_MESSAGE = "Store Updated";
 	public static final String DELETE_STORE_SUCESS_MESSAGE = "Store Deleted";
+	
+	public static final String ADD_PRODUCT_SUCCESS_MESSAGE = "Product Added";
+	public static final String UPDATE_PRODUCT_SUCCESS_MESSAGE = "Product Updated";
+	public static final String DELETE_PRODUCT_SUCESS_MESSAGE = "Product Deleted";
 }
