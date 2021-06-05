@@ -52,6 +52,7 @@ public class Constant {
 	public static final String UPDATE_ROLE = "UpdateRole";
 	public static final String DELETE_ROLE = "DeleteRole";
 
+	public static final String GET_PATIENT_LIST = "GetPatientList";
 	public static final String GET_KEY = "GetKey";
 
 	public static final String URL = "http://localhost:8086/medico.core/rest";

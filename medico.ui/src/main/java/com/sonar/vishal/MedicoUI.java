@@ -35,6 +35,7 @@ public class MedicoUI extends UI {
 		getNavigatorUI().addView("user", new UserView());
 		getNavigatorUI().addView("store", new StoreView());
 		getNavigatorUI().addView("product", new ProductView());
+		getNavigatorUI().addView("patient", new PatientView());
 		getNavigatorUI().navigateTo("");
 		getNavigatorUI().addViewChangeListener(new ChangeListener());
 	}
