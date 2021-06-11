@@ -46,8 +46,10 @@ public class CRUDListener implements ClickListener {
 		boolean response = backend.doPostRespondHeader();
 		if (response) {
 			notifySuccess(successMessage);
-			structure.list();
-			window.close();
+			if (structure != null && window != null) {
+				structure.list();
+				window.close();
+			}
 		} else {
 			notifyError(errorMessage);
 		}

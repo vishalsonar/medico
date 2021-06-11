@@ -12,11 +12,14 @@ public class ChangePasswordView extends MedicoView {
 	protected transient Component COMPONENT = Component.getInstance();
 
 	public ChangePasswordView() {
-		super("Change Password");
+		super("");
 	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {
+		if (!isDirty) {
+			displayUI();
+		}
 		MedicoWindow window = new ChangePasswordWindow();
 		window.setWindow();
 		UI.getCurrent().addWindow(window);
