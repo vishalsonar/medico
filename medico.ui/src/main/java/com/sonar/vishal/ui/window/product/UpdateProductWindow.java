@@ -11,7 +11,7 @@ public class UpdateProductWindow extends MedicoWindow {
 
 	private static final long serialVersionUID = -8168803717546976563L;
 	private Binder<Product> productBinder = new Binder<>();
-	private Product selectedProduct;
+	private transient Product selectedProduct;
 
 	public UpdateProductWindow(CRUDStructure structure, Product selectedProduct) {
 		super("Update Product", structure);

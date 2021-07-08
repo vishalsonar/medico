@@ -7,13 +7,15 @@ public class UIUtil {
 	public static final String STRING_REGEX = "[a-zA-Z]*";
 	public static final String NUMERIC_REGEX = "\\d*";
 	public static final String ALPHA_NUMERIC_REGEX = "\\w*";
+	
+	private UIUtil() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static boolean isValidString(String data) {
 		boolean result = false;
-		if (data != null && data.length() > 0) {
-			if (!data.trim().equals(UIConstant.EMPTY)) {
-				result = true;
-			}
+		if (data != null && data.length() > 0 && !data.trim().equals(UIConstant.EMPTY)) {
+			result = true;
 		}
 		return result;
 	}

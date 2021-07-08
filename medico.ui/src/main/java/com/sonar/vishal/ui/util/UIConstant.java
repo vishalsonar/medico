@@ -2,6 +2,10 @@ package com.sonar.vishal.ui.util;
 
 public class UIConstant {
 	
+	private UIConstant() {
+		throw new IllegalStateException("Constant class");
+	}
+	
 	public static final int PASSWORD_MIN_LENGTH = 8;
 	public static final int TWENTY = 20;
 

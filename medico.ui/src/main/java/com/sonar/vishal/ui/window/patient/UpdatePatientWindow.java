@@ -11,7 +11,7 @@ import com.vaadin.ui.TextField;
 public class UpdatePatientWindow extends MedicoWindow {
 
 	private static final long serialVersionUID = -262384955881959894L;
-	private Patient selectedPatient;
+	private transient Patient selectedPatient;
 	private Binder<Patient> patientBinder = new Binder<>();
 	private Binder<Address> addressBinder = new Binder<>();
 

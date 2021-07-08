@@ -17,7 +17,7 @@ public class ChangePasswordListener extends CRUDListener {
 
 	private static final long serialVersionUID = 6599959954201666323L;
 	private Binder<Password> passwordBinder;
-	private Password password;
+	private transient Password password;
 	private Window changePasswordWindow;
 
 	public ChangePasswordListener(Binder<Password> passwordBinder, Window changePasswordWindow) {
@@ -39,7 +39,7 @@ public class ChangePasswordListener extends CRUDListener {
 				UserData data = new UserData();
 				data.setUser(user);
 				Backend.message.setData(data);
-				doPostRespondHeader(Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
+				doPostRespondHeader(Constant.USER_PASSWORD_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 				changePasswordWindow.close();
 			} catch (ValidationException e) {
 				notifyError(e.getMessage());
