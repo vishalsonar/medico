@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.window;
 
+import java.util.Objects;
+
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.listener.WindowCloseListener;
@@ -63,4 +65,27 @@ public class MedicoWindow extends Window {
 	public void addAction() {
 		form.addComponent(action);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(action, cancel, form, layout, panel, submit);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MedicoWindow other = (MedicoWindow) obj;
+		return Objects.equals(action, other.action) && Objects.equals(cancel, other.cancel)
+				&& Objects.equals(form, other.form) && Objects.equals(layout, other.layout)
+				&& Objects.equals(panel, other.panel) && Objects.equals(submit, other.submit);
+	}
+	
 }
