@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.window.patient;
 
+import java.util.Objects;
+
 import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.ui.definition.CRUDStructure;
@@ -51,4 +53,25 @@ public class UpdatePatientWindow extends MedicoWindow {
 		addCancelListener(this);
 		addSubmitListener(new UpdatePatientListener(patientBinder, addressBinder, selectedPatient.getId(), this, structure));
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(addressBinder, patientBinder);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UpdatePatientWindow other = (UpdatePatientWindow) obj;
+		return Objects.equals(addressBinder, other.addressBinder) && Objects.equals(patientBinder, other.patientBinder);
+	}
+	
 }

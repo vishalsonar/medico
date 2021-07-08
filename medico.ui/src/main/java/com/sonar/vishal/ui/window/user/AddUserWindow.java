@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.window.user;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
@@ -48,4 +49,26 @@ public class AddUserWindow extends MedicoWindow {
 		RestBackend backend = new RestBackend(Constant.GET_ROLE_LIST);
 		roles = (Role[]) backend.doPostRespondData(Role[].class);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Arrays.hashCode(roles);
+		result = prime * result + Objects.hash(userBinder);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AddUserWindow other = (AddUserWindow) obj;
+		return Arrays.equals(roles, other.roles) && Objects.equals(userBinder, other.userBinder);
+	}
+	
 }
