@@ -25,7 +25,7 @@ public class MedicoWindow extends Window {
 	private Button submit;
 	private Button cancel;
 	protected transient CRUDStructure structure;
-	protected transient Component COMPONENT = Component.getInstance();
+	protected transient Component component = Component.getInstance();
 
 	public MedicoWindow(String label, CRUDStructure structure) {
 		this.structure = structure;
@@ -33,10 +33,10 @@ public class MedicoWindow extends Window {
 		form = new FormLayout();
 		layout = new VerticalLayout();
 		action = new HorizontalLayout();
-		submit = COMPONENT.getFriendlyButton("Submit", "100");
-		cancel = COMPONENT.getDangerButton("Cancel", "100");
+		submit = component.getFriendlyButton("Submit", "100");
+		cancel = component.getDangerButton("Cancel", "100");
 		action.addComponents(submit, cancel);
-		form.addComponent(COMPONENT.getPageLabel(label));
+		form.addComponent(component.getPageLabel(label));
 		panel.setContent(form);
 		panel.setWidth("500px");
 		panel.addStyleName(ValoTheme.PANEL_BORDERLESS);

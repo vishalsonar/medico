@@ -19,9 +19,9 @@ public class ChangePasswordWindow extends MedicoWindow {
 
 	@Override
 	public void setWindow() {
-		PasswordField password = COMPONENT.getPasswordField("Old Password", "Old Password", "300");
-		PasswordField newPassword = COMPONENT.getPasswordField("New Password", "New Password", "300");
-		PasswordField confirmPassword = COMPONENT.getPasswordField("Confirm Password", "Confirm Password", "300");
+		PasswordField password = component.getPasswordField("Old Password", "Old Password", "300");
+		PasswordField newPassword = component.getPasswordField("New Password", "New Password", "300");
+		PasswordField confirmPassword = component.getPasswordField("Confirm Password", "Confirm Password", "300");
 		passwordBinder.bind(password, Password::getPassword, Password::setPassword);
 		passwordBinder.bind(newPassword, Password::getNewPassword, Password::setNewPassword);
 		passwordBinder.bind(confirmPassword, Password::getConfirmPassword, Password::setConfirmPassword);

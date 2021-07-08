@@ -66,4 +66,10 @@ public class UIConstant {
 	
 	public static final String DOCTOR_NAME = "Doctor Name";
 	public static final String PATTIENT_NAME = "Patient Name";
+	
+	public static final String USER_SALT = "User Salt";
+	public static final String STORE_SALT = "Store Salt";
+	public static final String ROLE_SALT = "Role Salt";
+	public static final String PRODUCT_SALT = "Product Salt";
+	public static final String PATIENT_SALT = "Patient Salt";
 }
