@@ -13,7 +13,7 @@ public class UpdateStoreWindow extends MedicoWindow {
 	private static final long serialVersionUID = 1286841791002697168L;
 	private Binder<Store> storeBinder = new Binder<>();
 	private Binder<Address> addressBinder = new Binder<>();
-	private Store selectedStore;
+	private transient Store selectedStore;
 
 	public UpdateStoreWindow(CRUDStructure structure, Store selectedStore) {
 		super("Update Store", structure);

@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.listener.user;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import com.mysql.cj.util.StringUtils;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -22,9 +23,12 @@ public class UserRoleValueListener implements ValueChangeListener<String> {
 	public void valueChange(ValueChangeEvent<String> event) {
 		String selectedOption = event.getValue();
 		if (!StringUtils.isEmptyOrWhitespaceOnly(selectedOption)) {
-			UserRoleValueListener.selectedRole = UserRoleValueListener.roles.stream()
-																	  .filter(role -> selectedOption.equals(role.getName()))
-																	  .findFirst().get();
+			Optional<Role> optionalRole = UserRoleValueListener.roles.stream()
+															   .filter(role -> selectedOption.equals(role.getName()))
+															   .findFirst();
+			if (optionalRole.isPresent()) {
+				UserRoleValueListener.selectedRole = optionalRole.get();
+			}
 		}
 	}
 

@@ -16,7 +16,7 @@ public class UpdateRoleWindow extends MedicoWindow {
 
 	private static final long serialVersionUID = -3029061649785789120L;
 	private Binder<Role> roleBinder = new Binder<>();
-	private Role selectedRole;
+	private transient Role selectedRole;
 
 	public UpdateRoleWindow(CRUDStructure structure, Role selectedRole) {
 		super("Update Role", structure);
