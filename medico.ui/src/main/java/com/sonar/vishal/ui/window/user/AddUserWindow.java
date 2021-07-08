@@ -25,7 +25,6 @@ public class AddUserWindow extends MedicoWindow {
 
 	public AddUserWindow(UserStructure structure) {
 		super("Add User", structure);
-		this.structure = structure;
 		updateRoles();
 	}
 	

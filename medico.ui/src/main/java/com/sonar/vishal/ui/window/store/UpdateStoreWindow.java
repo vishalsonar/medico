@@ -14,12 +14,10 @@ public class UpdateStoreWindow extends MedicoWindow {
 	private Binder<Store> storeBinder = new Binder<>();
 	private Binder<Address> addressBinder = new Binder<>();
 	private Store selectedStore;
-	private transient CRUDStructure structure;
 
 	public UpdateStoreWindow(CRUDStructure structure, Store selectedStore) {
 		super("Update Store", structure);
 		this.selectedStore = selectedStore;
-		this.structure = structure;
 	}
 
 	@Override

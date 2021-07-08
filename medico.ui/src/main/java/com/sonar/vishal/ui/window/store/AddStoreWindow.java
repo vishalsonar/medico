@@ -16,7 +16,6 @@ public class AddStoreWindow extends MedicoWindow {
 
 	public AddStoreWindow(StoreStructure structure) {
 		super("Add Store", structure);
-		this.structure = structure;
 	}
 
 	@Override

@@ -23,12 +23,10 @@ public class UpdateUserWindow extends MedicoWindow {
 	private Binder<User> userBinder = new Binder<>();
 	private User selectedUser;
 	private Role[] roles;
-	private transient CRUDStructure structure;
 
 	public UpdateUserWindow(CRUDStructure structure, User selectedUser) {
 		super("Update User", structure);
 		this.selectedUser = selectedUser;
-		this.structure = structure;
 		updateRoles();
 	}
 	

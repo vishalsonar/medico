@@ -30,7 +30,7 @@ public class Patient implements Serializable {
 	private String phoneNumber;
 	@Column(name = "doctorname", nullable = true, length = 50)
 	private String doctorName;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Address address;
 
 	public int getId() {

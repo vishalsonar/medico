@@ -2,7 +2,7 @@ package com.sonar.vishal.ui.window.product;
 
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.listener.product.AddProductListener;
+import com.sonar.vishal.ui.listener.product.UpdateProductListener;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.data.Binder;
 import com.vaadin.ui.TextField;
@@ -12,12 +12,10 @@ public class UpdateProductWindow extends MedicoWindow {
 	private static final long serialVersionUID = -8168803717546976563L;
 	private Binder<Product> productBinder = new Binder<>();
 	private Product selectedProduct;
-	private transient CRUDStructure structure;
 
 	public UpdateProductWindow(CRUDStructure structure, Product selectedProduct) {
-		super("Update Role", structure);
+		super("Update Product", structure);
 		this.selectedProduct = selectedProduct;
-		this.structure = structure;
 	}
 
 	@Override
@@ -58,7 +56,7 @@ public class UpdateProductWindow extends MedicoWindow {
 		addComponents(description, pack, hsnCode, lsq, quantity, batchNumber, expiryDate, mrp, rate, gst, amount);
 		addAction();
 		addCancelListener(this);
-		addSubmitListener(new AddProductListener(productBinder, this, structure));
+		addSubmitListener(new UpdateProductListener(productBinder, selectedProduct.getId(), this, structure));
 	}
 
 }
