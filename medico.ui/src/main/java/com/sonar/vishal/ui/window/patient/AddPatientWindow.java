@@ -2,53 +2,35 @@ package com.sonar.vishal.ui.window.patient;
 
 import java.util.Objects;
 
-import com.sonar.vishal.medico.common.pojo.Address;
-import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.ui.listener.patient.AddPatientListener;
 import com.sonar.vishal.ui.structure.PatientStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
-import com.vaadin.data.Binder;
-import com.vaadin.ui.TextField;
 
 public class AddPatientWindow extends MedicoWindow {
 
 	private static final long serialVersionUID = 6602793284125960723L;
-	private Binder<Patient> patientBinder = new Binder<>();
-	private Binder<Address> addressBinder = new Binder<>();
+	private transient PatientWindowDecorator decorator;
 
 	public AddPatientWindow(PatientStructure structure) {
-		super("Add Patient", structure);
+		super(UIConstant.ADD_PATIENT, structure);
+		decorator = new PatientWindowDecorator();
 	}
 
 	@Override
 	public void setWindow() {
-		TextField name = COMPONENT.getTextField("Name", "Patient Name", "300");
-		TextField phoneNumber = COMPONENT.getTextField("Phone Number", "Phone Number", "300");
-		TextField doctorName = COMPONENT.getTextField("Doctor Name", "Doctor Name", "300");
-		TextField line1 = COMPONENT.getTextField("Address Line 1", "Line 1", "300");
-		TextField line2 = COMPONENT.getTextField("Address Line 2", "Line 2", "300");
-		TextField city = COMPONENT.getTextField("City", "City", "300");
-		TextField pinCode = COMPONENT.getTextField("Pin Code", "Pin Code", "300");
-		TextField state = COMPONENT.getTextField("State", "State", "300");
-		patientBinder.bind(name, Patient::getPatientName, Patient::setPatientName);
-		patientBinder.bind(phoneNumber, Patient::getPhoneNumber, Patient::setPhoneNumber);
-		patientBinder.bind(doctorName, Patient::getDoctorName, Patient::setDoctorName);
-		addressBinder.bind(line1, Address::getLine1, Address::setLine1);
-		addressBinder.bind(line2, Address::getLine2, Address::setLine2);
-		addressBinder.bind(city, Address::getCity, Address::setCity);
-		addressBinder.bind(pinCode, Address::getPinCode, Address::setPinCode);
-		addressBinder.bind(state, Address::getState, Address::setState);
-		addComponents(name, phoneNumber, doctorName, line1, line2, city, pinCode, state);
+		addComponents(decorator.name, decorator.phoneNumber, decorator.doctorName, decorator.line1, decorator.line2,
+				decorator.city, decorator.pinCode, decorator.state);
 		addAction();
 		addCancelListener(this);
-		addSubmitListener(new AddPatientListener(patientBinder, addressBinder, this, structure));
+		addSubmitListener(new AddPatientListener(decorator.patientBinder, decorator.addressBinder, this, structure));
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Objects.hash(addressBinder, patientBinder);
+		result = prime * result + Objects.hash(decorator);
 		return result;
 	}
 
@@ -61,7 +43,7 @@ public class AddPatientWindow extends MedicoWindow {
 		if (getClass() != obj.getClass())
 			return false;
 		AddPatientWindow other = (AddPatientWindow) obj;
-		return Objects.equals(addressBinder, other.addressBinder) && Objects.equals(patientBinder, other.patientBinder);
+		return Objects.equals(decorator, other.decorator);
 	}
-	
+
 }

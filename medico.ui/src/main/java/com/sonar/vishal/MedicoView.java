@@ -1,5 +1,7 @@
 package com.sonar.vishal;
 
+import java.util.Objects;
+
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.listener.AddButtonListener;
@@ -75,6 +77,30 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 		addButton.addClickListener(new AddButtonListener(structure));
 		updateButton.addClickListener(new UpdateButtonListener(structure));
 		deleteButton.addClickListener(new DeleteButtonListener(structure));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ Objects.hash(addButton, deleteButton, isDirty, leftLayout, logo, rightLayout, updateButton);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MedicoView other = (MedicoView) obj;
+		return Objects.equals(addButton, other.addButton) && Objects.equals(deleteButton, other.deleteButton)
+				&& isDirty == other.isDirty && Objects.equals(leftLayout, other.leftLayout)
+				&& Objects.equals(logo, other.logo) && Objects.equals(rightLayout, other.rightLayout)
+				&& Objects.equals(updateButton, other.updateButton);
 	}
 
 }
