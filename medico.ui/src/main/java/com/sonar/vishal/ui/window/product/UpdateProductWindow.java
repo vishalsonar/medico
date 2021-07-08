@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.window.product;
 
+import java.util.Objects;
+
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.listener.product.UpdateProductListener;
@@ -57,6 +59,26 @@ public class UpdateProductWindow extends MedicoWindow {
 		addAction();
 		addCancelListener(this);
 		addSubmitListener(new UpdateProductListener(productBinder, selectedProduct.getId(), this, structure));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(productBinder);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UpdateProductWindow other = (UpdateProductWindow) obj;
+		return Objects.equals(productBinder, other.productBinder);
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.window.role;
 
+import java.util.Objects;
+
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.ui.listener.role.AddRoleListener;
 import com.sonar.vishal.ui.listener.role.RoleOptionValueListener;
@@ -30,4 +32,25 @@ public class AddRoleWindow extends MedicoWindow {
 		addCancelListener(this);
 		addSubmitListener(new AddRoleListener(roleBinder, this, structure));
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(roleBinder);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AddRoleWindow other = (AddRoleWindow) obj;
+		return Objects.equals(roleBinder, other.roleBinder);
+	}
+	
 }

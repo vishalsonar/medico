@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.window.role;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.ui.definition.CRUDStructure;
@@ -38,4 +39,25 @@ public class UpdateRoleWindow extends MedicoWindow {
 		addCancelListener(this);
 		addSubmitListener(new UpdateRoleListener(roleBinder, selectedRole.getId(), this, structure));
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(roleBinder);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UpdateRoleWindow other = (UpdateRoleWindow) obj;
+		return Objects.equals(roleBinder, other.roleBinder);
+	}
+	
 }

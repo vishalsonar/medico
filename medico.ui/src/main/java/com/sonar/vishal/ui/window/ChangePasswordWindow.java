@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.window;
 
+import java.util.Objects;
+
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.ui.listener.ChangePasswordListener;
@@ -41,4 +43,25 @@ public class ChangePasswordWindow extends MedicoWindow {
 			}
 		});
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(passwordBinder);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ChangePasswordWindow other = (ChangePasswordWindow) obj;
+		return Objects.equals(passwordBinder, other.passwordBinder);
+	}
+	
 }
