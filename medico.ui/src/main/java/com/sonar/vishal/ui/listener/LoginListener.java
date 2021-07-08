@@ -10,6 +10,7 @@ import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.structure.KeyData;
 import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.Backend;
@@ -49,10 +50,10 @@ public class LoginListener implements ClickListener {
 			}
 			this.backend = new RestBackend(Constant.LOGIN);
 			Backend.message.setData(data);
-			boolean result = this.backend.doPostRespondHeader();
-			if (result) {
+			UserData userData = (UserData) this.backend.doPostRespondData(UserData.class);
+			if (userData != null && userData.getUser() != null && userData.getUser().getRole() != null) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, "Logged In");
-				VaadinSession.getCurrent().setAttribute("UserName", data.getUserName());
+				VaadinSession.getCurrent().getSession().setAttribute("user", userData.getUser());
 				MedicoUI.getNavigatorUI().navigateTo("optionpage");
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.LOGIN_FAILURE_MESSAGE);

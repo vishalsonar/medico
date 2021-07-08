@@ -142,5 +142,14 @@ public class Store implements Serializable {
 	public void setFassaiNumber(String fassaiNumber) {
 		this.fassaiNumber = fassaiNumber;
 	}
+	
+	public String getAddressString() {
+		String seperator = ", ";
+		StringBuilder builder = new StringBuilder();
+		builder.append(address.getLine1()).append(seperator).append(address.getLine2()).append(seperator)
+			   .append(address.getCity()).append(seperator).append(address.getPinCode()).append(seperator)
+			   .append(address.getState());
+		return builder.toString();
+	}
 
 }

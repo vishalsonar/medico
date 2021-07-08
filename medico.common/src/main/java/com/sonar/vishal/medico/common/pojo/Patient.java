@@ -24,11 +24,13 @@ public class Patient implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private int id;
+	@Column(name = "patientname", nullable = true, length = 50)
+	private String patientName;
 	@Column(name = "phone", nullable = false, length = 15)
 	private String phoneNumber;
 	@Column(name = "doctorname", nullable = true, length = 50)
 	private String doctorName;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Address address;
 
 	public int getId() {
@@ -63,4 +65,20 @@ public class Patient implements Serializable {
 		this.doctorName = doctorName;
 	}
 
+	public String getPatientName() {
+		return patientName;
+	}
+
+	public void setPatientName(String patientName) {
+		this.patientName = patientName;
+	}
+
+	public String getAddressString() {
+		String seperator = ", ";
+		StringBuilder builder = new StringBuilder();
+		builder.append(address.getLine1()).append(seperator).append(address.getLine2()).append(seperator)
+			   .append(address.getCity()).append(seperator).append(address.getPinCode()).append(seperator)
+			   .append(address.getState());
+		return builder.toString();
+	}
 }

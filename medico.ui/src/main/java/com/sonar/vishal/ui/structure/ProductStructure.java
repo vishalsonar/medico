@@ -1,0 +1,119 @@
+package com.sonar.vishal.ui.structure;
+
+import java.util.Optional;
+
+import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.pojo.Product;
+import com.sonar.vishal.medico.common.structure.ProductData;
+import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.window.MedicoWindow;
+import com.sonar.vishal.ui.window.product.AddProductWindow;
+import com.sonar.vishal.ui.window.product.UpdateProductWindow;
+import com.vaadin.event.selection.SelectionEvent;
+import com.vaadin.event.selection.SelectionListener;
+import com.vaadin.server.Page;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+
+public class ProductStructure implements CRUDStructure {
+
+	private VerticalLayout layout;
+	private Grid<Product> table;
+	private RestBackend backend;
+	private Product selectedProduct;
+	private Notification notification;
+
+	public ProductStructure() {
+		layout = new VerticalLayout();
+		table = new Grid<>();
+		table.setSizeFull();
+		table.setSelectionMode(SelectionMode.SINGLE);
+		layout.addComponent(table);
+	}
+	
+	@Override
+	public Object get() {
+		list();
+		table.addColumn(Product::getId).setCaption("Id");
+		table.addColumn(Product::getDescription).setCaption("Description");
+		table.addColumn(Product::getPack).setCaption("Pack");
+		table.addColumn(Product::getHsnCode).setCaption("HSN Code");
+		table.addColumn(Product::getLsq).setCaption("Lsq");
+		table.addColumn(Product::getQuantity).setCaption("Quantity");
+		table.addColumn(Product::getBatchNumber).setCaption("Batch Number");
+		table.addColumn(Product::getExpiryDate).setCaption("Expiry Date");
+		table.addColumn(Product::getMrp).setCaption("MRP");
+		table.addColumn(Product::getRate).setCaption("Rate");
+		table.addColumn(Product::getGst).setCaption("GST");
+		table.addColumn(Product::getAmount).setCaption("Amount");
+		table.addSelectionListener(new SelectionListener<Product>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void selectionChange(SelectionEvent<Product> event) {
+				try {
+					Optional<Product> optionalProduct = event.getFirstSelectedItem();
+					if (optionalProduct.isPresent()) {
+						selectedProduct = optionalProduct.get();
+					}
+				} catch(Exception e) {
+					// Do Nothing.
+				}
+			}
+		});
+		return layout;
+	}
+
+	@Override
+	public void list() {
+		backend = new RestBackend(Constant.GET_PRODUCT_LIST);
+		Product[] data = (Product[]) backend.doPostRespondData(Product[].class);
+		table.setItems(data);
+	}
+
+	@Override
+	public void add() {
+		MedicoWindow window = new AddProductWindow(this);
+		window.setWindow();
+		UI.getCurrent().addWindow(window);
+	}
+
+	@Override
+	public void update() {
+		try {
+			MedicoWindow window = new UpdateProductWindow(this, selectedProduct);
+			window.setWindow();
+			UI.getCurrent().addWindow(window);
+		} catch (Exception e) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
+			notification.show(Page.getCurrent());
+		}	
+	}
+
+	@Override
+	public void delete() {
+		if (selectedProduct == null) {
+			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_DELETE);
+		} else {
+			ProductData data = new ProductData();
+			data.setProduct(selectedProduct);
+			backend = new RestBackend(Constant.DELETE_PRODUCT);
+			Backend.message.setData(data);
+			boolean response = backend.doPostRespondHeader();
+			if (response) {
+				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_PRODUCT_SUCESS_MESSAGE);
+				list();
+			} else {
+				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
+			}
+		}
+		notification.show(Page.getCurrent());
+	}
+
+}

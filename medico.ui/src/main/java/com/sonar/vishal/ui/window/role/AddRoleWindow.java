@@ -16,7 +16,6 @@ public class AddRoleWindow extends MedicoWindow {
 
 	public AddRoleWindow(RoleStructure structure) {
 		super("Add Role", structure);
-		this.structure = structure;
 	}
 
 	@Override

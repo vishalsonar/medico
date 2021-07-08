@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.component;
 
+import java.util.List;
+
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.ui.listener.GoToOptionListener;
 import com.vaadin.icons.VaadinIcons;
@@ -14,6 +16,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
+import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -155,5 +158,12 @@ public class Component {
 		option.setCaption(label);
 		option.setItems(items);
 		return option;
+	}
+	
+	public RadioButtonGroup<String> getRadioGroupList(String label, List<String> items){
+		RadioButtonGroup<String> radioGroup = new RadioButtonGroup<>();
+		radioGroup.setCaption(label);
+		radioGroup.setItems(items);
+		return radioGroup;
 	}
 }

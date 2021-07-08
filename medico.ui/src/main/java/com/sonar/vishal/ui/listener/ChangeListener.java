@@ -1,5 +1,6 @@
 package com.sonar.vishal.ui.listener;
 
+import com.sonar.vishal.medico.common.pojo.User;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 
@@ -9,11 +10,13 @@ public class ChangeListener implements ViewChangeListener {
 
 	@Override
 	public boolean beforeViewChange(ViewChangeEvent event) {
-		boolean state = true;
-		Object userName = VaadinSession.getCurrent().getAttribute("UserName");
-		Object role = VaadinSession.getCurrent().getAttribute("Role");
-		if (userName == null || role == null) {
-			state = false;
+		boolean state = false;
+		Object data = VaadinSession.getCurrent().getSession().getAttribute("user");
+		if (data instanceof User) {
+			User user = (User) data;
+			if (user.getRole() != null) {
+				state = true;
+			}
 		}
 		return state;
 	}

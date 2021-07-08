@@ -11,14 +11,14 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.structure.LoginData;
-import com.sonar.vishal.medico.common.structure.RoleListData;
+import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.core.adapter.BusinessLogicAdapter;
 
 public class LoginLogic extends BusinessLogicAdapter {
 
 	@SuppressWarnings("deprecation")
 	public void isValidUser(LoginData data) {
-		RoleListData roleData = new RoleListData();
+		UserData userData = new UserData();
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(User.class);
@@ -29,14 +29,14 @@ public class LoginLogic extends BusinessLogicAdapter {
 			if (list != null && list.size() == 1) {
 				setSucessMessage(Constant.LOGIN);
 				User user = (User) list.get(0);
-				roleData.setRoleList(user.getRole());
+				userData.setUser(user);
 			} else {
 				setErrorMessage(Constant.LOGIN, Constant.EXCEPTION);
 			}
 		} else {
 			setErrorMessage(Constant.LOGIN, Constant.NULL);
 		}
-		message.setData(roleData);
+		message.setData(userData);
 	}
 
 	@Override

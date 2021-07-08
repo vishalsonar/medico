@@ -32,6 +32,11 @@ public class MedicoUI extends UI {
 		getNavigatorUI().addView("", new LoginView());
 		getNavigatorUI().addView("optionpage", new OptionView());
 		getNavigatorUI().addView("role", new RoleView());
+		getNavigatorUI().addView("user", new UserView());
+		getNavigatorUI().addView("store", new StoreView());
+		getNavigatorUI().addView("product", new ProductView());
+		getNavigatorUI().addView("patient", new PatientView());
+		getNavigatorUI().addView("changePassword", new ChangePasswordView());
 		getNavigatorUI().navigateTo("");
 		getNavigatorUI().addViewChangeListener(new ChangeListener());
 	}
