@@ -28,8 +28,6 @@ public class UIConstant {
 	public static final String ADD_STORE = "Add Store";
 	public static final String UPDATE_STORE = "Update Store";
 
-	public static final String[] ROLE_OPTIONS_LIST = { "Login", "Option", "Bill", "Product", "Patient", "Store", "User", "Role" };
-
 	public static final String FIELD_LENGTH_300 = "300";
 	public static final String NAME = "Name";
 	public static final String USER_NAME = "User Name";

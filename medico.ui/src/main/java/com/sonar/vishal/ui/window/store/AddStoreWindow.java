@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.window.store;
 
+import java.util.Objects;
+
 import com.sonar.vishal.ui.listener.store.AddStoreListener;
 import com.sonar.vishal.ui.structure.StoreStructure;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -23,6 +25,26 @@ public class AddStoreWindow extends MedicoWindow {
 		addAction();
 		addCancelListener(this);
 		addSubmitListener(new AddStoreListener(decorator.storeBinder, decorator.addressBinder, this, structure));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(decorator);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AddStoreWindow other = (AddStoreWindow) obj;
+		return Objects.equals(decorator, other.decorator);
 	}
 
 }
