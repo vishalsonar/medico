@@ -5,17 +5,17 @@ import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.exception.ValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
 
 public class UpdatePatientListener extends CRUDListener {
 
 	private static final long serialVersionUID = -647560492328455522L;
 	private Binder<Patient> patientBinder = new Binder<>();
 	private Binder<Address> addressBinder = new Binder<>();
-	private PatientListenerLogic logic;
+	private transient PatientListenerLogic logic;
 
 	public UpdatePatientListener(Binder<Patient> patientBinder, Binder<Address> addressBinder, int id, MedicoWindow window, CRUDStructure structure) {
 		super(structure, Constant.UPDATE_PATIENT, window);

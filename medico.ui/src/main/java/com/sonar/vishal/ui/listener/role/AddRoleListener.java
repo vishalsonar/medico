@@ -4,16 +4,16 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.exception.ValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
 
 public class AddRoleListener extends CRUDListener {
 
 	private static final long serialVersionUID = 6381327197810779730L;
 	private Binder<Role> roleBinder;
-	private RoleListenerLogic logic;
+	private transient RoleListenerLogic logic;
 
 	public AddRoleListener(Binder<Role> roleBinder, MedicoWindow window, CRUDStructure structure) {
 		super(structure, Constant.ADD_ROLE, window);

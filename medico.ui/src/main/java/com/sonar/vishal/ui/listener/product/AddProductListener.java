@@ -4,16 +4,16 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.exception.ValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
 
 public class AddProductListener extends CRUDListener {
 
 	private static final long serialVersionUID = -6422529977267864632L;
 	private Binder<Product> productBinder;
-	private ProductListenerLogic logic;
+	private transient ProductListenerLogic logic;
 
 	public AddProductListener(Binder<Product> productBinder, MedicoWindow window, CRUDStructure structure) {
 		super(structure, Constant.ADD_PRODUCT, window);

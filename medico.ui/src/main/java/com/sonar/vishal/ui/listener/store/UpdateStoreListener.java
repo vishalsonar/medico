@@ -5,17 +5,17 @@ import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.exception.ValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
 
 public class UpdateStoreListener extends CRUDListener {
 
 	private static final long serialVersionUID = -4272343966792618258L;
 	private Binder<Store> storeBinder;
 	private Binder<Address> addressBinder;
-	private StoreListenerLogic logic;
+	private transient StoreListenerLogic logic;
 
 	public UpdateStoreListener(Binder<Store> storeBinder, Binder<Address> addressBinder, int id, MedicoWindow window, CRUDStructure structure) {
 		super(structure, Constant.UPDATE_STORE, window);

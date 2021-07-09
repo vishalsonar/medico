@@ -13,7 +13,7 @@ public class AddUserListener extends CRUDListener {
 
 	private static final long serialVersionUID = -6795980482409634717L;
 	private Binder<User> userBinder;
-	private UserListenerLogic logic;
+	private transient UserListenerLogic logic;
 
 	public AddUserListener(Binder<User> userBinder, MedicoWindow window, CRUDStructure structure) {
 		super(structure, Constant.ADD_USER, window);

@@ -6,11 +6,12 @@ import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.StoreData;
 import com.sonar.vishal.ui.definition.BiListenerLogic;
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
 
 public class StoreListenerLogic implements BiListenerLogic<Binder<Store>, Binder<Address>> {
 
 	@Override
-	public Data process(Binder<Store> parentBinder, Binder<Address> childBinder, Integer id) throws Exception {
+	public Data process(Binder<Store> parentBinder, Binder<Address> childBinder, Integer id) throws ValidationException {
 		Store store = new Store();
 		Address address = new Address();
 		StoreData data = new StoreData();

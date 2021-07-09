@@ -10,7 +10,7 @@ import com.vaadin.data.ValidationException;
 public class UserListenerLogic implements ListenerLogic<Binder<User>> {
 
 	@Override
-	public Data process(Binder<User> binder, Integer id) throws Exception {
+	public Data process(Binder<User> binder, Integer id) throws ValidationException {
 		User user = new User();
 		UserData data = new UserData();
 		binder.writeBean(user);
