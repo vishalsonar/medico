@@ -26,7 +26,7 @@ public class Component {
 	private static Component component;
 
 	private Component() {
-
+		// Invisible Constructor
 	}
 
 	public static Component getInstance() {

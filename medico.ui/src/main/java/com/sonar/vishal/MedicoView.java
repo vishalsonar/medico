@@ -62,7 +62,7 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	}
 
 	public void setUI() {
-		// Do Nothing.
+		throw new IllegalStateException("Override Method");
 	}
 
 	public void displayUI() {

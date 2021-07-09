@@ -19,6 +19,7 @@ public class CRUDListener implements ClickListener {
 	private MedicoWindow window;
 	private transient RestBackend backend;
 	private transient CRUDStructure structure;
+	protected int id;
 
 	public CRUDListener(CRUDStructure structure, String message, MedicoWindow window) {
 		this.backend = new RestBackend(message);
@@ -68,7 +69,7 @@ public class CRUDListener implements ClickListener {
 	}
 	
 	protected void doAction() {
-		// Do Nothing, override method.
+		throw new IllegalStateException("Override Method");
 	}
 
 	@Override

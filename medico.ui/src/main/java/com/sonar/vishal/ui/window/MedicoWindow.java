@@ -48,7 +48,7 @@ public class MedicoWindow extends Window {
 	}
 
 	public void setWindow() {
-		// Do Nothing.
+		throw new IllegalStateException("Override Method");
 	}
 
 	public void addSubmitListener(ClickListener listener) {
