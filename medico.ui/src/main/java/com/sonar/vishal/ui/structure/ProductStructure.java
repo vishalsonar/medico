@@ -91,6 +91,7 @@ public class ProductStructure implements CRUDStructure {
 			MedicoWindow window = new UpdateProductWindow(this, selectedProduct);
 			window.setWindow();
 			UI.getCurrent().addWindow(window);
+			selectedProduct = null;
 		} catch (Exception e) {
 			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
 			notification.show(Page.getCurrent());
@@ -110,6 +111,7 @@ public class ProductStructure implements CRUDStructure {
 			if (response) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_PRODUCT_SUCESS_MESSAGE);
 				list();
+				selectedProduct = null;
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
 			}

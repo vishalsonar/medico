@@ -82,6 +82,7 @@ public class RoleStructure implements CRUDStructure {
 			MedicoWindow window = new UpdateRoleWindow(this, selectedRole);
 			window.setWindow();
 			UI.getCurrent().addWindow(window);
+			selectedRole = null;
 		} catch (Exception e) {
 			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
 			notification.show(Page.getCurrent());
@@ -101,6 +102,7 @@ public class RoleStructure implements CRUDStructure {
 			if (response) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_ROLE_SUCESS_MESSAGE);
 				list();
+				selectedRole = null;
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
 			}

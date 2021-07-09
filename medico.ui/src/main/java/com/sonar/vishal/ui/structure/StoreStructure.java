@@ -92,6 +92,7 @@ public class StoreStructure implements CRUDStructure {
 			MedicoWindow window = new UpdateStoreWindow(this, selectedStore);
 			window.setWindow();
 			UI.getCurrent().addWindow(window);
+			selectedStore = null;
 		} catch (Exception e) {
 			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
 			notification.show(Page.getCurrent());
@@ -111,6 +112,7 @@ public class StoreStructure implements CRUDStructure {
 			if (response) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_STORE_SUCESS_MESSAGE);
 				list();
+				selectedStore = null;
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
 			}

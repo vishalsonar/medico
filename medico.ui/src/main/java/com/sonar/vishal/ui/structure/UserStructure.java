@@ -86,6 +86,7 @@ public class UserStructure implements CRUDStructure {
 			MedicoWindow window = new UpdateUserWindow(this, selectedUser);
 			window.setWindow();
 			UI.getCurrent().addWindow(window);
+			selectedUser = null;
 		} catch (Exception e) {
 			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
 			notification.show(Page.getCurrent());
@@ -105,6 +106,7 @@ public class UserStructure implements CRUDStructure {
 			if (response) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_USER_SUCESS_MESSAGE);
 				list();
+				selectedUser = null;
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
 			}

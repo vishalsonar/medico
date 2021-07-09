@@ -40,7 +40,7 @@ public class Component {
 		field.setPlaceholder(placeHolder);
 		field.setMaxLength(20);
 		field.setResponsive(true);
-		field.setHeight(UIConstant.Number_30);
+		field.setHeight(UIConstant.NUMBER_30);
 		field.setWidth(width);
 		return field;
 	}
@@ -50,7 +50,7 @@ public class Component {
 		field.setPlaceholder(placeHolder);
 		field.setMaxLength(20);
 		field.setResponsive(true);
-		field.setHeight(UIConstant.Number_30);
+		field.setHeight(UIConstant.NUMBER_30);
 		field.setWidth(width);
 		return field;
 	}

@@ -84,6 +84,7 @@ public class PatientStructure implements CRUDStructure {
 			MedicoWindow window = new UpdatePatientWindow(this, selectedPatient);
 			window.setWindow();
 			UI.getCurrent().addWindow(window);
+			selectedPatient = null;
 		} catch (Exception e) {
 			notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.SELECT_ROW_TO_UPDATE);
 			notification.show(Page.getCurrent());
@@ -103,6 +104,7 @@ public class PatientStructure implements CRUDStructure {
 			if (response) {
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, Constant.DELETE_PATIENT_SUCCESS_MESSAGE);
 				list();
+				selectedPatient = null;
 			} else {
 				notification = Component.getInstance().getFailureNotification(Constant.ERROR, Constant.GENERAL_ERROR_MESSAGE);
 			}

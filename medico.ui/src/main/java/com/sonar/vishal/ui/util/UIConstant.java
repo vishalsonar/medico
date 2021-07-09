@@ -11,7 +11,7 @@ public class UIConstant {
 	public static final int TWENTY = 20;
 	
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
-	public static final String Number_30 = "30";
+	public static final String NUMBER_30 = "30";
 	public static final String MODULE = "module";
 
 	public static final String EMPTY = "";
