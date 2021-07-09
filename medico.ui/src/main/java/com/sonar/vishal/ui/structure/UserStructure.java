@@ -9,6 +9,7 @@ import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.user.AddUserWindow;
 import com.sonar.vishal.ui.window.user.UpdateUserWindow;
@@ -40,10 +41,10 @@ public class UserStructure implements CRUDStructure {
 	@Override
 	public Object get() {
 		list();
-		table.addColumn(User::getId).setCaption("Id");
-		table.addColumn(User::getUserName).setCaption("Name");
-		table.addColumn(User::getPassword).setCaption("Password");
-		table.addColumn(User::getRoleAsString).setCaption("Role");
+		table.addColumn(User::getId).setCaption(UIConstant.ID);
+		table.addColumn(User::getUserName).setCaption(UIConstant.NAME);
+		table.addColumn(User::getPassword).setCaption(UIConstant.PASSWORD);
+		table.addColumn(User::getRoleAsString).setCaption(UIConstant.ROLE);
 		table.addSelectionListener(new SelectionListener<User>() {
 			private static final long serialVersionUID = 1L;
 

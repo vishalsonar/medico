@@ -9,6 +9,7 @@ import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.patient.AddPatientWindow;
 import com.sonar.vishal.ui.window.patient.UpdatePatientWindow;
@@ -40,11 +41,11 @@ public class PatientStructure implements CRUDStructure {
 	@Override
 	public Object get() {
 		list();
-		table.addColumn(Patient::getId).setCaption("Id");
-		table.addColumn(Patient::getPatientName).setCaption("Patient Name");
-		table.addColumn(Patient::getDoctorName).setCaption("Doctor Name");
-		table.addColumn(Patient::getPhoneNumber).setCaption("Phone Number");
-		table.addColumn(Patient::getAddressString).setCaption("Address");
+		table.addColumn(Patient::getId).setCaption(UIConstant.ID);
+		table.addColumn(Patient::getPatientName).setCaption(UIConstant.PATIENT_NAME);
+		table.addColumn(Patient::getDoctorName).setCaption(UIConstant.DOCTOR_NAME);
+		table.addColumn(Patient::getPhoneNumber).setCaption(UIConstant.PHONE_NUMBER);
+		table.addColumn(Patient::getAddressString).setCaption(UIConstant.ADDRESS);
 		table.addSelectionListener(new SelectionListener<Patient>() {
 			private static final long serialVersionUID = 1L;
 

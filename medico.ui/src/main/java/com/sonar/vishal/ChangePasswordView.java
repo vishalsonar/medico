@@ -1,5 +1,6 @@
 package com.sonar.vishal;
 
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.ChangePasswordWindow;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -10,7 +11,7 @@ public class ChangePasswordView extends MedicoView {
 	private static final long serialVersionUID = -5733280017414108518L;
 
 	public ChangePasswordView() {
-		super("");
+		super(UIConstant.EMPTY);
 	}
 
 	@Override

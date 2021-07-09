@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.ui.listener.ChangePasswordListener;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.data.Binder;
 import com.vaadin.ui.PasswordField;
 
@@ -14,14 +15,14 @@ public class ChangePasswordWindow extends MedicoWindow {
 	private Binder<Password> passwordBinder = new Binder<>();
 
 	public ChangePasswordWindow() {
-		super("Change Password", null);
+		super(UIConstant.CHANGE_PASSWORD, null);
 	}
 
 	@Override
 	public void setWindow() {
-		PasswordField password = component.getPasswordField("Old Password", "Old Password", "300");
-		PasswordField newPassword = component.getPasswordField("New Password", "New Password", "300");
-		PasswordField confirmPassword = component.getPasswordField("Confirm Password", "Confirm Password", "300");
+		PasswordField password = component.getPasswordField(UIConstant.OLD_PASSWORD, UIConstant.OLD_PASSWORD, UIConstant.FIELD_LENGTH_300);
+		PasswordField newPassword = component.getPasswordField(UIConstant.NEW_PASSWORD, UIConstant.NEW_PASSWORD, UIConstant.FIELD_LENGTH_300);
+		PasswordField confirmPassword = component.getPasswordField(UIConstant.CONFIRM_PASSWORD, UIConstant.CONFIRM_PASSWORD, UIConstant.FIELD_LENGTH_300);
 		passwordBinder.bind(password, Password::getPassword, Password::setPassword);
 		passwordBinder.bind(newPassword, Password::getNewPassword, Password::setNewPassword);
 		passwordBinder.bind(confirmPassword, Password::getConfirmPassword, Password::setConfirmPassword);
@@ -39,7 +40,7 @@ public class ChangePasswordWindow extends MedicoWindow {
 
 			@Override
 			public void windowClose(CloseEvent e) {
-				MedicoUI.getNavigatorUI().navigateTo("optionpage");
+				MedicoUI.getNavigatorUI().navigateTo(UIConstant.OPTION_PAGE);
 			}
 		});
 	}

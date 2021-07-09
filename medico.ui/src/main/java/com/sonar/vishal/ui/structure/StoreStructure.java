@@ -9,6 +9,7 @@ import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.store.AddStoreWindow;
 import com.sonar.vishal.ui.window.store.UpdateStoreWindow;
@@ -40,18 +41,18 @@ public class StoreStructure implements CRUDStructure {
 	@Override
 	public Object get() {
 		list();
-		table.addColumn(Store::getId).setCaption("Id");
-		table.addColumn(Store::getName).setCaption("Name");
-		table.addColumn(Store::getAddressString).setCaption("Address");
-		table.addColumn(Store::getPhoneNumber).setCaption("Phone Number");
-		table.addColumn(Store::getDlNumber).setCaption("DL Number");
-		table.addColumn(Store::getDlExpiry).setCaption("DL Expiry");
-		table.addColumn(Store::getSxDlNumber).setCaption("Sx DL Number");
-		table.addColumn(Store::getSxDlExpiry).setCaption("Sx DL Number Expiry");
-		table.addColumn(Store::getPanNumber).setCaption("PAN Number");
-		table.addColumn(Store::getCinNumber).setCaption("CIN Number");
-		table.addColumn(Store::getGstin).setCaption("GST");
-		table.addColumn(Store::getFassaiNumber).setCaption("FASSAI");
+		table.addColumn(Store::getId).setCaption(UIConstant.ID);
+		table.addColumn(Store::getName).setCaption(UIConstant.NAME);
+		table.addColumn(Store::getAddressString).setCaption(UIConstant.ADDRESS);
+		table.addColumn(Store::getPhoneNumber).setCaption(UIConstant.PHONE_NUMBER);
+		table.addColumn(Store::getDlNumber).setCaption(UIConstant.DL_NUMBER);
+		table.addColumn(Store::getDlExpiry).setCaption(UIConstant.DL_EXPIRY);
+		table.addColumn(Store::getSxDlNumber).setCaption(UIConstant.SX_DL_NUMBER);
+		table.addColumn(Store::getSxDlExpiry).setCaption(UIConstant.SX_DL_EXPIRY);
+		table.addColumn(Store::getPanNumber).setCaption(UIConstant.PAN_NUMBER);
+		table.addColumn(Store::getCinNumber).setCaption(UIConstant.CIN_NUMBER);
+		table.addColumn(Store::getGstin).setCaption(UIConstant.GST);
+		table.addColumn(Store::getFassaiNumber).setCaption(UIConstant.FASSAI);
 		table.addSelectionListener(new SelectionListener<Store>() {
 			private static final long serialVersionUID = 1L;
 

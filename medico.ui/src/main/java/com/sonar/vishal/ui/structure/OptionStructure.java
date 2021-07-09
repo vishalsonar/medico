@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.structure;
 
 import com.sonar.vishal.ui.definition.Structure;
 import com.sonar.vishal.ui.listener.LogoutListener;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
@@ -25,15 +26,15 @@ public class OptionStructure implements Structure {
 
 	@Override
 	public Object get() {
-		Button logoutButton = COMPONENT.getOptionButton("Logout", "", VaadinIcons.SIGN_OUT);
+		Button logoutButton = COMPONENT.getOptionButton(UIConstant.LOGOUT, UIConstant.EMPTY, VaadinIcons.SIGN_OUT);
 		logoutButton.addClickListener(new LogoutListener());
-		grid.addComponent(COMPONENT.getOptionButton("Bill", "bill", VaadinIcons.ALIGN_JUSTIFY));
-		grid.addComponent(COMPONENT.getOptionButton("Product", "product", VaadinIcons.CLIPBOARD_CROSS));
-		grid.addComponent(COMPONENT.getOptionButton("Patient", "patient", VaadinIcons.USER_HEART));
-		grid.addComponent(COMPONENT.getOptionButton("Store", "store", VaadinIcons.SHOP));
-		grid.addComponent(COMPONENT.getOptionButton("User", "user", VaadinIcons.USER));
-		grid.addComponent(COMPONENT.getOptionButton("Role", "role", VaadinIcons.TASKS));
-		grid.addComponent(COMPONENT.getOptionButton("Change Password", "changePassword", VaadinIcons.RETWEET));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.BILL, UIConstant._BILL, VaadinIcons.ALIGN_JUSTIFY));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.PRODUCT, UIConstant._PRODUCT, VaadinIcons.CLIPBOARD_CROSS));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.PATIENT, UIConstant._PATIENT, VaadinIcons.USER_HEART));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.STORE, UIConstant._STORE, VaadinIcons.SHOP));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.USER, UIConstant._USER, VaadinIcons.USER));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.ROLE, UIConstant._ROLE, VaadinIcons.TASKS));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.CHANGE_PASSWORD, UIConstant._CHANGE_PASSWORD, VaadinIcons.RETWEET));
 		grid.addComponent(logoutButton);
 		return panel;
 	}

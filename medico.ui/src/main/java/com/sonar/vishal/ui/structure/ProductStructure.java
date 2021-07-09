@@ -9,6 +9,7 @@ import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.product.AddProductWindow;
 import com.sonar.vishal.ui.window.product.UpdateProductWindow;
@@ -40,18 +41,18 @@ public class ProductStructure implements CRUDStructure {
 	@Override
 	public Object get() {
 		list();
-		table.addColumn(Product::getId).setCaption("Id");
-		table.addColumn(Product::getDescription).setCaption("Description");
-		table.addColumn(Product::getPack).setCaption("Pack");
-		table.addColumn(Product::getHsnCode).setCaption("HSN Code");
-		table.addColumn(Product::getLsq).setCaption("Lsq");
-		table.addColumn(Product::getQuantity).setCaption("Quantity");
-		table.addColumn(Product::getBatchNumber).setCaption("Batch Number");
-		table.addColumn(Product::getExpiryDate).setCaption("Expiry Date");
-		table.addColumn(Product::getMrp).setCaption("MRP");
-		table.addColumn(Product::getRate).setCaption("Rate");
-		table.addColumn(Product::getGst).setCaption("GST");
-		table.addColumn(Product::getAmount).setCaption("Amount");
+		table.addColumn(Product::getId).setCaption(UIConstant.ID);
+		table.addColumn(Product::getDescription).setCaption(UIConstant.DESCRIPTION);
+		table.addColumn(Product::getPack).setCaption(UIConstant.PACK);
+		table.addColumn(Product::getHsnCode).setCaption(UIConstant.HSN_CODE);
+		table.addColumn(Product::getLsq).setCaption(UIConstant.LSQ);
+		table.addColumn(Product::getQuantity).setCaption(UIConstant.QUANTITY);
+		table.addColumn(Product::getBatchNumber).setCaption(UIConstant.BATCH_NUMBER);
+		table.addColumn(Product::getExpiryDate).setCaption(UIConstant.EXPIRY_DATE);
+		table.addColumn(Product::getMrp).setCaption(UIConstant.MRP);
+		table.addColumn(Product::getRate).setCaption(UIConstant.RATE);
+		table.addColumn(Product::getGst).setCaption(UIConstant.GST);
+		table.addColumn(Product::getAmount).setCaption(UIConstant.AMOUNT);
 		table.addSelectionListener(new SelectionListener<Product>() {
 			private static final long serialVersionUID = 1L;
 

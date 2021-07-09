@@ -9,6 +9,7 @@ import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.role.AddRoleWindow;
 import com.sonar.vishal.ui.window.role.UpdateRoleWindow;
@@ -40,9 +41,9 @@ public class RoleStructure implements CRUDStructure {
 	@Override
 	public Object get() {
 		list();
-		table.addColumn(Role::getId).setCaption("Id");
-		table.addColumn(Role::getName).setCaption("Name");
-		table.addColumn(Role::getModule).setCaption("Option");
+		table.addColumn(Role::getId).setCaption(UIConstant.ID);
+		table.addColumn(Role::getName).setCaption(UIConstant.NAME);
+		table.addColumn(Role::getModule).setCaption(UIConstant.OPTION);
 		table.addSelectionListener(new SelectionListener<Role>() {
 			private static final long serialVersionUID = 1L;
 
