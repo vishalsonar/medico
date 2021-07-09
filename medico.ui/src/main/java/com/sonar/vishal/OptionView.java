@@ -1,6 +1,7 @@
 package com.sonar.vishal;
 
 import com.sonar.vishal.ui.structure.OptionStructure;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Panel;
 
@@ -9,7 +10,7 @@ public class OptionView extends MedicoView {
 	private static final long serialVersionUID = 5565865641978914486L;
 
 	public OptionView() {
-		super("Option");
+		super(UIConstant.OPTIONS);
 	}
 
 	@Override

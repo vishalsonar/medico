@@ -22,7 +22,7 @@ public class PatientWindowDecorator {
 
 	public PatientWindowDecorator() {
 		Component component = Component.getInstance();
-		name = component.getTextField(UIConstant.NAME, UIConstant.PATTIENT_NAME, UIConstant.FIELD_LENGTH_300);
+		name = component.getTextField(UIConstant.NAME, UIConstant.PATIENT_NAME, UIConstant.FIELD_LENGTH_300);
 		phoneNumber = component.getTextField(UIConstant.PHONE_NUMBER, UIConstant.PHONE_NUMBER, UIConstant.FIELD_LENGTH_300);
 		doctorName = component.getTextField(UIConstant.DOCTOR_NAME, UIConstant.DOCTOR_NAME, UIConstant.FIELD_LENGTH_300);
 		line1 = component.getTextField(UIConstant.ADDRESS_LINE_1, UIConstant.ADDRESS_LINE_1, UIConstant.FIELD_LENGTH_300);

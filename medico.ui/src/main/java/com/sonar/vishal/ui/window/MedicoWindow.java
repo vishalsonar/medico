@@ -5,6 +5,7 @@ import java.util.Objects;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.listener.WindowCloseListener;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
@@ -33,12 +34,12 @@ public class MedicoWindow extends Window {
 		form = new FormLayout();
 		layout = new VerticalLayout();
 		action = new HorizontalLayout();
-		submit = component.getFriendlyButton("Submit", "100");
-		cancel = component.getDangerButton("Cancel", "100");
+		submit = component.getFriendlyButton(UIConstant.SUBMIT, UIConstant.NUMBER_100);
+		cancel = component.getDangerButton(UIConstant.CANCEL, UIConstant.NUMBER_100);
 		action.addComponents(submit, cancel);
 		form.addComponent(component.getPageLabel(label));
 		panel.setContent(form);
-		panel.setWidth("500px");
+		panel.setWidth(UIConstant.NUMBER_500_PX);
 		panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 		layout.addComponent(panel);
 		layout.setComponentAlignment(panel, Alignment.MIDDLE_CENTER);
@@ -47,7 +48,7 @@ public class MedicoWindow extends Window {
 	}
 
 	public void setWindow() {
-		// Do Nothing.
+		throw new IllegalStateException("Override Method");
 	}
 
 	public void addSubmitListener(ClickListener listener) {

@@ -10,6 +10,7 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.security.Security;
 import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.vaadin.server.VaadinSession;
@@ -99,13 +100,13 @@ public class RestBackend implements Backend {
 
 	private void addRoleToSession(JsonObject responseObject) {
 		JsonObject dataObject = responseObject.get(Constant.DATA).getAsJsonObject();
-		JsonArray roleArray = dataObject.get("List").getAsJsonArray();
+		JsonArray roleArray = dataObject.get(Constant.LIST).getAsJsonArray();
 		StringBuilder roleBuilder = new StringBuilder();
 		for (JsonElement element : roleArray) {
-			String role = element.getAsJsonObject().get("module").getAsString();
+			String role = element.getAsJsonObject().get(UIConstant.MODULE).getAsString();
 			roleBuilder.append(role);
 		}
-		VaadinSession.getCurrent().setAttribute("Role", roleBuilder.toString());
+		VaadinSession.getCurrent().setAttribute(UIConstant.ROLE, roleBuilder.toString());
 	}
 
 	private boolean verifyMac(JsonObject object) {

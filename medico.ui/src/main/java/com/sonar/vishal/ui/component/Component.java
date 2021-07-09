@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.ui.listener.GoToOptionListener;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Resource;
@@ -25,7 +26,7 @@ public class Component {
 	private static Component component;
 
 	private Component() {
-
+		// Invisible Constructor
 	}
 
 	public static Component getInstance() {
@@ -39,7 +40,7 @@ public class Component {
 		field.setPlaceholder(placeHolder);
 		field.setMaxLength(20);
 		field.setResponsive(true);
-		field.setHeight("30");
+		field.setHeight(UIConstant.NUMBER_30);
 		field.setWidth(width);
 		return field;
 	}
@@ -49,7 +50,7 @@ public class Component {
 		field.setPlaceholder(placeHolder);
 		field.setMaxLength(20);
 		field.setResponsive(true);
-		field.setHeight("30");
+		field.setHeight(UIConstant.NUMBER_30);
 		field.setWidth(width);
 		return field;
 	}
