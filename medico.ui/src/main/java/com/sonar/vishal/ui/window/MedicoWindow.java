@@ -34,12 +34,12 @@ public class MedicoWindow extends Window {
 		form = new FormLayout();
 		layout = new VerticalLayout();
 		action = new HorizontalLayout();
-		submit = component.getFriendlyButton(UIConstant.SUBMIT, UIConstant._100);
-		cancel = component.getDangerButton(UIConstant.CANCEL, UIConstant._100);
+		submit = component.getFriendlyButton(UIConstant.SUBMIT, UIConstant.NUMBER_100);
+		cancel = component.getDangerButton(UIConstant.CANCEL, UIConstant.NUMBER_100);
 		action.addComponents(submit, cancel);
 		form.addComponent(component.getPageLabel(label));
 		panel.setContent(form);
-		panel.setWidth(UIConstant._500_PX);
+		panel.setWidth(UIConstant.NUMBER_500_PX);
 		panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 		layout.addComponent(panel);
 		layout.setComponentAlignment(panel, Alignment.MIDDLE_CENTER);

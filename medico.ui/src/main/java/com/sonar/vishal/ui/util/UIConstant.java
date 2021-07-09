@@ -11,7 +11,7 @@ public class UIConstant {
 	public static final int TWENTY = 20;
 	
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
-	public static final String _30 = "30";
+	public static final String Number_30 = "30";
 	public static final String MODULE = "module";
 
 	public static final String EMPTY = "";
@@ -23,30 +23,30 @@ public class UIConstant {
 	public static final String SHORT_PASSWORD_LENGTH = "Password length should be greater than " + PASSWORD_MIN_LENGTH + " digit";
 	
 	public static final String LOGIN = "Login";
-	public static final String _400_PX = "400px";
-	public static final String _200_PX = "200px";
+	public static final String NUMBER_400_PX = "400px";
+	public static final String NUMBER_200_PX = "200px";
 	public static final String FORGOT_PASSWORD = "forgot password!";
 	public static final String OPTION_PAGE_PATH = "./OptionPage";
 	
 	public static final String BILL = "Bill";
-	public static final String _BILL = "bill";
+	public static final String S_BILL = "bill";
 	public static final String PRODUCT = "Product";
-	public static final String _PRODUCT = "product";
+	public static final String S_PRODUCT = "product";
 	public static final String PATIENT = "Patient";
-	public static final String _PATIENT = "patient";
+	public static final String S_PATIENT = "patient";
 	public static final String STORE = "Store";
-	public static final String _STORE = "store";
+	public static final String S_STORE = "store";
 	public static final String USER = "User";
-	public static final String _USER = "user";
+	public static final String S_USER = "user";
 	public static final String ROLE = "Role";
-	public static final String _ROLE = "role";
-	public static final String _CHANGE_PASSWORD = "changePassword";
+	public static final String S_ROLE = "role";
+	public static final String S_CHANGE_PASSWORD = "changePassword";
 	public static final String LOGOUT = "Logout";
 	
 	public static final String SUBMIT = "Submit";
 	public static final String CANCEL = "Cancel";
-	public static final String _100 = "100";
-	public static final String _500_PX = "500px";
+	public static final String NUMBER_100 = "100";
+	public static final String NUMBER_500_PX = "500px";
 	public static final String ID = "Id";
 
 	public static final String ADD_USER = "Add User";

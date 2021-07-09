@@ -32,12 +32,12 @@ public class MedicoUI extends UI {
 		setNavigatorUI(new Navigator(this, this));
 		getNavigatorUI().addView(UIConstant.EMPTY, new LoginView());
 		getNavigatorUI().addView(UIConstant.OPTION_PAGE, new OptionView());
-		getNavigatorUI().addView(UIConstant._ROLE, new RoleView());
-		getNavigatorUI().addView(UIConstant._USER, new UserView());
-		getNavigatorUI().addView(UIConstant._STORE, new StoreView());
-		getNavigatorUI().addView(UIConstant._PRODUCT, new ProductView());
-		getNavigatorUI().addView(UIConstant._PATIENT, new PatientView());
-		getNavigatorUI().addView(UIConstant._CHANGE_PASSWORD, new ChangePasswordView());
+		getNavigatorUI().addView(UIConstant.S_ROLE, new RoleView());
+		getNavigatorUI().addView(UIConstant.S_USER, new UserView());
+		getNavigatorUI().addView(UIConstant.S_STORE, new StoreView());
+		getNavigatorUI().addView(UIConstant.S_PRODUCT, new ProductView());
+		getNavigatorUI().addView(UIConstant.S_PATIENT, new PatientView());
+		getNavigatorUI().addView(UIConstant.S_CHANGE_PASSWORD, new ChangePasswordView());
 		getNavigatorUI().navigateTo(UIConstant.EMPTY);
 		getNavigatorUI().addViewChangeListener(new ChangeListener());
 	}

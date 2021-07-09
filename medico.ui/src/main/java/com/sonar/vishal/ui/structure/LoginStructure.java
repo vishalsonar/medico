@@ -27,16 +27,16 @@ public class LoginStructure implements Structure {
 		login.addStyleName(ValoTheme.LABEL_H2);
 		formLayout.setSizeFull();
 		formLayout.setMargin(true);
-		panel.setWidth(UIConstant._400_PX);
+		panel.setWidth(UIConstant.NUMBER_400_PX);
 		panel.setContent(formLayout);
 		panel.addStyleName(ValoTheme.PANEL_BORDERLESS);
 	}
 
 	@Override
 	public Object get() {
-		TextField userName = COMPONENT.getTextField(UIConstant.USER_NAME, UIConstant.USER_NAME, UIConstant._200_PX);
-		PasswordField password = COMPONENT.getPasswordField(UIConstant.PASSWORD, UIConstant.PASSWORD, UIConstant._200_PX);
-		Button loginButton = COMPONENT.getFriendlyButton(UIConstant.LOGIN, UIConstant._100);
+		TextField userName = COMPONENT.getTextField(UIConstant.USER_NAME, UIConstant.USER_NAME, UIConstant.NUMBER_200_PX);
+		PasswordField password = COMPONENT.getPasswordField(UIConstant.PASSWORD, UIConstant.PASSWORD, UIConstant.NUMBER_200_PX);
+		Button loginButton = COMPONENT.getFriendlyButton(UIConstant.LOGIN, UIConstant.NUMBER_100);
 		Link link = COMPONENT.getLink(UIConstant.FORGOT_PASSWORD, UIConstant.OPTION_PAGE_PATH);
 		formLayout.addComponents(login, userName, password, loginButton, link);
 		binder.bind(userName, LoginData::getUserName, LoginData::setUserName);
