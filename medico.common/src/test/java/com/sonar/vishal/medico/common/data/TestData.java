@@ -7,7 +7,9 @@ import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Bill;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
+import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.Store;
+import com.sonar.vishal.medico.common.pojo.User;
 
 public class TestData {
 
@@ -17,10 +19,29 @@ public class TestData {
 		testObjectList.add(TestData.getAddress());
 		testObjectList.add(TestData.getPatient());
 		testObjectList.add(TestData.getProduct());
+		testObjectList.add(TestData.getRole());
+		testObjectList.add(TestData.getUser());
 		testObjectList.add(null);
 		testObjectList.add(Store.class);
 		testObjectList.add(new Store());
 		return testObjectList;
+	}
+
+	public static Role getRole() {
+		Role role = new Role();
+		role.setName("admin");
+		role.setModule("Login,Option,Bill,Product,Patient,Store,User,Role");
+		return role;
+	}
+
+	public static User getUser() {
+		User user = new User();
+		Role role = getRole();
+		role.setId(1);
+		user.setUserName("admin");
+		user.setPassword("admin");
+		user.setRole(role);
+		return user;
 	}
 
 	public static Address getAddress() {
@@ -54,6 +75,7 @@ public class TestData {
 		patient.setAddress(getAddress());
 		patient.setPhoneNumber("987643234");
 		patient.setDoctorName("doctor");
+		patient.setPatientName("patient name");
 		return patient;
 	}
 
@@ -69,6 +91,7 @@ public class TestData {
 		product.setPack("pack123");
 		product.setQuantity("12");
 		product.setRate("30");
+		product.setLsq("LSQ1234");
 		return product;
 	}
 

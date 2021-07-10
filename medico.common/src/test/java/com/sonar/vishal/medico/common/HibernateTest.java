@@ -21,7 +21,7 @@ import junit.framework.TestCase;
 public class HibernateTest extends TestCase {
 
 	private Hibernate hibernate;
-	private int size = 3;
+	private int size = 5;
 	private int storeId;
 	private int addressId;
 	private int patientId;

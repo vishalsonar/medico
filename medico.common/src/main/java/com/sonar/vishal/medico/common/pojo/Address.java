@@ -16,7 +16,7 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = 5046941506582446785L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name = "line1", nullable = false, length = 50)

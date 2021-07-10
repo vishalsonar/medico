@@ -21,7 +21,7 @@ public class Bill {
 
 	@Id
 	@PrimaryKeyJoinColumn
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
