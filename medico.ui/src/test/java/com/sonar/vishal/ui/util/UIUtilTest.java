@@ -15,7 +15,7 @@ public class UIUtilTest {
 	@Test
 	public void testIsValidString() {
 		boolean result = UIUtil.isValidString(TestData.NULL);
-		assertFalse(result);
+		assertFalse(result); 
 		result = UIUtil.isValidString(TestData.EMPTY);
 		assertFalse(result);
 		result = UIUtil.isValidString(TestData.SPACE);
@@ -34,6 +34,14 @@ public class UIUtilTest {
 		assertTrue(result);
 		result = UIUtil.isNumericStringOfN(TestData.RANDOM_NUMERIC_STRING, TestData.MAX);
 		assertTrue(result);
+	}
+
+	@Test
+	public void testIsDecimalNumericString() {
+		boolean result = UIUtil.isDecimalNumericString(TestData.RANDOM_NUMERIC_STRING + ".123");
+		assertTrue(result);
+		result = UIUtil.isDecimalNumericString(TestData.RANDOM_NUMERIC_STRING + ".123.124");
+		assertFalse(result);
 	}
 
 	@Test
@@ -60,10 +68,17 @@ public class UIUtilTest {
 		assertTrue(result);
 		assertFalse(UIUtil.isAlphaNumericString(TestData.NULL));
 	}
-	
+
 	@Test
 	public void testIsAlphaNumericSpaceString() {
 		boolean result = UIUtil.isAlphaNumericSpaceString(TestData.RANDOM_ALPHANUMERIC_STRING + "  " + " l");
+		assertTrue(result);
+		assertFalse(UIUtil.isAlphaNumericString(TestData.NULL));
+	}
+
+	@Test
+	public void testIsAlphaNumericSpaceHypenString() {
+		boolean result = UIUtil.isAlphaNumericSpaceHypenString(TestData.RANDOM_ALPHANUMERIC_STRING + "  -" + " l");
 		assertTrue(result);
 		assertFalse(UIUtil.isAlphaNumericString(TestData.NULL));
 	}

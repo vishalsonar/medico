@@ -6,7 +6,6 @@ import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.ui.definition.Validator;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.util.UIConstant;
-import com.sonar.vishal.ui.util.UIUtil;
 
 public class PatientDataValidator implements Validator<PatientData> {
 
@@ -30,15 +29,9 @@ public class PatientDataValidator implements Validator<PatientData> {
 		if (address == null) {
 			throw new MedicoValidationException(UIConstant.ALL_FIELDS_MANDATORY);
 		}
-		if (!UIUtil.isAlphaNumericSpaceString(patientName)) {
-			throw new MedicoValidationException(INVALID_PATIENT_NAME);
-		}
-		if (!UIUtil.isAlphaNumericSpaceString(doctorName)) {
-			throw new MedicoValidationException(INVALID_DOCTOR_NAME);
-		}
-		if (!UIUtil.isNumericString(phoneNumber)) {
-			throw new MedicoValidationException(INVALID_PHONE_NUMBER);
-		}
+		isAlphaNumericSpace(patientName, INVALID_PATIENT_NAME);
+		isAlphaNumericSpace(doctorName, INVALID_DOCTOR_NAME);
+		isNumeric(phoneNumber, INVALID_PHONE_NUMBER);
 		new AddressDataValidator().doValidation(address);
 	}
 

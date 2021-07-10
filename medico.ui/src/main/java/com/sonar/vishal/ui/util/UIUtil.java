@@ -6,9 +6,11 @@ public class UIUtil {
 
 	public static final String STRING_REGEX = "[a-zA-Z]*";
 	public static final String NUMERIC_REGEX = "\\d*";
+	public static final String DECIMAL_NUMERIC_REGEX = "\\d*[.]{1}\\d*";
 	public static final String ALPHA_NUMERIC_REGEX = "\\w*";
 	public static final String ALPHA_NUMERIC_SPACE_REGEX = "[\\w\\s]*";
-	public static final String ADDRESS_REGEX = "[a-zA-Z0-9//,.()\\s-]*";
+	public static final String ALPHA_NUMERIC_SPACE_HYPEN_REGEX = "[\\w\\s-]*";
+	public static final String ADDRESS_REGEX = "[a-zA-Z0-9/,.()\\s-]*";
 	
 	private UIUtil() {
 		throw new IllegalStateException("Utility class");
@@ -61,6 +63,14 @@ public class UIUtil {
 		}
 		return result;
 	}
+	
+	public static boolean isDecimalNumericString(String data) {
+		boolean result = false;
+		if (isValidString(data)) {
+			result = Pattern.matches(DECIMAL_NUMERIC_REGEX, data);
+		}
+		return result;
+	}
 
 	public static boolean isAlphaNumericString(String data) {
 		boolean result = false;
@@ -85,7 +95,15 @@ public class UIUtil {
 		}
 		return result;
 	}
-	
+
+	public static boolean isAlphaNumericSpaceHypenString(String data) {
+		boolean result = false;
+		if (isValidString(data)) {
+			result = Pattern.matches(ALPHA_NUMERIC_SPACE_HYPEN_REGEX, data);
+		}
+		return result;
+	}
+
 	public static boolean isAddressLineString(String data) {
 		boolean result = false;
 		if (isValidString(data)) {
