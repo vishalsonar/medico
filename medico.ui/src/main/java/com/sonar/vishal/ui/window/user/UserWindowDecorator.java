@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.ui.backend.RestBackend;
@@ -24,6 +25,7 @@ public class UserWindowDecorator {
 	PasswordField confirmPassword;
 	RadioButtonGroup<String> optionGroup;
 	Binder<User> userBinder = new Binder<>();
+	Binder<Password> passwordBinder = new Binder<>();
 	
 	public UserWindowDecorator() {
 		RestBackend backend = new RestBackend(Constant.GET_ROLE_LIST);
@@ -37,5 +39,6 @@ public class UserWindowDecorator {
 		optionGroup.addValueChangeListener(new UserRoleValueListener(roles));
 		userBinder.bind(name, User::getUserName, User::setUserName);
 		userBinder.bind(password, User::getPassword, User::setPassword);
+		passwordBinder.bind(confirmPassword, Password::getConfirmPassword, Password::setConfirmPassword);
 	}
 }

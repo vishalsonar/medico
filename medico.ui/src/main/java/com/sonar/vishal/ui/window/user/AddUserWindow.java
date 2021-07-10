@@ -22,7 +22,7 @@ public class AddUserWindow extends MedicoWindow {
 		addComponents(decorator.name, decorator.password, decorator.confirmPassword, decorator.optionGroup);
 		addAction();
 		addCancelListener(this);
-		addSubmitListener(new AddUserListener(decorator.userBinder, this, structure));
+		addSubmitListener(new AddUserListener(decorator.userBinder, decorator.passwordBinder, this, structure));
 	}
 
 	@Override

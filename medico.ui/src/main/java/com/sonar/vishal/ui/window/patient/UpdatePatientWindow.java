@@ -29,7 +29,7 @@ public class UpdatePatientWindow extends MedicoWindow {
 		decorator.line2.setValue(selectedPatient.getAddress().getLine2());
 		decorator.city.setValue(selectedPatient.getAddress().getCity());
 		decorator.pinCode.setValue(selectedPatient.getAddress().getPinCode());
-		decorator.state.setValue(selectedPatient.getAddress().getPinCode());
+		decorator.state.setValue(selectedPatient.getAddress().getState());
 		addComponents(decorator.name, decorator.phoneNumber, decorator.doctorName, decorator.line1, decorator.line2,
 				decorator.city, decorator.pinCode, decorator.state);
 		addAction();

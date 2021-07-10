@@ -54,4 +54,17 @@ public class UIUtilTest {
 		assertFalse(UIUtil.isString(TestData.NULL));
 	}
 
+	@Test
+	public void testIsAddressLineString() {
+		boolean result = UIUtil.isAddressLineString(TestData.RANDOM_ALPHANUMERIC_STRING + "  ,-.()" + " l");
+		assertTrue(result);
+		assertFalse(UIUtil.isAlphaNumericString(TestData.NULL));
+	}
+	
+	@Test
+	public void testIsAlphaNumericSpaceString() {
+		boolean result = UIUtil.isAlphaNumericSpaceString(TestData.RANDOM_ALPHANUMERIC_STRING + "  " + " l");
+		assertTrue(result);
+		assertFalse(UIUtil.isAlphaNumericString(TestData.NULL));
+	}
 }
