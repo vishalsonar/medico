@@ -8,8 +8,22 @@ import java.util.UUID;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
+import com.sonar.vishal.medico.common.pojo.Bill;
+import com.sonar.vishal.medico.common.pojo.Patient;
+import com.sonar.vishal.medico.common.pojo.Product;
+import com.sonar.vishal.medico.common.pojo.Role;
+import com.sonar.vishal.medico.common.pojo.Store;
+import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.structure.BillData;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.Header;
+import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.PatientData;
+import com.sonar.vishal.medico.common.structure.ProductData;
+import com.sonar.vishal.medico.common.structure.RoleData;
+import com.sonar.vishal.medico.common.structure.StoreData;
+import com.sonar.vishal.medico.common.structure.UserData;
 
 public class UnitTestData {
 
@@ -32,6 +46,240 @@ public class UnitTestData {
 	public Message getAllStoreRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_STORE_LIST);
+		return message;
+	}
+
+	public Message getAddStoreRequest() {
+		StoreData data = new StoreData();
+		data.setStore(TestData.getStore());
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_STORE);
+		return message;
+	}
+
+	public Message getUpdateStoreRequest(Store store) {
+		StoreData data = new StoreData();
+		data.setStore(store);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_STORE);
+		return message;
+	}
+
+	public Message getDeleteStoreRequest(Store store) {
+		StoreData data = new StoreData();
+		data.setStore(store);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_STORE);
+		return message;
+	}
+
+	public Message getStoreRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_STORE);
+		return message;
+	}
+
+	public Message getAllUserRequest() {
+		message.setData(new Data());
+		message.getHeader().setFunction(Constant.GET_USER_LIST);
+		return message;
+	}
+
+	public Message getAddUserRequest(Role role) {
+		UserData data = new UserData();
+		data.setUser(TestData.getUser());
+		data.getUser().setRole(role);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_USER);
+		return message;
+	}
+
+	public Message getUserRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_USER);
+		return message;
+	}
+
+	public Message getUpdateUserRequest(User user) {
+		UserData data = new UserData();
+		data.setUser(user);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_USER);
+		return message;
+	}
+
+	public Message getDeleteUserRequest(User user) {
+		UserData data = new UserData();
+		data.setUser(user);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_USER);
+		return message;
+	}
+
+	public Message getAllRoleRequest() {
+		message.setData(new Data());
+		message.getHeader().setFunction(Constant.GET_ROLE_LIST);
+		return message;
+	}
+
+	public Message getAddRoleRequest() {
+		RoleData data = new RoleData();
+		data.setRole(TestData.getRole());
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_ROLE);
+		return message;
+	}
+
+	public Message getUpdateRoleRequest(Role role) {
+		RoleData data = new RoleData();
+		data.setRole(role);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_ROLE);
+		return message;
+	}
+
+	public Message getDeleteRoleRequest(Role role) {
+		RoleData data = new RoleData();
+		data.setRole(role);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_ROLE);
+		return message;
+	}
+
+	public Message getRoleRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_ROLE);
+		return message;
+	}
+
+	public Message getAllProductRequest() {
+		message.setData(new Data());
+		message.getHeader().setFunction(Constant.GET_PRODUCT_LIST);
+		return message;
+	}
+
+	public Message getAddProductRequest() {
+		ProductData data = new ProductData();
+		data.setProduct(TestData.getProduct());
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_PRODUCT);
+		return message;
+	}
+
+	public Message getUpdateProductRequest(Product product) {
+		ProductData data = new ProductData();
+		data.setProduct(product);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_PRODUCT);
+		return message;
+	}
+
+	public Message getDeleteProductRequest(Product product) {
+		ProductData data = new ProductData();
+		data.setProduct(product);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_PRODUCT);
+		return message;
+	}
+
+	public Message getProductRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_PRODUCT);
+		return message;
+	}
+
+	public Message getAllPatientRequest() {
+		message.setData(new Data());
+		message.getHeader().setFunction(Constant.GET_PATIENT_LIST);
+		return message;
+	}
+
+	public Message getAddPatientRequest() {
+		PatientData data = new PatientData();
+		data.setPatient(TestData.getPatient());
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_PATIENT);
+		return message;
+	}
+
+	public Message getPatientRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_PATIENT);
+		return message;
+	}
+
+	public Message getUpdatePatientRequest(Patient patient) {
+		PatientData data = new PatientData();
+		data.setPatient(patient);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_PATIENT);
+		return message;
+	}
+
+	public Message getDeletePatientRequest(Patient patient) {
+		PatientData data = new PatientData();
+		data.setPatient(patient);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_PATIENT);
+		return message;
+	}
+
+	public Message getAllBillRequest() {
+		message.setData(new Data());
+		message.getHeader().setFunction(Constant.GET_BILL_LIST);
+		return message;
+	}
+
+	public Message getAddBillRequest(Patient patient, Store store) {
+		BillData data = new BillData();
+		data.setBill(TestData.getBill());
+		data.getBill().setPatient(patient);
+		data.getBill().setStore(store);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_BILL);
+		return message;
+	}
+
+	public Message getUpdateBillRequest(Bill bill) {
+		BillData data = new BillData();
+		data.setBill(bill);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_BILL);
+		return message;
+	}
+
+	public Message getDeleteBillRequest(Bill bill) {
+		BillData data = new BillData();
+		data.setBill(bill);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_BILL);
+		return message;
+	}
+
+	public Message getBillRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_BILL);
+		return message;
+	}
+
+	public Message getLoginData(User user) {
+		LoginData data = new LoginData();
+		data.setUserName(user.getUserName());
+		data.setPassword(user.getPassword());
+		message.setData(data);
+		message.getHeader().setFunction(Constant.LOGIN);
 		return message;
 	}
 
