@@ -11,17 +11,7 @@
 	<packaging>war</packaging>
 	<name>medico.core Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<properties>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>com.sonar.vishal</groupId>
 			<artifactId>medico.common</artifactId>
@@ -30,7 +20,7 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
-			<version>1.8</version>
+			<version>${jersey-server.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

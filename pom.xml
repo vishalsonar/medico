@@ -7,6 +7,20 @@
 		<revision>1.0.0-SNAPSHOT</revision>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<vaadin.version>8.0.0</vaadin.version>
+		<vaadin.plugin.version>8.0.0</vaadin.plugin.version>
+		<jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<vaadin.widgetset.mode>local</vaadin.widgetset.mode>
+		<javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+		<jersey-client.version>1.8</jersey-client.version>
+		<junit.version>4.12</junit.version>
+		<jersey-server.version>1.8</jersey-server.version>
+		<mysql-connector-java.version>8.0.22</mysql-connector-java.version>
+		<ojdbc8.version>19.3.0.0</ojdbc8.version>
+		<hibernate-core.version>5.4.24.Final</hibernate-core.version>
+		<gson.version>2.8.6</gson.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
 	</properties>
 	<groupId>com.sonar.vishal</groupId>
 	<artifactId>medico</artifactId>
@@ -22,13 +36,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version>
+			<version>${commons-lang3.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

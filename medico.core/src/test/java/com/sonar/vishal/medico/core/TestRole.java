@@ -21,6 +21,7 @@ public class TestRole extends UnitTest {
 		JsonObject response = TestApi(data.getAllRoleRequest());
 		JsonObject roleObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Role role = gson.fromJson(roleObject, Role.class);
+		assertNotNull(role);
 		TestApi(data.getRoleRequest(role.getId()));
 		TestApi(data.getUpdateRoleRequest(role));
 		TestApi(data.getDeleteRoleRequest(role));

@@ -24,6 +24,7 @@ public class TestStore extends UnitTest {
 		JsonObject response = TestApi(data.getAllStoreRequest());
 		JsonObject storeObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Store store = gson.fromJson(storeObject, Store.class);
+		assertNotNull(store);
 		TestApi(data.getStoreRequest(store.getId()));
 		TestApi(data.getUpdateStoreRequest(store));
 		TestApi(data.getDeleteStoreRequest(store));

@@ -21,6 +21,7 @@ public class TestPatient extends UnitTest {
 		JsonObject response = TestApi(data.getAllPatientRequest());
 		JsonObject patientObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Patient patient = gson.fromJson(patientObject, Patient.class);
+		assertNotNull(patient);
 		TestApi(data.getPatientRequest(patient.getId()));
 		TestApi(data.getUpdatePatientRequest(patient));
 		TestApi(data.getDeletePatientRequest(patient));
