@@ -7,6 +7,7 @@ import com.sonar.vishal.medico.common.structure.BillData;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
@@ -17,6 +18,7 @@ import com.sonar.vishal.medico.core.definition.BusinessAdapter;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 import com.sonar.vishal.medico.core.logic.BillLogic;
 import com.sonar.vishal.medico.core.logic.KeyLogic;
+import com.sonar.vishal.medico.core.logic.LogLogic;
 import com.sonar.vishal.medico.core.logic.LoginLogic;
 import com.sonar.vishal.medico.core.logic.PatientLogic;
 import com.sonar.vishal.medico.core.logic.ProductLogic;
@@ -68,6 +70,10 @@ public class RequestAdapter implements BusinessAdapter {
 			if (functionName.contains("User")) {
 				logic = new UserLogic();
 				messageData = gson.fromJson(dataObject, UserData.class);
+			}
+			if (functionName.contains("Log") && messageData == null) {
+				logic = new LogLogic();
+				messageData = gson.fromJson(dataObject, LogData.class);
 			}
 			Message responesMessage = logic.execute(functionName, messageData);
 			response = gson.toJson(responesMessage);

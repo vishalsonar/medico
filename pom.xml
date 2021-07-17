@@ -31,6 +31,7 @@
 		<module>medico.common</module>
 		<module>medico.core</module>
 		<module>medico.ui</module>
+		<module>medico.logui</module>
 	</modules>
 	<dependencies>
 		<dependency>

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
+import com.sonar.vishal.medico.common.message.common.Now;
 import com.sonar.vishal.medico.common.pojo.Bill;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
@@ -18,6 +19,7 @@ import com.sonar.vishal.medico.common.structure.BillData;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
@@ -280,6 +282,31 @@ public class UnitTestData {
 		data.setPassword(user.getPassword());
 		message.setData(data);
 		message.getHeader().setFunction(Constant.LOGIN);
+		return message;
+	}
+
+	public Message getAddLogRequest() {
+		LogData data = new LogData();
+		data.setLog(TestData.getLog());
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_LOG);
+		return message;
+	}
+
+	public Message getAllLogRequest() {
+		message.setData(new Data());
+		message.getHeader().setFunction(Constant.GET_LOG_LIST);
+		return message;
+	}
+
+	public Message getLogRequest() {
+		LogData data = new LogData();
+		data.setLog(TestData.getLog());
+		data.setEndDate(Now.get());
+		String date = data.getLog().getDateTime().split("T")[0];
+		data.getLog().setDateTime(date + "T00:00");
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_LOG);
 		return message;
 	}
 

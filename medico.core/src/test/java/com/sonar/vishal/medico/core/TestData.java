@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import com.sonar.vishal.medico.common.message.common.Now;
 import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Bill;
+import com.sonar.vishal.medico.common.pojo.Log;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -107,5 +109,14 @@ public class TestData {
 		bill.setProducts(list);
 		bill.setStore(getStore());
 		return bill;
+	}
+
+	public static Log getLog() {
+		Log log = new Log();
+		log.setComponent("CORE");
+		log.setSeverity("INFO");
+		log.setMessage("Test Log Message");
+		log.setDateTime(Now.get());
+		return log;
 	}
 }
