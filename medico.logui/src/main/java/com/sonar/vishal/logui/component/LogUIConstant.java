@@ -2,8 +2,12 @@ package com.sonar.vishal.logui.component;
 
 public class LogUIConstant {
 
+	private LogUIConstant() {
+		throw new IllegalStateException("Constant class");
+	}
+
 	public static final String EMPTY = "";
-	public static final String _ID = "id";
+	public static final String ID_SMALL = "id";
 	public static final String ID = "Id";
 	public static final String LOGUI = "LogUI";
 	public static final String SELECT_COMPONENT = "Select Component";
@@ -19,9 +23,6 @@ public class LogUIConstant {
 	public static final String MESSAGE = "Message";
 	public static final String INITIALIZATION_FAILED = "Initialization Failed";
 
-	public static final String[] SEVERITY_LIST = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "ALL" };
-	public static final String[] COMPONENT_LIST = { "CORE", "MEDICOUI", "LOGUI" };
-	
 	public static final String NO_DATA_FOUND = "No Data Found";
 	public static final String PLEASE_TRY_OTHER_COMBINATION = "Please try other filter combination";
 	public static final String INVALID_DATE_RANGE = "Invalid date range selected";

@@ -7,6 +7,10 @@ public class Now {
 
 	public static final String FORMAT = "YYYY-MM-dd'T'HH:mm";
 
+	private Now() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static String get() {
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat(FORMAT);

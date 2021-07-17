@@ -1,6 +1,7 @@
 package com.sonar.vishal;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.sonar.vishal.converter.DateTimeToStringConverter;
@@ -27,12 +28,14 @@ import com.vaadin.ui.VerticalLayout;
 public class LogView extends HorizontalSplitPanel implements View {
 
 	private static final long serialVersionUID = -6960712018063674712L;
-	private Component component;
+	private static final String[] SEVERITY_LIST = { "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "ALL" };
+	private static final String[] COMPONENT_LIST = { "CORE", "MEDICOUI", "LOGUI" };
+	private transient Component component;
+	private transient LogLogic logLogic;
 	private VerticalLayout leftLayout;
 	private VerticalLayout rightLayout;
 	private Grid<Log> table;
 	private Log selectedLog;
-	private LogLogic logLogic;
 	private Binder<Log> logBinder;
 	private Binder<LogData> logDataBinder;
 
@@ -40,10 +43,10 @@ public class LogView extends HorizontalSplitPanel implements View {
 		component = new Component();
 		leftLayout = new VerticalLayout();
 		rightLayout = new VerticalLayout();
-		table = new Grid<Log>();
+		table = new Grid<>();
 		logLogic = new LogLogic();
-		logBinder = new Binder<Log>();
-		logDataBinder = new Binder<LogData>();
+		logBinder = new Binder<>();
+		logDataBinder = new Binder<>();
 	}
 
 	@Override
@@ -58,8 +61,8 @@ public class LogView extends HorizontalSplitPanel implements View {
 
 	private void setLeftUI() {
 		Button submit = component.getFriendlyButton(LogUIConstant.SUBMIT);
-		ComboBox<String> componentComboBox = component.getDropDown(LogUIConstant.SELECT_COMPONENT, LogUIConstant.SELECT_COMPONENT, LogUIConstant.COMPONENT_LIST);
-		ComboBox<String> severityComboBox = component.getDropDown(LogUIConstant.SELECT_SEVERITY, LogUIConstant.SELECT_SEVERITY, LogUIConstant.SEVERITY_LIST);
+		ComboBox<String> componentComboBox = component.getDropDown(LogUIConstant.SELECT_COMPONENT, LogUIConstant.SELECT_COMPONENT, COMPONENT_LIST);
+		ComboBox<String> severityComboBox = component.getDropDown(LogUIConstant.SELECT_SEVERITY, LogUIConstant.SELECT_SEVERITY, SEVERITY_LIST);
 		DateTimeField startDateTimeField = component.getDataTimeField(LogUIConstant.SELECT_START_DATE);
 		DateTimeField endDateTimeField = component.getDataTimeField(LogUIConstant.SELECT_END_DATE);
 		leftLayout.addComponent(component.getLogo(LogUIConstant.LOGUI));
@@ -106,6 +109,28 @@ public class LogView extends HorizontalSplitPanel implements View {
 		table.setSizeFull();
 		rightLayout.addComponent(table);
 		rightLayout.setSizeFull();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(leftLayout, logBinder, logDataBinder, rightLayout, selectedLog, table);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LogView other = (LogView) obj;
+		return Objects.equals(leftLayout, other.leftLayout) && Objects.equals(logBinder, other.logBinder)
+				&& Objects.equals(logDataBinder, other.logDataBinder) && Objects.equals(rightLayout, other.rightLayout)
+				&& Objects.equals(selectedLog, other.selectedLog) && Objects.equals(table, other.table);
 	}
 
 }

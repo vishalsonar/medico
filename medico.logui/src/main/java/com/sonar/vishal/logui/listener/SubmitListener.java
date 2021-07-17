@@ -17,11 +17,11 @@ import com.vaadin.ui.Grid;
 public class SubmitListener implements ClickListener {
 
 	private static final long serialVersionUID = -6004988276634900129L;
+	private Grid<Log> table;
 	private Binder<Log> logBinder;
 	private Binder<LogData> logDataBinder;
-	private LogLogic logic;
-	private Component component;
-	private Grid<Log> table;
+	private transient LogLogic logic;
+	private transient Component component;
 
 	public SubmitListener(Binder<Log> logBinder, Binder<LogData> logDataBinder, Grid<Log> table) {
 		this.logBinder = logBinder;

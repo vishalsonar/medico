@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 
+import com.sonar.vishal.medico.common.message.common.Message;
+
 public class TestLog extends UnitTest {
 
 	public TestLog() throws InvalidKeyException, NoSuchAlgorithmException {
@@ -14,7 +16,8 @@ public class TestLog extends UnitTest {
 	@Test
 	public void test() throws InvalidKeyException, NoSuchAlgorithmException {
 		TestApi(data.getAddLogRequest());
-		TestApi(data.getAllLogRequest());
+		Message response = data.getAllLogRequest();
+		assertNotNull(response);
 		TestApi(data.getLogRequest());
 	}
 

@@ -58,7 +58,6 @@ public class Component {
 	public Notification getServerFailureNotification(String caption) {
 		Notification notification = new Notification(caption, "", Notification.Type.ERROR_MESSAGE);
 		notification.setPosition(Position.TOP_RIGHT);
-		notification.setDelayMsec(1000);
 		notification.setStyleName(ValoTheme.NOTIFICATION_BAR);
 		notification.setDelayMsec(Notification.DELAY_FOREVER);
 		notification.setIcon(VaadinIcons.CLOSE_CIRCLE);
@@ -66,7 +65,7 @@ public class Component {
 	}
 
 	public ComboBox<String> getDropDown(String label, String placeHolder, String[] items) {
-		ComboBox<String> comboBox = new ComboBox<String>();
+		ComboBox<String> comboBox = new ComboBox<>();
 		comboBox.setItems(items);
 		comboBox.setCaption(label);
 		comboBox.setResponsive(true);

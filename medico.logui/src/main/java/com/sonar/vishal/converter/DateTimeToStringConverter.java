@@ -4,8 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Date;
+import java.util.TimeZone;
 
 import com.sonar.vishal.medico.common.message.common.Now;
 import com.vaadin.data.Converter;
@@ -28,7 +28,7 @@ public class DateTimeToStringConverter implements Converter<LocalDateTime, Strin
 	public LocalDateTime convertToPresentation(String value, ValueContext context) {
 		try {
 			Date date = new SimpleDateFormat(Now.FORMAT).parse(value);
-			return Instant.ofEpochMilli(date.getTime()).atZone(ZoneOffset.systemDefault()).toLocalDateTime();
+			return Instant.ofEpochMilli(date.getTime()).atZone(TimeZone.getDefault().toZoneId()).toLocalDateTime();
 		} catch (ParseException e) {
 			return null;
 		}

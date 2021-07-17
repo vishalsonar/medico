@@ -40,7 +40,7 @@ public class LogLogic implements BusinessLogic {
 
 	@Override
 	public void getById(String id) {
-		throw new IllegalAccessError("Method not Allowed");
+		throw new IllegalAccessError("ById Method not Allowed");
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class LogLogic implements BusinessLogic {
 
 	@Override
 	public void delete(Object data) {
-		throw new IllegalAccessError("Method not Allowed");
+		throw new IllegalAccessError("Delete Method not Allowed");
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
@@ -71,16 +71,14 @@ public class LogLogic implements BusinessLogic {
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Log.class);
-			if (!(component == null || component.trim().equals(""))) {
+			if (checkField(component)) {
 				criteria.add(Restrictions.eq(Constant.COMPONENT, component));
 			}
-			if (!(serverity == null || serverity.trim().equals(""))) {
+			if (checkField(serverity)) {
 				criteria.add(Restrictions.eq(Constant.SEVERITY, serverity));
 			}
-			if (!(startDate == null || startDate.trim().equals(""))) {
-				if (!(endDate == null || endDate.trim().equals(""))) {
-					criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
-				}
+			if (checkField(startDate) && checkField(endDate)) {
+				criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
 			}
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			List<Log> list = (List<Log>) hibernate.executeCriteria(session, criteria);
@@ -94,6 +92,14 @@ public class LogLogic implements BusinessLogic {
 			setErrorMessage(Constant.GET_LOG, Constant.NULL);
 		}
 		message.setData(replyData);
+	}
+	
+	private boolean checkField(String field) {
+		boolean result = false;
+		if (!(field == null || field.trim().equals(""))) {
+			result = true;
+		}
+		return result;
 	}
 
 	@Override
