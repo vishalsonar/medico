@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Now {
 
-	public static final String FORMAT = "YYYY-MM-dd'T'HH:mm";
+	public static final String FORMAT = "yyyy-MM-dd'T'HH:mm";
 
 	private Now() {
 		throw new IllegalStateException("Utility class");

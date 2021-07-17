@@ -51,10 +51,8 @@ public class LogLogic {
 			if (!(serverity == null || serverity.trim().equals(""))) {
 				criteria.add(Restrictions.eq(Constant.SEVERITY, serverity));
 			}
-			if (!(startDate == null || startDate.trim().equals(""))) {
-				if (!(endDate == null || endDate.trim().equals(""))) {
-					criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
-				}
+			if (!(startDate == null || startDate.trim().equals("") || endDate == null || endDate.trim().equals(""))) {
+				criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
 			}
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			list = (List<Log>) hibernate.executeCriteria(session, criteria);

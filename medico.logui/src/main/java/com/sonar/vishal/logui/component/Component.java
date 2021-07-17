@@ -1,6 +1,7 @@
 package com.sonar.vishal.logui.component;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Sizeable.Unit;
@@ -36,13 +37,14 @@ public class Component {
 		label.addStyleName(ValoTheme.LABEL_BOLD);
 		label.addStyleName(ValoTheme.LABEL_H1);
 		label.setResponsive(true);
+		label.setLocale(Locale.ENGLISH);
 		return label;
 	}
 
 	public Notification getSuccessNotification(String caption, String description) {
 		Notification notification = new Notification(caption, description, Notification.Type.HUMANIZED_MESSAGE);
 		notification.setPosition(Position.TOP_RIGHT);
-		notification.setDelayMsec(1000);
+		notification.setDelayMsec(1500);
 		notification.setStyleName(ValoTheme.NOTIFICATION_SUCCESS);
 		return notification;
 	}
@@ -50,7 +52,7 @@ public class Component {
 	public Notification getFailureNotification(String caption, String description) {
 		Notification notification = new Notification(caption, description, Notification.Type.ERROR_MESSAGE);
 		notification.setPosition(Position.TOP_RIGHT);
-		notification.setDelayMsec(1000);
+		notification.setDelayMsec(1500);
 		notification.setStyleName(ValoTheme.NOTIFICATION_ERROR);
 		return notification;
 	}
