@@ -130,7 +130,6 @@ public class Component {
 	public Notification getServerFailureNotification(String caption) {
 		Notification notification = new Notification(caption, UIConstant.EMPTY, Notification.Type.ERROR_MESSAGE);
 		notification.setPosition(Position.TOP_RIGHT);
-		notification.setDelayMsec(1000);
 		notification.setStyleName(ValoTheme.NOTIFICATION_BAR);
 		notification.setDelayMsec(Notification.DELAY_FOREVER);
 		notification.setIcon(VaadinIcons.CLOSE_CIRCLE);

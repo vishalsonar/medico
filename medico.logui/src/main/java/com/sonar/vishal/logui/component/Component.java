@@ -11,6 +11,7 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateTimeField;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class Component {
@@ -33,33 +34,35 @@ public class Component {
 	}
 
 	public Label getLogo(String logoString) {
-		Label label = new Label(logoString);
-		label.addStyleName(ValoTheme.LABEL_BOLD);
-		label.addStyleName(ValoTheme.LABEL_H1);
-		label.setResponsive(true);
-		label.setLocale(Locale.ENGLISH);
-		return label;
+		Label logo = new Label(logoString);
+		logo.addStyleName(ValoTheme.LABEL_BOLD);
+		logo.addStyleName(ValoTheme.LABEL_H1);
+		logo.setResponsive(true);
+		logo.setLocale(Locale.ENGLISH);
+		return logo;
+	}
+	
+	private Notification getNotification(String caption, String description, Type type) {
+		Notification notification = new Notification(caption, description, type);
+		notification.setPosition(Position.TOP_RIGHT);
+		notification.setDelayMsec(1000);
+		return notification;
 	}
 
 	public Notification getSuccessNotification(String caption, String description) {
-		Notification notification = new Notification(caption, description, Notification.Type.HUMANIZED_MESSAGE);
-		notification.setPosition(Position.TOP_RIGHT);
-		notification.setDelayMsec(1500);
+		Notification notification = getNotification(caption, description, Notification.Type.HUMANIZED_MESSAGE);
 		notification.setStyleName(ValoTheme.NOTIFICATION_SUCCESS);
 		return notification;
 	}
 
 	public Notification getFailureNotification(String caption, String description) {
-		Notification notification = new Notification(caption, description, Notification.Type.ERROR_MESSAGE);
-		notification.setPosition(Position.TOP_RIGHT);
-		notification.setDelayMsec(1500);
+		Notification notification = getNotification(caption, description, Notification.Type.ERROR_MESSAGE);
 		notification.setStyleName(ValoTheme.NOTIFICATION_ERROR);
 		return notification;
 	}
 
 	public Notification getServerFailureNotification(String caption) {
-		Notification notification = new Notification(caption, "", Notification.Type.ERROR_MESSAGE);
-		notification.setPosition(Position.TOP_RIGHT);
+		Notification notification = getNotification(caption, "", Notification.Type.ERROR_MESSAGE);
 		notification.setStyleName(ValoTheme.NOTIFICATION_BAR);
 		notification.setDelayMsec(Notification.DELAY_FOREVER);
 		notification.setIcon(VaadinIcons.CLOSE_CIRCLE);
