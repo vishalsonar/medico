@@ -39,11 +39,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-client</artifactId>
-			<version>${jersey-client.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.sonar.vishal</groupId>
 			<artifactId>medico.common</artifactId>
 			<version>${revision}</version>

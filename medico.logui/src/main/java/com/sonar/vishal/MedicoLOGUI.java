@@ -1,6 +1,6 @@
 package com.sonar.vishal;
 
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ public class MedicoLOGUI extends UI {
 	static {
 		try {
 			Logger.setComponent(LoggerMessage.LOGUI);
-			Logger.setIp(Inet4Address.getLocalHost().getHostAddress());
+			Logger.setIp(InetAddress.getLocalHost().getHostAddress());
 			Logger.info(LoggerMessage.MEDICOLOGUI_CLASS_NAME, LoggerMessage.LOGUI_INITIALIZE);
 		} catch (UnknownHostException e) {
 			Logger.setIp(LoggerMessage.EMPTY);

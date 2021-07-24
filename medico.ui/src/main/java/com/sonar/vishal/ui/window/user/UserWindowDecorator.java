@@ -8,7 +8,7 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.User;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.listener.user.UserRoleValueListener;
 import com.sonar.vishal.ui.util.UIConstant;

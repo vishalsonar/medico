@@ -99,4 +99,6 @@ public class Constant {
 	public static final String ADD_PATIENT_SUCCESS_MESSAGE = "Patient Added";
 	public static final String UPDATE_PATIENT_SUCCESS_MESSAGE = "Patient Updated";
 	public static final String DELETE_PATIENT_SUCCESS_MESSAGE = "Patient Deleted";
+	
+	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
 }

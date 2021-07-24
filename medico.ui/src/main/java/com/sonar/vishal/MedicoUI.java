@@ -1,7 +1,12 @@
 package com.sonar.vishal;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.servlet.annotation.WebServlet;
 
+import com.sonar.vishal.medico.common.util.Logger;
+import com.sonar.vishal.medico.common.util.LoggerMessage;
 import com.sonar.vishal.ui.listener.ChangeListener;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.annotations.Theme;
@@ -16,6 +21,17 @@ public class MedicoUI extends UI {
 
 	private static final long serialVersionUID = -112040433551458450L;
 	private static Navigator navigator;
+	
+	static {
+		try {
+			Logger.setComponent(LoggerMessage.MEDICOUI);
+			Logger.setIp(InetAddress.getLocalHost().getHostAddress());
+			Logger.info(LoggerMessage.MEDICOUI_CLASS_NAME, LoggerMessage.MEDICOUI_INITIALIZE);
+		} catch (UnknownHostException e) {
+			Logger.setIp(LoggerMessage.EMPTY);
+			Logger.error(LoggerMessage.MEDICOLOGUI_CLASS_NAME, LoggerMessage.UNKOWN_HOST_EXCEPTION);
+		}
+	}
 
 	public static Navigator getNavigatorUI() {
 		return navigator;

@@ -7,12 +7,12 @@ import javax.crypto.spec.SecretKeySpec;
 
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.KeyData;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.UserData;
-import com.sonar.vishal.ui.backend.RestBackend;
 import com.sonar.vishal.ui.component.Component;
-import com.sonar.vishal.ui.definition.Backend;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.validator.LoginDataValidator;

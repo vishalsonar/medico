@@ -1,6 +1,6 @@
 package com.sonar.vishal.medico.core.listener;
 
-import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import javax.servlet.ServletContextEvent;
@@ -17,7 +17,7 @@ public class MedicoContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		try {
 			Logger.setComponent(LoggerMessage.CORE);
-			Logger.setIp(Inet4Address.getLocalHost().getHostAddress());
+			Logger.setIp(InetAddress.getLocalHost().getHostAddress());
 			Logger.info(getClass().getName(), LoggerMessage.SERVER_INITIALIZE);
 		} catch (UnknownHostException e) {
 			Logger.setIp(LoggerMessage.EMPTY);

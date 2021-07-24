@@ -1,4 +1,4 @@
-package com.sonar.vishal.ui.definition;
+package com.sonar.vishal.medico.common.rest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,6 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.Header;
-import com.sonar.vishal.ui.util.UIConstant;
 import com.sun.jersey.api.client.Client;
 
 public interface Backend {
@@ -19,7 +18,7 @@ public interface Backend {
 	public static final Gson gson = new Gson();
 
 	public default void init(String functionName) {
-		String date = new SimpleDateFormat(UIConstant.DATA_TIME_FORMAT).format(new Date());
+		String date = new SimpleDateFormat(Constant.DATA_TIME_FORMAT).format(new Date());
 		Header header = new Header();
 		header.setDateTime(date);
 		header.setType(Constant.REQUEST);

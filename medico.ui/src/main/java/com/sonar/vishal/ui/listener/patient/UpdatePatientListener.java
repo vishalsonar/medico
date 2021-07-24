@@ -3,7 +3,7 @@ package com.sonar.vishal.ui.listener.patient;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Patient;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;

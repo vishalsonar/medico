@@ -1,7 +1,7 @@
 package com.sonar.vishal.ui.listener;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.window.MedicoWindow;

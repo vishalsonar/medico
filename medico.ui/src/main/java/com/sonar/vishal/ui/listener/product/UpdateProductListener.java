@@ -2,7 +2,7 @@ package com.sonar.vishal.ui.listener.product;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Product;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
