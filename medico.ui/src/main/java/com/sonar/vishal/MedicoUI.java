@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.sonar.vishal.medico.common.util.Logger;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.medico.common.util.LoggerMessage;
 import com.sonar.vishal.ui.listener.ChangeListener;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -24,12 +24,12 @@ public class MedicoUI extends UI {
 	
 	static {
 		try {
-			Logger.setComponent(LoggerMessage.MEDICOUI);
-			Logger.setIp(InetAddress.getLocalHost().getHostAddress());
-			Logger.info(LoggerMessage.MEDICOUI_CLASS_NAME, LoggerMessage.MEDICOUI_INITIALIZE);
+			LoggerApi.setComponent(LoggerMessage.MEDICOUI);
+			LoggerApi.setIp(InetAddress.getLocalHost().getHostAddress());
+			LoggerApi.info(LoggerMessage.MEDICOUI_CLASS_NAME, LoggerMessage.MEDICOUI_INITIALIZE);
 		} catch (UnknownHostException e) {
-			Logger.setIp(LoggerMessage.EMPTY);
-			Logger.error(LoggerMessage.MEDICOLOGUI_CLASS_NAME, LoggerMessage.UNKOWN_HOST_EXCEPTION);
+			LoggerApi.setIp(LoggerMessage.EMPTY);
+			LoggerApi.error(LoggerMessage.MEDICOLOGUI_CLASS_NAME, LoggerMessage.UNKOWN_HOST_EXCEPTION);
 		}
 	}
 

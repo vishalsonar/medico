@@ -5,6 +5,7 @@ import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.structure.UserData;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.validator.PasswordDataValidator;
@@ -44,6 +45,7 @@ public class ChangePasswordListener extends CRUDListener {
 			} catch (MedicoValidationException e) {
 				notifyError(e.getMessage());
 			} catch (Exception e) {
+				LoggerApi.error(getClass().getName(), e.getMessage());
 				notifyError(Constant.GENERAL_ERROR_MESSAGE);
 			}
 		} else {

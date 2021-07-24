@@ -3,6 +3,7 @@ package com.sonar.vishal.ui.listener.role;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
@@ -33,6 +34,7 @@ public class UpdateRoleListener extends CRUDListener {
 		} catch (ValidationException e) {
 			notifyError(Constant.VALIDATION_EXCEPTION);
 		} catch (Exception e) {
+			LoggerApi.error(getClass().getName(), e.getMessage());
 			notifyError(Constant.GENERAL_ERROR_MESSAGE);
 		}
 	}

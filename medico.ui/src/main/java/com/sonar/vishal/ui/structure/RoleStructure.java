@@ -7,6 +7,7 @@ import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.RoleData;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -55,7 +56,7 @@ public class RoleStructure implements CRUDStructure {
 						selectedRole = optionalRole.get();
 					}
 				} catch(Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});

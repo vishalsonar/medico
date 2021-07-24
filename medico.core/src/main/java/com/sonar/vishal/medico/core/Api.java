@@ -24,10 +24,10 @@ public class Api {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response processRequest(String data) {
-		Logger.info(getClass().getName(), LoggerMessage.REQUEST_RECEIVED + data);
 		JsonElement element = JsonParser.parseString(data);
+		Logger.trace(getClass().getName(), LoggerMessage.REQUEST_RECEIVED + element.getAsJsonObject().get(Constant.HEADER).getAsJsonObject().toString());
 		JsonObject responseObject = new RequestAdapter().process(element.getAsJsonObject());
-		Logger.info(getClass().getName(), LoggerMessage.RESPONSE_GENERATED + responseObject.toString());
+		Logger.trace(getClass().getName(), LoggerMessage.RESPONSE_GENERATED + responseObject.get(Constant.HEADER).getAsJsonObject().toString());
 		return Response.status(200).entity(responseObject.toString()).build();
 	}
 
@@ -36,10 +36,10 @@ public class Api {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response processKeyRequest(String data) {
-		Logger.info(getClass().getName(), LoggerMessage.REQUEST_RECEIVED + data);
 		JsonElement element = JsonParser.parseString(data);
+		Logger.trace(getClass().getName(), LoggerMessage.REQUEST_RECEIVED + element.getAsJsonObject().get(Constant.HEADER).getAsJsonObject().toString());
 		JsonObject responseObject = new KeyRequestAdapter().process(element.getAsJsonObject());
-		Logger.info(getClass().getName(), LoggerMessage.RESPONSE_GENERATED + responseObject.get(Constant.HEADER).getAsJsonObject().toString());
+		Logger.trace(getClass().getName(), LoggerMessage.RESPONSE_GENERATED + responseObject.get(Constant.HEADER).getAsJsonObject().toString());
 		return Response.status(200).entity(responseObject.toString()).build();
 	}
 }

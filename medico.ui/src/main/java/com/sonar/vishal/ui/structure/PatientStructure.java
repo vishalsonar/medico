@@ -7,6 +7,7 @@ import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.PatientData;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -57,7 +58,7 @@ public class PatientStructure implements CRUDStructure {
 						selectedPatient = optionalPatient.get();
 					}
 				} catch(Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});

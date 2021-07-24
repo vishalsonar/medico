@@ -7,6 +7,7 @@ import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.StoreData;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -64,7 +65,7 @@ public class StoreStructure implements CRUDStructure {
 						selectedStore = optionalStore.get();
 					}
 				} catch (Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});
