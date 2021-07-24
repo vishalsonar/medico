@@ -7,6 +7,7 @@ import com.sonar.vishal.logui.component.LogUIConstant;
 import com.sonar.vishal.logui.logic.LogLogic;
 import com.sonar.vishal.medico.common.pojo.Log;
 import com.sonar.vishal.medico.common.structure.LogData;
+import com.sonar.vishal.medico.common.util.Logger;
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValidationException;
 import com.vaadin.server.Page;
@@ -50,7 +51,7 @@ public class SubmitListener implements ClickListener {
 			}
 			table.setItems(list);
 		} catch (ValidationException e) {
-			// Do Nothing.
+			Logger.error(getClass().getName(), e.getMessage());
 		}
 	}
 

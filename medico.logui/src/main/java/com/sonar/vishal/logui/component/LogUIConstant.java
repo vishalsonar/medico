@@ -21,6 +21,9 @@ public class LogUIConstant {
 	public static final String DATE_TIME = "Date Time";
 	public static final String SEVERITY = "Severity";
 	public static final String MESSAGE = "Message";
+	public static final String CLASS_NAME = "Class Name";
+	public static final String IP = "IP";
+	public static final String USER_ID = "User Id";
 	public static final String INITIALIZATION_FAILED = "Initialization Failed";
 
 	public static final String NO_DATA_FOUND = "No Data Found";

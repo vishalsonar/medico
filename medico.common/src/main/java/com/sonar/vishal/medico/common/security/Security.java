@@ -5,6 +5,9 @@ import java.security.Key;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 
+import com.sonar.vishal.medico.common.util.Logger;
+import com.sonar.vishal.medico.common.util.LoggerMessage;
+
 public class Security {
 
 	private static Mac mac;
@@ -22,7 +25,7 @@ public class Security {
 			key = keyGen.generateKey();
 			mac.init(key);
 		} catch (Exception e) {
-			// Do Nothing
+			Logger.error(LoggerMessage.SECURITY_CLASS_NAME, e.getMessage());
 		}
 	}
 
@@ -31,7 +34,7 @@ public class Security {
 			Security.key = key;
 			mac.init(key);
 		} catch (Exception e) {
-			// Do Nothing
+			Logger.error(LoggerMessage.SECURITY_CLASS_NAME, e.getMessage());
 		}
 	}
 

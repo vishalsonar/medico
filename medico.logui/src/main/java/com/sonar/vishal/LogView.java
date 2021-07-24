@@ -11,6 +11,7 @@ import com.sonar.vishal.logui.listener.SubmitListener;
 import com.sonar.vishal.logui.logic.LogLogic;
 import com.sonar.vishal.medico.common.pojo.Log;
 import com.sonar.vishal.medico.common.structure.LogData;
+import com.sonar.vishal.medico.common.util.Logger;
 import com.vaadin.data.Binder;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
@@ -81,10 +82,13 @@ public class LogView extends HorizontalSplitPanel implements View {
 
 	private void setupRightUI() {
 		table.addColumn(Log::getId).setCaption(LogUIConstant.ID);
-		table.addColumn(Log::getComponent).setCaption(LogUIConstant.COMPONENT);
 		table.addColumn(Log::getDateTime).setCaption(LogUIConstant.DATE_TIME);
+		table.addColumn(Log::getComponent).setCaption(LogUIConstant.COMPONENT);
 		table.addColumn(Log::getSeverity).setCaption(LogUIConstant.SEVERITY);
+		table.addColumn(Log::getClassName).setCaption(LogUIConstant.CLASS_NAME);
 		table.addColumn(Log::getMessage).setCaption(LogUIConstant.MESSAGE);
+		table.addColumn(Log::getIp).setCaption(LogUIConstant.IP);
+		table.addColumn(Log::getUserId).setCaption(LogUIConstant.USER_ID);
 		table.addSelectionListener(new SelectionListener<Log>() {
 			private static final long serialVersionUID = 1L;
 
@@ -96,7 +100,7 @@ public class LogView extends HorizontalSplitPanel implements View {
 						selectedLog = optionalLog.get();
 					}
 				} catch (Exception e) {
-					// Do Nothing.
+					Logger.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});

@@ -117,6 +117,9 @@ public class TestData {
 		log.setSeverity("INFO");
 		log.setMessage("Test Log Message");
 		log.setDateTime(Now.get());
+		log.setIp("10.0.0.0");
+		log.setUserId("1");
+		log.setClassName("com.sonar.vishal.medico.core.TestData");
 		return log;
 	}
 }

@@ -8,6 +8,7 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.util.HibernateUtil;
+import com.sonar.vishal.medico.common.util.Logger;
 
 public class Hibernate {
 
@@ -33,6 +34,7 @@ public class Hibernate {
 			session.delete(session.get(clazz, id));
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			Logger.error(getClass().getName(), e.getMessage());
 			state = handleException(session);
 		} finally {
 			closeSession(session);
@@ -49,6 +51,7 @@ public class Hibernate {
 			session.saveOrUpdate(object);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			Logger.error(getClass().getName(), e.getMessage());
 			state = handleException(session);
 		} finally {
 			closeSession(session);
@@ -61,6 +64,7 @@ public class Hibernate {
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 		} catch (Exception e) {
+			Logger.error(getClass().getName(), e.getMessage());
 			handleException(session);
 		}
 		return session;
@@ -73,6 +77,7 @@ public class Hibernate {
 			list = criteria.list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			Logger.error(getClass().getName(), e.getMessage());
 			handleException(session);
 		} finally {
 			closeSession(session);
@@ -89,6 +94,7 @@ public class Hibernate {
 			object = session.get(clazz, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			Logger.error(getClass().getName(), e.getMessage());
 			handleException(session);
 		} finally {
 			closeSession(session);
@@ -110,6 +116,7 @@ public class Hibernate {
 			object = criteria.list().get(0);
 			session.getTransaction().commit();
 		} catch (Exception e) {
+			Logger.error(getClass().getName(), e.getMessage());
 			handleException(session);
 		} finally {
 			closeSession(session);

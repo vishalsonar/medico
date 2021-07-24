@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-        <groupId>com.sonar.vishal</groupId>
-        <artifactId>medico</artifactId>
-        <version>${revision}</version>
-    </parent>
+		<groupId>com.sonar.vishal</groupId>
+		<artifactId>medico</artifactId>
+		<version>${revision}</version>
+	</parent>
 	<artifactId>medico.core</artifactId>
 	<packaging>war</packaging>
 	<name>medico.core Maven Webapp</name>
@@ -20,8 +20,21 @@
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
-			<version>${jersey-server.version}</version>
+			<version>${jersey.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-servlet</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>medico.core</finalName>
