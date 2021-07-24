@@ -1,5 +1,7 @@
 package com.sonar.vishal.medico.core;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -22,6 +24,8 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.security.Security;
 import com.sonar.vishal.medico.common.structure.KeyData;
+import com.sonar.vishal.medico.common.util.Logger;
+import com.sonar.vishal.medico.common.util.LoggerMessage;
 
 import junit.framework.TestCase;
 
@@ -34,7 +38,15 @@ public class UnitTest extends TestCase {
 	protected static Gson gson;
 
 	static {
-		gson = new Gson();
+		try {
+			gson = new Gson();
+			Logger.setComponent(LoggerMessage.CORE);
+			Logger.setIp(Inet4Address.getLocalHost().getHostAddress());
+			Logger.info("TestData", LoggerMessage.SERVER_INITIALIZE);
+		} catch (UnknownHostException e) {
+			Logger.setIp(LoggerMessage.EMPTY);
+			Logger.error("TestData", LoggerMessage.UNKOWN_HOST_EXCEPTION);
+		}
 	}
 
 	public UnitTest() throws InvalidKeyException, NoSuchAlgorithmException {
