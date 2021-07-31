@@ -24,12 +24,11 @@ public class LogLogic {
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	public List<Log> getAll(int count) {
+	public List<Log> getAll() {
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Log.class);
 			criteria.addOrder(Order.desc(LogUIConstant.ID_SMALL));
-			criteria.setMaxResults(count);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			list = (List<Log>) hibernate.executeCriteria(session, criteria);
 		}

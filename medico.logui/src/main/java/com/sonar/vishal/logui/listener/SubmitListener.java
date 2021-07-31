@@ -8,6 +8,7 @@ import com.sonar.vishal.logui.logic.LogLogic;
 import com.sonar.vishal.medico.common.pojo.Log;
 import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.util.Logger;
+import com.vaadin.addon.pagination.Pagination;
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValidationException;
 import com.vaadin.server.Page;
@@ -23,13 +24,15 @@ public class SubmitListener implements ClickListener {
 	private Binder<LogData> logDataBinder;
 	private transient LogLogic logic;
 	private transient Component component;
+	private Pagination pagination;
 
-	public SubmitListener(Binder<Log> logBinder, Binder<LogData> logDataBinder, Grid<Log> table) {
+	public SubmitListener(Binder<Log> logBinder, Binder<LogData> logDataBinder, Grid<Log> table, Pagination pagination) {
 		this.logBinder = logBinder;
 		this.logDataBinder = logDataBinder;
 		this.logic = new LogLogic();
 		this.component = new Component();
 		this.table = table;
+		this.pagination = pagination;
 	}
 
 	@Override
@@ -50,9 +53,11 @@ public class SubmitListener implements ClickListener {
 				return;
 			}
 			table.setItems(list);
+			pagination.setTotalCount(Long.valueOf(list.size()));
+			pagination.addPageChangeListener(new PaginationListener(table, list));
 		} catch (ValidationException e) {
 			Logger.error(getClass().getName(), e.getMessage());
 		}
 	}
-
+	
 }

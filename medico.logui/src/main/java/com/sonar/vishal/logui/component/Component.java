@@ -3,9 +3,12 @@ package com.sonar.vishal.logui.component;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
+import com.vaadin.addon.pagination.Pagination;
+import com.vaadin.addon.pagination.PaginationResource;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.shared.Position;
+import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.DateTimeField;
@@ -88,6 +91,40 @@ public class Component {
 		dateTimeField.setStyleName(ValoTheme.DATEFIELD_SMALL);
 		dateTimeField.setWidth(95, Unit.PERCENTAGE);
 		return dateTimeField;
+	}
+	
+	public Pagination getPagination(long total) {
+	    PaginationResource paginationResource = PaginationResource.newBuilder().setTotal(total).setPage(1).setLimit(20).build();
+	    Pagination pagination = new Pagination(paginationResource);
+	    pagination.setItemsPerPage(10, 20, 50, 100);
+	    pagination.setResponsive(true);
+	    return pagination;
+	}
+	
+	public MarginInfo getTableMargin() {
+		return new MarginInfo(false, true, true, true);
+	}
+	
+	public Button getResetButton(String label) {
+		Button button = new Button(label);
+		button.addStyleName(ValoTheme.BUTTON_SMALL);
+		button.setWidth(95, Unit.PERCENTAGE);
+		return button;
+	}
+	
+	public Button getExpandLogButton(String label) {
+		Button button = new Button(label);
+		button.addStyleName(ValoTheme.BUTTON_SMALL);
+		button.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		button.setWidth(95, Unit.PERCENTAGE);
+		return button;
+	}
+	
+	public Button getWindowCloseButton(String label) {
+		Button button = new Button(label);
+		button.addStyleName(ValoTheme.BUTTON_SMALL);
+		button.addStyleName(ValoTheme.BUTTON_DANGER);
+		return button;
 	}
 
 }

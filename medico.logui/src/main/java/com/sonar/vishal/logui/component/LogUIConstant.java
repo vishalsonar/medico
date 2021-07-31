@@ -29,4 +29,17 @@ public class LogUIConstant {
 	public static final String NO_DATA_FOUND = "No Data Found";
 	public static final String PLEASE_TRY_OTHER_COMBINATION = "Please try other filter combination";
 	public static final String INVALID_DATE_RANGE = "Invalid date range selected";
+	public static final String INVALID_SELECTED_LOG = "Please select row to view";
+	
+	public static final String CLOSE = "Close";
+	public static final String BR = "<br/>";
+	public static final String ID_LABEL = "<b>ID:&ensp;&emsp;&emsp;&emsp;&emsp;&emsp;</b>";
+	public static final String DATE_TIME_LABEL = "<b>Date Time:&nbsp;&emsp;</b>";
+	public static final String IP_LABEL = "<b>IP Address:&emsp;</b>";
+	public static final String COMPONENT_LABEL = "<b>Component:&ensp;</b>";
+	public static final String CLASS_NAME_LABEL = "<b>Class Name:&ensp;</b>";
+	public static final String SEVERITY_LABEL = "<b>Severity:&ensp;&emsp;&emsp;</b>";
+	public static final String USER_ID_LABEL = "<b>User Id:&emsp;&emsp;&emsp;</b>";
+	public static final String MESSAGE_LABEL = "<b>Message:&nbsp;&emsp;&emsp;</b>";
+	public static final String HEADLINE_LOG_VIEW = "<H2>Expanded Log View: </H2><hr/>";
 }
