@@ -130,9 +130,11 @@ public class LogView extends HorizontalSplitPanel implements View {
 		if (data == null) {
 			component.getServerFailureNotification(LogUIConstant.INITIALIZATION_FAILED).show(Page.getCurrent());
 		} else {
-			pagination = component.getPagination(Long.valueOf(data.size()));
+			int dataCount = data.size();
+			int subDataCount = dataCount <= 20 ? dataCount : 20;
+			pagination = component.getPagination(Long.valueOf(dataCount));
 			pagination.addPageChangeListener(new PaginationListener(table, data));
-			table.setItems(data.subList(0, 20));
+			table.setItems(data.subList(0, subDataCount));
 		}
 		table.setSizeFull();
 		upperLayout.addComponent(pagination);

@@ -64,11 +64,10 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.vaadin.addon/pagination -->
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>pagination</artifactId>
-			<version>8.0.6</version>
+			<version>${pagination.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

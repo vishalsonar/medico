@@ -5,6 +5,8 @@ import java.util.List;
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.ui.listener.GoToOptionListener;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.vaadin.addon.pagination.Pagination;
+import com.vaadin.addon.pagination.PaginationResource;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Resource;
@@ -175,5 +177,13 @@ public class Component {
 		radioGroup.setCaption(label);
 		radioGroup.setItems(items);
 		return radioGroup;
+	}
+	
+	public Pagination getPagination() {
+	    PaginationResource paginationResource = PaginationResource.newBuilder().setPage(1).setLimit(20).build();
+	    Pagination pagination = new Pagination(paginationResource);
+	    pagination.setItemsPerPage(10, 20, 50, 100);
+	    pagination.setResponsive(true);
+	    return pagination;
 	}
 }

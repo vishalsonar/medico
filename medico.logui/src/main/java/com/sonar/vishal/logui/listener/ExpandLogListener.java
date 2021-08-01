@@ -17,7 +17,7 @@ public class ExpandLogListener implements ClickListener {
 
 	private static final long serialVersionUID = 9101476375205575789L;
 	private Log selectedLog;
-	private Component component;
+	private transient Component component;
 	
 	public ExpandLogListener() {
 		this.component = new Component();

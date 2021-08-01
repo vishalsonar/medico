@@ -40,9 +40,15 @@ public class RestBackend implements Backend {
 	}
 
 	private ClientResponse doPost() {
-		String request = getMacRequest();
-		WebResource webResource = client.resource(url);
-		return webResource.type(Constant.APPLICATION_JSON).post(ClientResponse.class, request);
+		try {
+			String request = getMacRequest();
+			WebResource webResource = client.resource(url);
+			return webResource.type(Constant.APPLICATION_JSON).post(ClientResponse.class, request);
+		} catch (Throwable e) {
+			ClientResponse response = new ClientResponse(0, null, null, null);
+			response.setStatus(404);
+			return response;
+		}
 	}
 
 	private boolean responseHeader(JsonObject responseObject) {

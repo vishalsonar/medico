@@ -36,7 +36,9 @@ public class LoginListener implements ClickListener {
 		this.data = data;
 		this.backend = new RestBackend(Constant.GET_KEY);
 		Key key = getKey();
-		this.backend.setKey(key);
+		if (key != null) {
+			this.backend.setKey(key);
+		}
 	}
 	
 	private Key getKey() {

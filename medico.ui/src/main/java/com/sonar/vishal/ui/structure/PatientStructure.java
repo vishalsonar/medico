@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
@@ -10,33 +12,46 @@ import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.listener.PaginationListener;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.patient.AddPatientWindow;
 import com.sonar.vishal.ui.window.patient.UpdatePatientWindow;
+import com.vaadin.addon.pagination.Pagination;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.server.Page;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.VerticalSplitPanel;
 
 public class PatientStructure implements CRUDStructure {
 
 	private VerticalLayout layout;
+	private VerticalSplitPanel splitLayout;
 	private Grid<Patient> table;
 	private RestBackend backend;
 	private Patient selectedPatient;
 	private Notification notification;
+	private Pagination pagination;
 
 	public PatientStructure() {
 		layout = new VerticalLayout();
+		splitLayout = new VerticalSplitPanel();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(table);
+		pagination = Component.getInstance().getPagination();
+		splitLayout.addComponent(pagination);
+		splitLayout.addComponent(table);
+		splitLayout.setLocked(true);
+		splitLayout.setSplitPosition(10, Unit.PERCENTAGE);
+		splitLayout.setSizeFull();
+		layout.addComponent(splitLayout);
 	}
 
 	@Override
@@ -69,7 +84,12 @@ public class PatientStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_PATIENT_LIST);
 		Patient[] data = (Patient[]) backend.doPostRespondData(Patient[].class);
-		table.setItems(data);
+		List<Patient> dataList = Arrays.asList(data);
+		int dataListCount = dataList.size();
+		int subDataListCount = dataListCount <= 20 ? dataListCount : 20;
+		table.setItems(dataList.subList(0, subDataListCount));
+		pagination.setTotalCount(dataListCount);
+		pagination.addPageChangeListener(new PaginationListener<Patient>(table, dataList));
 	}
 
 	@Override

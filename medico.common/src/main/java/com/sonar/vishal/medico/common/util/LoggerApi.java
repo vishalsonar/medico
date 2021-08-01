@@ -28,10 +28,14 @@ public class LoggerApi {
 	private static Key key;
 
 	static {
-		RestBackend backend = new RestBackend(Constant.GET_KEY);
-		KeyData keyData = (KeyData) backend.doPostRespondData(KeyData.class);
-		byte[] decodedKey = Base64.getDecoder().decode(keyData.getKey());
-		key = new SecretKeySpec(decodedKey, 0, decodedKey.length, Constant.AES);
+		try {
+			RestBackend backend = new RestBackend(Constant.GET_KEY);
+			KeyData keyData = (KeyData) backend.doPostRespondData(KeyData.class);
+			byte[] decodedKey = Base64.getDecoder().decode(keyData.getKey());
+			key = new SecretKeySpec(decodedKey, 0, decodedKey.length, Constant.AES);
+		} catch (Exception e) {
+			// Do Nothing.
+		}
 	}
 
 	private LoggerApi() {
@@ -74,6 +78,9 @@ public class LoggerApi {
 	}
 
 	public static void trace(String className, String message) {
+		if (key == null) {
+			return;
+		}
 		backend = new RestBackend(Constant.ADD_LOG);
 		backend.setKey(key);
 		LogData logData = getLogData();
@@ -85,6 +92,9 @@ public class LoggerApi {
 	}
 
 	public static void debug(String className, String message) {
+		if (key == null) {
+			return;
+		}
 		backend = new RestBackend(Constant.ADD_LOG);
 		backend.setKey(key);
 		LogData logData = getLogData();
@@ -96,6 +106,9 @@ public class LoggerApi {
 	}
 
 	public static void info(String className, String message) {
+		if (key == null) {
+			return;
+		}
 		backend = new RestBackend(Constant.ADD_LOG);
 		backend.setKey(key);
 		LogData logData = getLogData();
@@ -107,6 +120,9 @@ public class LoggerApi {
 	}
 
 	public static void warn(String className, String message) {
+		if (key == null) {
+			return;
+		}
 		backend = new RestBackend(Constant.ADD_LOG);
 		backend.setKey(key);
 		LogData logData = getLogData();
@@ -118,6 +134,9 @@ public class LoggerApi {
 	}
 
 	public static void error(String className, String message) {
+		if (key == null) {
+			return;
+		}
 		backend = new RestBackend(Constant.ADD_LOG);
 		backend.setKey(key);
 		LogData logData = getLogData();
@@ -129,6 +148,9 @@ public class LoggerApi {
 	}
 
 	public static void fatal(String className, String message) {
+		if (key == null) {
+			return;
+		}
 		backend = new RestBackend(Constant.ADD_LOG);
 		backend.setKey(key);
 		LogData logData = getLogData();
