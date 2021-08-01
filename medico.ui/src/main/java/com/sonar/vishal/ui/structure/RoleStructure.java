@@ -37,7 +37,7 @@ public class RoleStructure implements CRUDStructure {
 
 	public RoleStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<Role>();
+		tablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);

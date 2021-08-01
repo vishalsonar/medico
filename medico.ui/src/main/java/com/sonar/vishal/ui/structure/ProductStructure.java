@@ -37,7 +37,7 @@ public class ProductStructure implements CRUDStructure {
 
 	public ProductStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<Product>();
+		tablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);

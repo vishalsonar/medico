@@ -13,11 +13,10 @@ public class TablePagination<T> {
 
 	private Pagination pagination;
 	private Grid<T> table;
-	private VerticalSplitPanel splitLayout;
 
 	public VerticalSplitPanel init(Grid<T> table) {
 		this.table = table;
-		splitLayout = new VerticalSplitPanel();
+		VerticalSplitPanel splitLayout = new VerticalSplitPanel();
 		pagination = Component.getInstance().getPagination();
 		splitLayout.addComponent(pagination);
 		splitLayout.addComponent(table);

@@ -37,7 +37,7 @@ public class PatientStructure implements CRUDStructure {
 
 	public PatientStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<Patient>();
+		tablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);

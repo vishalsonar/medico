@@ -37,7 +37,7 @@ public class StoreStructure implements CRUDStructure {
 	
 	public StoreStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<Store>();
+		tablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);

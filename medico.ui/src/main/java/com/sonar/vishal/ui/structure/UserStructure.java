@@ -37,7 +37,7 @@ public class UserStructure implements CRUDStructure {
 
 	public UserStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<User>();
+		tablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
