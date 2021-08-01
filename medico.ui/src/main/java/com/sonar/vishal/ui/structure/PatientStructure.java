@@ -23,26 +23,23 @@ import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.VerticalSplitPanel;
 
 public class PatientStructure implements CRUDStructure {
 
 	private VerticalLayout layout;
-	private VerticalSplitPanel splitLayout;
 	private Grid<Patient> table;
 	private RestBackend backend;
 	private Patient selectedPatient;
 	private Notification notification;
-	private TablePagination<Patient> tablePagination;
+	private TablePagination<Patient> patientTablePagination;
 
 	public PatientStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<>();
+		patientTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		splitLayout = tablePagination.init(table);
-		layout.addComponent(splitLayout);
+		layout.addComponent(patientTablePagination.init(table));
 	}
 
 	@Override
@@ -75,7 +72,7 @@ public class PatientStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_PATIENT_LIST);
 		Patient[] data = (Patient[]) backend.doPostRespondData(Patient[].class);
-		tablePagination.configurePagination(data);
+		patientTablePagination.configurePagination(data);
 	}
 
 	@Override

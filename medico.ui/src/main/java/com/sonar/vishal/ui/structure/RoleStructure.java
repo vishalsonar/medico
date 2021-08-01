@@ -23,26 +23,23 @@ import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.VerticalSplitPanel;
 
 public class RoleStructure implements CRUDStructure {
 
 	private VerticalLayout layout;
-	private VerticalSplitPanel splitLayout;
 	private Grid<Role> table;
 	private RestBackend backend;
 	private Role selectedRole;
 	private Notification notification;
-	private TablePagination<Role> tablePagination;
+	private TablePagination<Role> roleTablePagination;
 
 	public RoleStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<>();
+		roleTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		splitLayout = tablePagination.init(table);
-		layout.addComponent(splitLayout);
+		layout.addComponent(roleTablePagination.init(table));
 	}
 
 	@Override
@@ -73,7 +70,7 @@ public class RoleStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_ROLE_LIST);
 		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
-		tablePagination.configurePagination(data);
+		roleTablePagination.configurePagination(data);
 	}
 
 	@Override

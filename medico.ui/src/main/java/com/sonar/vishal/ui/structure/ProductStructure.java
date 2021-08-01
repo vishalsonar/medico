@@ -23,26 +23,23 @@ import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.VerticalSplitPanel;
 
 public class ProductStructure implements CRUDStructure {
 
 	private VerticalLayout layout;
-	private VerticalSplitPanel splitLayout;
 	private Grid<Product> table;
 	private RestBackend backend;
 	private Product selectedProduct;
 	private Notification notification;
-	private TablePagination<Product> tablePagination;
+	private TablePagination<Product> productTablePagination;
 
 	public ProductStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<>();
+		productTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		splitLayout = tablePagination.init(table);
-		layout.addComponent(splitLayout);
+		layout.addComponent(productTablePagination.init(table));
 	}
 	
 	@Override
@@ -82,7 +79,7 @@ public class ProductStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_PRODUCT_LIST);
 		Product[] data = (Product[]) backend.doPostRespondData(Product[].class);
-		tablePagination.configurePagination(data);
+		productTablePagination.configurePagination(data);
 	}
 
 	@Override

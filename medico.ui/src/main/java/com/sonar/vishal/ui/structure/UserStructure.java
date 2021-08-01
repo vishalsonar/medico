@@ -23,26 +23,23 @@ import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.VerticalSplitPanel;
 
 public class UserStructure implements CRUDStructure {
 
 	private VerticalLayout layout;
-	private VerticalSplitPanel splitLayout;
 	private Grid<User> table;
 	private RestBackend backend;
 	private User selectedUser;
 	private Notification notification;
-	private TablePagination<User> tablePagination;
+	private TablePagination<User> userTablePagination;
 
 	public UserStructure() {
 		layout = new VerticalLayout();
-		tablePagination = new TablePagination<>();
+		userTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		splitLayout = tablePagination.init(table);
-		layout.addComponent(splitLayout);
+		layout.addComponent(userTablePagination.init(table));
 	}
 
 	@Override
@@ -77,7 +74,7 @@ public class UserStructure implements CRUDStructure {
 		for (User user : data) {
 			user.update();
 		}
-		tablePagination.configurePagination(data);
+		userTablePagination.configurePagination(data);
 	}
 
 	@Override
