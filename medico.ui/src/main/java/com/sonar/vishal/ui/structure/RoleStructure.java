@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.RoleData;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
@@ -29,13 +31,15 @@ public class RoleStructure implements CRUDStructure {
 	private RestBackend backend;
 	private Role selectedRole;
 	private Notification notification;
+	private TablePagination<Role> roleTablePagination;
 
 	public RoleStructure() {
 		layout = new VerticalLayout();
+		roleTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(table);
+		layout.addComponent(roleTablePagination.init(table));
 	}
 
 	@Override
@@ -55,7 +59,7 @@ public class RoleStructure implements CRUDStructure {
 						selectedRole = optionalRole.get();
 					}
 				} catch(Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});
@@ -66,7 +70,7 @@ public class RoleStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_ROLE_LIST);
 		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
-		table.setItems(data);
+		roleTablePagination.configurePagination(data);
 	}
 
 	@Override

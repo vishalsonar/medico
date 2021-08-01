@@ -2,8 +2,10 @@ package com.sonar.vishal.ui.listener.product;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Product;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.listener.CRUDListener;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.data.Binder;
@@ -27,9 +29,12 @@ public class UpdateProductListener extends CRUDListener {
 		try {
 			Backend.message.setData(logic.process(productBinder, id));
 			doPostRespondHeader(Constant.UPDATE_PRODUCT_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
+		} catch (MedicoValidationException e) {
+			notifyError(e.getMessage());
 		} catch (ValidationException e) {
 			notifyError(Constant.VALIDATION_EXCEPTION);
 		} catch (Exception e) {
+			LoggerApi.error(getClass().getName(), e.getMessage());
 			notifyError(Constant.GENERAL_ERROR_MESSAGE);
 		}
 	}

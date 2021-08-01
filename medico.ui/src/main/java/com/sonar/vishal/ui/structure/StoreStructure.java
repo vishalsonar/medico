@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Store;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.StoreData;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
@@ -29,13 +31,15 @@ public class StoreStructure implements CRUDStructure {
 	private RestBackend backend;
 	private Store selectedStore;
 	private Notification notification;
-
+	private TablePagination<Store> storeTablePagination;
+	
 	public StoreStructure() {
 		layout = new VerticalLayout();
+		storeTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(table);
+		layout.addComponent(storeTablePagination.init(table));
 	}
 
 	@Override
@@ -64,7 +68,7 @@ public class StoreStructure implements CRUDStructure {
 						selectedStore = optionalStore.get();
 					}
 				} catch (Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});
@@ -76,7 +80,7 @@ public class StoreStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_STORE_LIST);
 		Store[] data = (Store[]) backend.doPostRespondData(Store[].class);
-		table.setItems(data);
+		storeTablePagination.configurePagination(data);
 	}
 
 	@Override

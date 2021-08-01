@@ -6,6 +6,8 @@ import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.structure.BillData;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.Header;
+import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
@@ -16,6 +18,7 @@ import com.sonar.vishal.medico.core.definition.BusinessAdapter;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 import com.sonar.vishal.medico.core.logic.BillLogic;
 import com.sonar.vishal.medico.core.logic.KeyLogic;
+import com.sonar.vishal.medico.core.logic.LogLogic;
 import com.sonar.vishal.medico.core.logic.LoginLogic;
 import com.sonar.vishal.medico.core.logic.PatientLogic;
 import com.sonar.vishal.medico.core.logic.ProductLogic;
@@ -29,15 +32,17 @@ public class RequestAdapter implements BusinessAdapter {
 	public JsonObject process(JsonObject data) {
 		Header header = null;
 		Data messageData = null;
+		String functionName = null;
+		JsonObject dataObject = null;
 		BusinessLogic logic = new KeyLogic();
 		String response = getErrorMessageAsString("Invalid Function Name");
 		
 		try {
 			macVerification(data);
 			JsonObject headerObject = data.get(Constant.HEADER).getAsJsonObject();
-			JsonObject dataObject = data.get(Constant.DATA).getAsJsonObject();
+			dataObject = data.get(Constant.DATA).getAsJsonObject();
 			header = gson.fromJson(headerObject, Header.class);
-			String functionName = header.getFunction();
+			functionName = header.getFunction();
 			if (functionName.contains("Patient")) {
 				logic = new PatientLogic();
 				messageData = gson.fromJson(dataObject, PatientData.class);
@@ -66,6 +71,14 @@ public class RequestAdapter implements BusinessAdapter {
 				logic = new UserLogic();
 				messageData = gson.fromJson(dataObject, UserData.class);
 			}
+			if (functionName.contains("Log") && messageData == null) {
+				logic = new LogLogic();
+				messageData = gson.fromJson(dataObject, LogData.class);
+			}
+			Message responesMessage = logic.execute(functionName, messageData);
+			response = gson.toJson(responesMessage);
+		} catch (ClassCastException e) {
+			messageData = gson.fromJson(dataObject, IdData.class);
 			Message responesMessage = logic.execute(functionName, messageData);
 			response = gson.toJson(responesMessage);
 		} catch (Exception e) {

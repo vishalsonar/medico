@@ -1,6 +1,7 @@
 package com.sonar.vishal.ui.listener;
 
 import com.sonar.vishal.MedicoUI;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
@@ -10,7 +11,7 @@ public class GoToOptionListener implements ClickListener {
 
 	@Override
 	public void buttonClick(ClickEvent event) {
-		MedicoUI.getNavigatorUI().navigateTo("optionpage");
+		MedicoUI.getNavigatorUI().navigateTo(UIConstant.OPTION_PAGE);
 	}
 
 }

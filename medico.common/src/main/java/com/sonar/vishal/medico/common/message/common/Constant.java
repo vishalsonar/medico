@@ -58,6 +58,13 @@ public class Constant {
 	public static final String UPDATE_PATIENT = "UpdatePatient";
 	public static final String DELETE_PATIENT = "DeletePatient";
 	
+	public static final String GET_LOG_LIST = "GetLogList";
+	public static final String GET_LOG = "GetLog";
+	public static final String ADD_LOG = "AddLog";
+	public static final String COMPONENT = "component";
+	public static final String SEVERITY = "severity";
+	public static final String DATE_TIME = "dateTime";
+
 	public static final String GET_KEY = "GetKey";
 
 	public static final String URL = "http://localhost:8080/medico.core/rest";
@@ -92,4 +99,7 @@ public class Constant {
 	public static final String ADD_PATIENT_SUCCESS_MESSAGE = "Patient Added";
 	public static final String UPDATE_PATIENT_SUCCESS_MESSAGE = "Patient Updated";
 	public static final String DELETE_PATIENT_SUCCESS_MESSAGE = "Patient Deleted";
+	
+	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
+	public static final String AES = "AES";
 }

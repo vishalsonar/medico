@@ -13,6 +13,8 @@ public class UIConstant {
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
 	public static final String NUMBER_30 = "30";
 	public static final String MODULE = "module";
+	public static final String AES = "AES";
+	public static final String SERVER_INITIALIZE_FAILED = "Initialization Failed";
 
 	public static final String EMPTY = "";
 	public static final String COMMA = ",";
@@ -119,4 +121,7 @@ public class UIConstant {
 	public static final String CHANGE_PASSWORD = "Change Password";
 	
 	public static final String OPTION_PAGE = "optionpage";
+	public static final String LOGGED_IN_SUCCESS = "Logged In";
+	public static final String LOGGED_OUT_SUCCESS = "Logged Out";
+	public static final String ALL_FIELDS_MANDATORY = "Please Enter Missing Fields";
 }

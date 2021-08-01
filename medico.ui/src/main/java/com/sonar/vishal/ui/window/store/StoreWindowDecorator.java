@@ -44,6 +44,7 @@ public class StoreWindowDecorator {
 		cinNumber = component.getTextField(UIConstant.CIN_NUMBER, UIConstant.CIN_NUMBER, UIConstant.FIELD_LENGTH_300);
 		gst = component.getTextField(UIConstant.GST, UIConstant.GST, UIConstant.FIELD_LENGTH_300);
 		fassai = component.getTextField(UIConstant.FASSAI, UIConstant.FASSAI, UIConstant.FIELD_LENGTH_300);
+		setInputDigitLimit();
 		storeBinder.bind(name, Store::getName, Store::setName);
 		addressBinder.bind(line1, Address::getLine1, Address::setLine1);
 		addressBinder.bind(line2, Address::getLine2, Address::setLine2);
@@ -59,5 +60,20 @@ public class StoreWindowDecorator {
 		storeBinder.bind(cinNumber, Store::getCinNumber, Store::setCinNumber);
 		storeBinder.bind(gst, Store::getGstin, Store::setGstin);
 		storeBinder.bind(fassai, Store::getFassaiNumber, Store::setFassaiNumber);
+	}
+	
+	private void setInputDigitLimit() {
+		name.setMaxLength(50);
+		phoneNumber.setMaxLength(15);
+		dlNumber.setMaxLength(10);
+		dlExpiry.setMaxLength(10);
+		sxDlNumber.setMaxLength(10);
+		sxDlExpiry.setMaxLength(10);
+		panNumber.setMaxLength(10);
+		cinNumber.setMaxLength(10);
+		fassai.setMaxLength(10);
+		line1.setMaxLength(50);
+		line2.setMaxLength(50);
+		pinCode.setMaxLength(10);
 	}
 }

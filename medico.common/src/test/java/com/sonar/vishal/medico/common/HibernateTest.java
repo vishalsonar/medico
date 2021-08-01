@@ -1,5 +1,7 @@
 package com.sonar.vishal.medico.common;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,6 +16,8 @@ import com.sonar.vishal.medico.common.pojo.Bill;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Store;
+import com.sonar.vishal.medico.common.util.Logger;
+import com.sonar.vishal.medico.common.util.LoggerMessage;
 
 import junit.framework.TestCase;
 
@@ -21,10 +25,21 @@ import junit.framework.TestCase;
 public class HibernateTest extends TestCase {
 
 	private Hibernate hibernate;
-	private int size = 3;
+	private int size = 5;
 	private int storeId;
 	private int addressId;
 	private int patientId;
+	
+	static {
+		try {
+			Logger.setComponent(LoggerMessage.CORE);
+			Logger.setIp(Inet4Address.getLocalHost().getHostAddress());
+			Logger.info("HibernateTest", LoggerMessage.SERVER_INITIALIZE);
+		} catch (UnknownHostException e) {
+			Logger.setIp(LoggerMessage.EMPTY);
+			Logger.error("HibernateTest", LoggerMessage.UNKOWN_HOST_EXCEPTION);
+		}
+	}
 
 	public HibernateTest() {
 		hibernate = new Hibernate();

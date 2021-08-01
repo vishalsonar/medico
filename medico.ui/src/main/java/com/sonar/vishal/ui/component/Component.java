@@ -5,6 +5,8 @@ import java.util.List;
 import com.sonar.vishal.MedicoUI;
 import com.sonar.vishal.ui.listener.GoToOptionListener;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.vaadin.addon.pagination.Pagination;
+import com.vaadin.addon.pagination.PaginationResource;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Resource;
@@ -127,6 +129,15 @@ public class Component {
 		return notification;
 	}
 
+	public Notification getServerFailureNotification(String caption) {
+		Notification notification = new Notification(caption, UIConstant.EMPTY, Notification.Type.ERROR_MESSAGE);
+		notification.setPosition(Position.TOP_RIGHT);
+		notification.setStyleName(ValoTheme.NOTIFICATION_BAR);
+		notification.setDelayMsec(Notification.DELAY_FOREVER);
+		notification.setIcon(VaadinIcons.CLOSE_CIRCLE);
+		return notification;
+	}
+	
 	public Label getPageLabel(String label) {
 		Label name = new Label(label);
 		name.addStyleName(ValoTheme.LABEL_H2);
@@ -166,5 +177,13 @@ public class Component {
 		radioGroup.setCaption(label);
 		radioGroup.setItems(items);
 		return radioGroup;
+	}
+	
+	public Pagination getPagination() {
+	    PaginationResource paginationResource = PaginationResource.newBuilder().setPage(1).setLimit(20).build();
+	    Pagination pagination = new Pagination(paginationResource);
+	    pagination.setItemsPerPage(10, 20, 50, 100);
+	    pagination.setResponsive(true);
+	    return pagination;
 	}
 }

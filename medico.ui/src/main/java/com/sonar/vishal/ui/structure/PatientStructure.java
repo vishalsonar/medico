@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Patient;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.PatientData;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
@@ -29,13 +31,15 @@ public class PatientStructure implements CRUDStructure {
 	private RestBackend backend;
 	private Patient selectedPatient;
 	private Notification notification;
+	private TablePagination<Patient> patientTablePagination;
 
 	public PatientStructure() {
 		layout = new VerticalLayout();
+		patientTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(table);
+		layout.addComponent(patientTablePagination.init(table));
 	}
 
 	@Override
@@ -57,7 +61,7 @@ public class PatientStructure implements CRUDStructure {
 						selectedPatient = optionalPatient.get();
 					}
 				} catch(Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});
@@ -68,7 +72,7 @@ public class PatientStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_PATIENT_LIST);
 		Patient[] data = (Patient[]) backend.doPostRespondData(Patient[].class);
-		table.setItems(data);
+		patientTablePagination.configurePagination(data);
 	}
 
 	@Override

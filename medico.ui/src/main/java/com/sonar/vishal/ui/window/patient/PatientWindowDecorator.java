@@ -30,6 +30,7 @@ public class PatientWindowDecorator {
 		city = component.getTextField(UIConstant.CITY, UIConstant.CITY, UIConstant.FIELD_LENGTH_300);
 		pinCode = component.getTextField(UIConstant.PIN_CODE, UIConstant.PIN_CODE, UIConstant.FIELD_LENGTH_300);
 		state = component.getTextField(UIConstant.STATE, UIConstant.STATE, UIConstant.FIELD_LENGTH_300);
+		setInputDigitLimit();
 		patientBinder.bind(name, Patient::getPatientName, Patient::setPatientName);
 		patientBinder.bind(phoneNumber, Patient::getPhoneNumber, Patient::setPhoneNumber);
 		patientBinder.bind(doctorName, Patient::getDoctorName, Patient::setDoctorName);
@@ -38,5 +39,14 @@ public class PatientWindowDecorator {
 		addressBinder.bind(city, Address::getCity, Address::setCity);
 		addressBinder.bind(pinCode, Address::getPinCode, Address::setPinCode);
 		addressBinder.bind(state, Address::getState, Address::setState);
+	}
+	
+	private void setInputDigitLimit() {
+		name.setMaxLength(50);
+		phoneNumber.setMaxLength(15);
+		doctorName.setMaxLength(50);
+		line1.setMaxLength(50);
+		line2.setMaxLength(50);
+		pinCode.setMaxLength(10);
 	}
 }

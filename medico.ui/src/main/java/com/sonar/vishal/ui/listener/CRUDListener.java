@@ -1,11 +1,9 @@
 package com.sonar.vishal.ui.listener;
 
-import com.mysql.cj.util.StringUtils;
 import com.sonar.vishal.medico.common.message.common.Constant;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.exception.ValidationException;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.vaadin.server.Page;
 import com.vaadin.ui.Button.ClickEvent;
@@ -25,12 +23,6 @@ public class CRUDListener implements ClickListener {
 		this.backend = new RestBackend(message);
 		this.window = window;
 		this.structure = structure;
-	}
-
-	protected void validateString(String input) throws ValidationException {
-		if (StringUtils.isEmptyOrWhitespaceOnly(input)) {
-			throw new ValidationException();
-		}
 	}
 
 	protected void notifySuccess(String message) {

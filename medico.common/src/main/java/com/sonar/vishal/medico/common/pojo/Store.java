@@ -21,12 +21,12 @@ public class Store implements Serializable {
 
 	@Id
 	@PrimaryKeyJoinColumn
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	@Column(name = "name", nullable = false, length = 50)
 	private String name;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	private Address address;
 	@Column(name = "phone", nullable = false, length = 15)
 	private String phoneNumber;

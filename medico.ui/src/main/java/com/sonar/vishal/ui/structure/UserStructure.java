@@ -4,10 +4,12 @@ import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.UserData;
-import com.sonar.vishal.ui.backend.RestBackend;
+import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
-import com.sonar.vishal.ui.definition.Backend;
+import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
@@ -29,13 +31,15 @@ public class UserStructure implements CRUDStructure {
 	private RestBackend backend;
 	private User selectedUser;
 	private Notification notification;
+	private TablePagination<User> userTablePagination;
 
 	public UserStructure() {
 		layout = new VerticalLayout();
+		userTablePagination = new TablePagination<>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(table);
+		layout.addComponent(userTablePagination.init(table));
 	}
 
 	@Override
@@ -56,7 +60,7 @@ public class UserStructure implements CRUDStructure {
 						selectedUser = optionalRole.get();
 					}
 				} catch (Exception e) {
-					// Do Nothing.
+					LoggerApi.error(getClass().getName(), e.getMessage());
 				}
 			}
 		});
@@ -70,7 +74,7 @@ public class UserStructure implements CRUDStructure {
 		for (User user : data) {
 			user.update();
 		}
-		table.setItems(data);
+		userTablePagination.configurePagination(data);
 	}
 
 	@Override
