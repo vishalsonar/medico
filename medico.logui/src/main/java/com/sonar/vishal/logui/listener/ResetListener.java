@@ -33,7 +33,7 @@ public class ResetListener implements ClickListener {
 		if (data == null) {
 			component.getServerFailureNotification(LogUIConstant.INITIALIZATION_FAILED).show(Page.getCurrent());
 		} else {
-			pagination.setTotalCount(Long.valueOf(data.size()));
+			pagination.setTotalCount(data.size());
 			pagination.addPageChangeListener(new PaginationListener(table, data));
 			table.setItems(data.subList(0, 20));
 		}

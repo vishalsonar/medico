@@ -67,8 +67,21 @@ public class ExpandLogListener implements ClickListener {
 			   .append(LogUIConstant.CLASS_NAME_LABEL).append(selectedLog.getClassName()).append(LogUIConstant.BR)
 			   .append(LogUIConstant.SEVERITY_LABEL).append(selectedLog.getSeverity()).append(LogUIConstant.BR)
 			   .append(LogUIConstant.USER_ID_LABEL).append(selectedLog.getUserId()).append(LogUIConstant.BR)
-			   .append(LogUIConstant.MESSAGE_LABEL).append(selectedLog.getMessage()).append(LogUIConstant.BR);
+			   .append(LogUIConstant.MESSAGE_LABEL).append(formatMessage(selectedLog.getMessage())).append(LogUIConstant.BR);
 		return builder.toString();
 	}
 
+	private String formatMessage(String message) {
+		int counter = 0;
+		StringBuilder builder = new StringBuilder();
+		for (char literal : message.toCharArray()) {
+			counter++;
+			builder.append(literal);
+			if (counter == 99) {
+				counter = 0;
+				builder.append(LogUIConstant.MESSAGE_SEPERATOR);
+			}
+		}
+		return builder.toString();
+	}
 }

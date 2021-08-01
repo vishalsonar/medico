@@ -53,7 +53,7 @@ public class SubmitListener implements ClickListener {
 				return;
 			}
 			table.setItems(list);
-			pagination.setTotalCount(Long.valueOf(list.size()));
+			pagination.setTotalCount(list.size());
 			pagination.addPageChangeListener(new PaginationListener(table, list));
 		} catch (ValidationException e) {
 			Logger.error(getClass().getName(), e.getMessage());

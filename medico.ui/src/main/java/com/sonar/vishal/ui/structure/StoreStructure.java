@@ -1,7 +1,5 @@
 package com.sonar.vishal.ui.structure;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
@@ -11,17 +9,15 @@ import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.StoreData;
 import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
-import com.sonar.vishal.ui.listener.PaginationListener;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.store.AddStoreWindow;
 import com.sonar.vishal.ui.window.store.UpdateStoreWindow;
-import com.vaadin.addon.pagination.Pagination;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.server.Page;
-import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
@@ -37,20 +33,15 @@ public class StoreStructure implements CRUDStructure {
 	private RestBackend backend;
 	private Store selectedStore;
 	private Notification notification;
-	private Pagination pagination;
-
+	private TablePagination<Store> tablePagination;
+	
 	public StoreStructure() {
 		layout = new VerticalLayout();
-		splitLayout = new VerticalSplitPanel();
+		tablePagination = new TablePagination<Store>();
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		pagination = Component.getInstance().getPagination();
-		splitLayout.addComponent(pagination);
-		splitLayout.addComponent(table);
-		splitLayout.setLocked(true);
-		splitLayout.setSplitPosition(10, Unit.PERCENTAGE);
-		splitLayout.setSizeFull();
+		splitLayout = tablePagination.init(table);
 		layout.addComponent(splitLayout);
 	}
 
@@ -92,12 +83,7 @@ public class StoreStructure implements CRUDStructure {
 	public void list() {
 		backend = new RestBackend(Constant.GET_STORE_LIST);
 		Store[] data = (Store[]) backend.doPostRespondData(Store[].class);
-		List<Store> dataList = Arrays.asList(data);
-		int dataListCount = dataList.size();
-		int subDataListCount = dataListCount <= 20 ? dataListCount : 20;
-		table.setItems(dataList.subList(0, subDataListCount));
-		pagination.setTotalCount(dataListCount);
-		pagination.addPageChangeListener(new PaginationListener<Store>(table, dataList));
+		tablePagination.configurePagination(data);
 	}
 
 	@Override

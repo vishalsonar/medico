@@ -42,4 +42,5 @@ public class LogUIConstant {
 	public static final String USER_ID_LABEL = "<b>User Id:&emsp;&emsp;&emsp;</b>";
 	public static final String MESSAGE_LABEL = "<b>Message:&nbsp;&emsp;&emsp;</b>";
 	public static final String HEADLINE_LOG_VIEW = "<H2>Expanded Log View: </H2><hr/>";
+	public static final String MESSAGE_SEPERATOR = "<br/>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
 }

@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.security.Security;
 import com.sonar.vishal.medico.common.structure.Header;
+import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
@@ -44,7 +45,7 @@ public class RestBackend implements Backend {
 			String request = getMacRequest();
 			WebResource webResource = client.resource(url);
 			return webResource.type(Constant.APPLICATION_JSON).post(ClientResponse.class, request);
-		} catch (Throwable e) {
+		} catch (ClientHandlerException e) {
 			ClientResponse response = new ClientResponse(0, null, null, null);
 			response.setStatus(404);
 			return response;

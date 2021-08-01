@@ -10,7 +10,7 @@ public class PaginationListener<T> implements PaginationChangeListener {
 
 	private static final long serialVersionUID = -662219306642379510L;
 	private Grid<T> table;
-	private List<T> list;
+	private transient List<T> list;
 
 	public PaginationListener(Grid<T> table, List<T> list) {
 		this.table = table;
