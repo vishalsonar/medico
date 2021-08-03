@@ -20,7 +20,7 @@ import com.vaadin.ui.Grid;
 public class SearchListener<T> implements ValueChangeListener<String> {
 
 	private static final long serialVersionUID = -8749092197896815056L;
-	private List<T> list;
+	private transient List<T> list;
 	private Grid<T> table;
 	private Pagination pagination;
 

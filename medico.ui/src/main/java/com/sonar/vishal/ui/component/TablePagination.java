@@ -41,10 +41,12 @@ public class TablePagination<T> {
 		List<T> dataList = Arrays.asList(data);
 		int dataListCount = dataList.size();
 		table.setItems(dataList.subList(0, Math.min(20, dataList.size())));
+		PaginationListener<T> paginationListener = new PaginationListener<>(table, dataList);
 		pagination.setTotalCount(dataListCount);
-		pagination.addPageChangeListener(new PaginationListener<T>(table, dataList));
+		pagination.addPageChangeListener(paginationListener);
+		SearchListener<T> searchListener = new SearchListener<>(table, dataList, pagination);
 		searchField.setValueChangeMode(ValueChangeMode.LAZY);
-		searchField.addValueChangeListener(new SearchListener<T>(table, dataList, pagination));
+		searchField.addValueChangeListener(searchListener);
 	}
 
 }
