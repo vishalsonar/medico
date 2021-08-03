@@ -39,7 +39,7 @@ public class UserStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(userTablePagination.init(table));
+		layout.addComponent(userTablePagination.init(table, UIConstant.FILTER_USER));
 	}
 
 	@Override

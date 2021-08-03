@@ -10,6 +10,7 @@ import com.vaadin.addon.pagination.PaginationResource;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Resource;
+import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
@@ -35,6 +36,16 @@ public class Component {
 		if (component == null)
 			return new Component();
 		return component;
+	}
+	
+	public TextField getSearchField(String placeHolder) {
+		TextField field = new TextField();
+		field.setPlaceholder(placeHolder);
+		field.setMaxLength(50);
+		field.setResponsive(true);
+		field.setHeight(UIConstant.NUMBER_30);
+		field.setWidth(99, Unit.PERCENTAGE);
+		return field;
 	}
 
 	public TextField getTextField(String label, String placeHolder, String width) {
@@ -155,8 +166,7 @@ public class Component {
 	}
 
 	public Button gotoOptionButton() {
-		Button button = new Button("Option");
-		button.addStyleName(ValoTheme.BUTTON_PRIMARY);
+		Button button = new Button(UIConstant.OPTION);
 		button.addStyleName(ValoTheme.BUTTON_SMALL);
 		button.setIcon(VaadinIcons.ARROW_BACKWARD);
 		button.addStyleName(ValoTheme.BUTTON_ICON_ALIGN_TOP);

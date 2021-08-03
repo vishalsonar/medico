@@ -39,7 +39,7 @@ public class ProductStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(productTablePagination.init(table));
+		layout.addComponent(productTablePagination.init(table, UIConstant.FILTER_PRODUCT));
 	}
 	
 	@Override

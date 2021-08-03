@@ -39,7 +39,7 @@ public class StoreStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(storeTablePagination.init(table));
+		layout.addComponent(storeTablePagination.init(table, UIConstant.FILTER_STORE));
 	}
 
 	@Override

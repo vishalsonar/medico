@@ -124,4 +124,12 @@ public class UIConstant {
 	public static final String LOGGED_IN_SUCCESS = "Logged In";
 	public static final String LOGGED_OUT_SUCCESS = "Logged Out";
 	public static final String ALL_FIELDS_MANDATORY = "Please Enter Missing Fields";
+	public static final String NO_DATA_FOUND = "No Data Found";
+	public static final String NO_DATA_FOUND_MESSAGE = "Please try other combination";
+	
+	public static final String FILTER_PATIENT = "Filter by patient name...";
+	public static final String FILTER_PRODUCT = "Filter by product name...";
+	public static final String FILTER_ROLE = "Filter by role name...";
+	public static final String FILTER_STORE = "Filter by store name...";
+	public static final String FILTER_USER = "Filter by user name...";
 }

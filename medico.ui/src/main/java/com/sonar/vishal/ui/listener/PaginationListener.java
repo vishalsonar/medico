@@ -19,7 +19,7 @@ public class PaginationListener<T> implements PaginationChangeListener {
 
 	@Override
 	public void changed(PaginationResource event) {
-		List<T> subList = list.subList(event.fromIndex(), event.toIndex());
+		List<T> subList = list.subList(event.fromIndex(), Math.min(list.size(), event.toIndex()));
 		table.setItems(subList);
 	}
 

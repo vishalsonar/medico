@@ -39,7 +39,7 @@ public class RoleStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(roleTablePagination.init(table));
+		layout.addComponent(roleTablePagination.init(table, UIConstant.FILTER_ROLE));
 	}
 
 	@Override

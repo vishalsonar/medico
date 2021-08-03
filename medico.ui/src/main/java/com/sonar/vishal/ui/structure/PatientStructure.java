@@ -39,7 +39,7 @@ public class PatientStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(patientTablePagination.init(table));
+		layout.addComponent(patientTablePagination.init(table, UIConstant.FILTER_PATIENT));
 	}
 
 	@Override
