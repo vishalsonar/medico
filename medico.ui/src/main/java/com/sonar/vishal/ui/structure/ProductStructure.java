@@ -41,7 +41,23 @@ public class ProductStructure implements CRUDStructure {
 		table.setSelectionMode(SelectionMode.SINGLE);
 		layout.addComponent(productTablePagination.init(table, UIConstant.FILTER_PRODUCT));
 	}
-	
+
+	public Grid<Product> getTable() {
+		return table;
+	}
+
+	public void setTable(Grid<Product> table) {
+		this.table = table;
+	}
+
+	public Product getSelectedProduct() {
+		return selectedProduct;
+	}
+
+	public void setSelectedProduct(Product selectedProduct) {
+		this.selectedProduct = selectedProduct;
+	}
+
 	@Override
 	public Object get() {
 		list();
