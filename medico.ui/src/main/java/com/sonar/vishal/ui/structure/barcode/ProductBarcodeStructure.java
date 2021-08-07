@@ -31,10 +31,8 @@ public class ProductBarcodeStructure implements GenerateStructure {
 	private VerticalLayout layout;
 	private VerticalLayout windowLayout;
 	private Grid<Product> table;
-	private RestBackend backend;
 	private Window window;
 	private Product selectedProduct;
-	private Notification notification;
 	private TablePagination<Product> productTablePagination;
 
 	public ProductBarcodeStructure() {
@@ -45,9 +43,9 @@ public class ProductBarcodeStructure implements GenerateStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(productTablePagination.init(table, UIConstant.FILTER_PRODUCT));
 		window.setContent(windowLayout);
 		window.setSizeFull();
+		layout.addComponent(productTablePagination.init(table, UIConstant.FILTER_PRODUCT));
 	}
 
 	@Override
@@ -85,6 +83,7 @@ public class ProductBarcodeStructure implements GenerateStructure {
 
 	@Override
 	public void generate() {
+		Notification notification;
 		if (selectedProduct == null) {
 			notification = Component.getInstance().getFailureNotification(Constant.ERROR, UIConstant.PLEASE_SELECT_ROW_GENERATE);
 			notification.show(Page.getCurrent());
@@ -104,7 +103,7 @@ public class ProductBarcodeStructure implements GenerateStructure {
 
 	@Override
 	public void list() {
-		backend = new RestBackend(Constant.GET_PRODUCT_LIST);
+		RestBackend backend = new RestBackend(Constant.GET_PRODUCT_LIST);
 		Product[] data = (Product[]) backend.doPostRespondData(Product[].class);
 		productTablePagination.configurePagination(data);
 	}
