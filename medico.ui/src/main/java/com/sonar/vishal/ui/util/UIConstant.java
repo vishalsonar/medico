@@ -42,11 +42,14 @@ public class UIConstant {
 	public static final String S_USER = "user";
 	public static final String ROLE = "Role";
 	public static final String S_ROLE = "role";
+	public static final String BARCODE = "Barcode";
+	public static final String S_BARCODE = "barcode";
 	public static final String S_CHANGE_PASSWORD = "changePassword";
 	public static final String LOGOUT = "Logout";
 	
 	public static final String SUBMIT = "Submit";
 	public static final String CANCEL = "Cancel";
+	public static final String PRINT = "Print";
 	public static final String NUMBER_100 = "100";
 	public static final String NUMBER_500_PX = "500px";
 	public static final String ID = "Id";
@@ -132,4 +135,10 @@ public class UIConstant {
 	public static final String FILTER_ROLE = "Filter by role name...";
 	public static final String FILTER_STORE = "Filter by store name...";
 	public static final String FILTER_USER = "Filter by user name...";
+	
+	public static final String BARCODE_SEPERATOR = " - ";
+	public static final String GENERATE = "Generate";
+	public static final String PLEASE_SELECT_ROW_GENERATE = "Please select row to generate";
+	public static final String ERROR_GENERATING_BARCODE = "Error while generating barcode";
+	public static final String QR_SEPERATOR = " #### ";
 }

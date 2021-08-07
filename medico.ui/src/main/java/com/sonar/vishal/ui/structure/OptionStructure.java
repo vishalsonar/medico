@@ -29,6 +29,7 @@ public class OptionStructure implements Structure {
 		Button logoutButton = COMPONENT.getOptionButton(UIConstant.LOGOUT, UIConstant.EMPTY, VaadinIcons.SIGN_OUT);
 		logoutButton.addClickListener(new LogoutListener());
 		grid.addComponent(COMPONENT.getOptionButton(UIConstant.BILL, UIConstant.S_BILL, VaadinIcons.ALIGN_JUSTIFY));
+		grid.addComponent(COMPONENT.getOptionButton(UIConstant.BARCODE, UIConstant.S_BARCODE, VaadinIcons.BARCODE));
 		grid.addComponent(COMPONENT.getOptionButton(UIConstant.PRODUCT, UIConstant.S_PRODUCT, VaadinIcons.CLIPBOARD_CROSS));
 		grid.addComponent(COMPONENT.getOptionButton(UIConstant.PATIENT, UIConstant.S_PATIENT, VaadinIcons.USER_HEART));
 		grid.addComponent(COMPONENT.getOptionButton(UIConstant.STORE, UIConstant.S_STORE, VaadinIcons.SHOP));

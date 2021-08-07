@@ -4,8 +4,10 @@ import java.util.Objects;
 
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.CRUDStructure;
+import com.sonar.vishal.ui.definition.GenerateStructure;
 import com.sonar.vishal.ui.listener.AddButtonListener;
 import com.sonar.vishal.ui.listener.DeleteButtonListener;
+import com.sonar.vishal.ui.listener.GenerateButtonListener;
 import com.sonar.vishal.ui.listener.UpdateButtonListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
@@ -24,11 +26,13 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	private Button addButton;
 	private Button updateButton;
 	private Button deleteButton;
+	private Button generateButton;
 	protected final VerticalLayout leftLayout;
 	protected final Label logo;
 	protected VerticalLayout rightLayout;
 	protected boolean isDirty = false;
 	protected transient CRUDStructure structure;
+	protected transient GenerateStructure generateStructure;
 	protected transient Component component = Component.getInstance();
 	
 	public MedicoView(String logoString) {
@@ -37,6 +41,14 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 		logo = Component.getInstance().getLogo(logoString);
 		leftLayout.addComponent(logo);
 		leftLayout.setComponentAlignment(logo, Alignment.MIDDLE_LEFT);
+	}
+	
+	public MedicoView(String logoString, String generate) {
+		this(logoString);
+		generateButton = component.getMenuButton(generate, VaadinIcons.BARCODE);
+		generateButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+		Button gotoOption = component.gotoOptionButton();
+		leftLayout.addComponents(gotoOption, generateButton);
 	}
 
 	public MedicoView(String logoString, String add, String update, String delete) {
@@ -58,6 +70,9 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 			if (addButton != null && updateButton != null && deleteButton != null) {
 				addListener();
 			}
+			if (generateButton != null) {
+				addGenerateListener();
+			}
 		}
 	}
 
@@ -77,6 +92,10 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 		addButton.addClickListener(new AddButtonListener(structure));
 		updateButton.addClickListener(new UpdateButtonListener(structure));
 		deleteButton.addClickListener(new DeleteButtonListener(structure));
+	}
+
+	private void addGenerateListener() {
+		generateButton.addClickListener(new GenerateButtonListener(generateStructure));
 	}
 
 	@Override

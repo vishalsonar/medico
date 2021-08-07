@@ -28,7 +28,7 @@ public class TablePagination<T> {
 		searchAndPaginationSplit.addComponent(searchField);
 		searchAndPaginationSplit.addComponent(pagination);
 		searchAndPaginationSplit.setLocked(true);
-		searchAndPaginationSplit.setSplitPosition(30, Unit.PERCENTAGE);
+		searchAndPaginationSplit.setSplitPosition(40, Unit.PERCENTAGE);
 		splitLayout.addComponent(searchAndPaginationSplit);
 		splitLayout.addComponent(table);
 		splitLayout.setLocked(true);
