@@ -7,8 +7,10 @@ import org.junit.Test;
 
 import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.structure.UserData;
 
 public class TestLogin extends UnitTest {
 
@@ -23,11 +25,14 @@ public class TestLogin extends UnitTest {
 		JsonObject roleObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Role role = gson.fromJson(roleObject, Role.class);
 		assertNotNull(role);
-		TestApi(data.getAddUserRequest(role));
+		Message message = data.getAddUserRequest(role);
+		TestApi(message);
+		UserData userData = (UserData) message.getData();
 		response = TestApi(data.getAllUserRequest());
 		JsonObject userObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		User user = gson.fromJson(userObject, User.class);
 		assertNotNull(user);
+		user.setPassword(userData.getUser().getPassword());
 		TestApi(data.getLoginData(user));
 	}
 
