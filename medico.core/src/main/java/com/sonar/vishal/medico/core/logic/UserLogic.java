@@ -26,7 +26,7 @@ public class UserLogic implements BusinessLogic {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.createCriteria(Constant.ROLE);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<User> list = (List<User>) hibernate.<User>executeCriteria(session, criteria);
+			List<User> list = hibernate.<User>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_USER_LIST, Constant.NULL);
 			} else {

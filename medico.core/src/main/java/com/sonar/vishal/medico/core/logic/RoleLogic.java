@@ -25,7 +25,7 @@ public class RoleLogic implements BusinessLogic {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Role.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Role> list = (List<Role>) hibernate.<Role>executeCriteria(session, criteria);
+			List<Role> list = hibernate.<Role>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_ROLE_LIST, Constant.NULL);
 			} else {

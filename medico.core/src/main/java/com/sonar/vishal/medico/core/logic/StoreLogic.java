@@ -26,7 +26,7 @@ public class StoreLogic implements BusinessLogic {
 			Criteria criteria = session.createCriteria(Store.class);
 			criteria.createCriteria(Constant.ADDRESS);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Store> list = (List<Store>) hibernate.<Store>executeCriteria(session, criteria);
+			List<Store> list = hibernate.<Store>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_STORE_LIST, Constant.NULL);
 			} else {

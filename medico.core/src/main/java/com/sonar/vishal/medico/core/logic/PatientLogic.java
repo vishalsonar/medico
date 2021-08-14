@@ -25,7 +25,7 @@ public class PatientLogic implements BusinessLogic {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Patient.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Patient> list = (List<Patient>) hibernate.<Patient>executeCriteria(session, criteria);
+			List<Patient> list = hibernate.<Patient>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_PATIENT_LIST, Constant.NULL);
 			} else {

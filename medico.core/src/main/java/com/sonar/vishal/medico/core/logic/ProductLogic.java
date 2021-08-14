@@ -25,7 +25,7 @@ public class ProductLogic implements BusinessLogic {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Product.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Product> list = (List<Product>) hibernate.<Product>executeCriteria(session, criteria);
+			List<Product> list = hibernate.<Product>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_PRODUCT_LIST, Constant.NULL);
 			} else {

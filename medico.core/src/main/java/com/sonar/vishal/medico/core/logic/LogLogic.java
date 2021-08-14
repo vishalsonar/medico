@@ -25,7 +25,7 @@ public class LogLogic implements BusinessLogic {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Log.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Log> list = (List<Log>) hibernate.<Log>executeCriteria(session, criteria);
+			List<Log> list = hibernate.<Log>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_LOG_LIST, Constant.NULL);
 			} else {
@@ -81,7 +81,7 @@ public class LogLogic implements BusinessLogic {
 				criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
 			}
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Log> list = (List<Log>) hibernate.<Log>executeCriteria(session, criteria);
+			List<Log> list = hibernate.<Log>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_LOG, Constant.NULL);
 			} else {

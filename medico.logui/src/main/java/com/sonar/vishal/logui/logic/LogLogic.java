@@ -30,7 +30,7 @@ public class LogLogic {
 			Criteria criteria = session.createCriteria(Log.class);
 			criteria.addOrder(Order.desc(LogUIConstant.ID_SMALL));
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			list = (List<Log>) hibernate.<Log>executeCriteria(session, criteria);
+			list = hibernate.<Log>executeCriteria(session, criteria);
 		}
 		return list;
 	}
@@ -54,7 +54,7 @@ public class LogLogic {
 				criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
 			}
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			list = (List<Log>) hibernate.<Log>executeCriteria(session, criteria);
+			list = hibernate.<Log>executeCriteria(session, criteria);
 		}
 		return list;
 	}
