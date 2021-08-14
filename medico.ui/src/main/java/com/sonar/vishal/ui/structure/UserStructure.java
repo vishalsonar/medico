@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
@@ -18,6 +20,7 @@ import com.sonar.vishal.ui.window.user.UpdateUserWindow;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
@@ -69,12 +72,22 @@ public class UserStructure implements CRUDStructure {
 
 	@Override
 	public void list() {
+		User thisUser = null;
+		Object userData = VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		if (userData instanceof User) {
+			thisUser = (User) userData;
+		}
 		backend = new RestBackend(Constant.GET_USER_LIST);
 		User[] data = (User[]) backend.doPostRespondData(User[].class);
+		List<User> dataList = new ArrayList<>();
 		for (User user : data) {
+			if (thisUser != null && thisUser.getId() == user.getId()) {
+				continue;
+			}
 			user.update();
+			dataList.add(user);
 		}
-		userTablePagination.configurePagination(data);
+		userTablePagination.configurePagination(dataList.toArray(new User[dataList.size()]));
 	}
 
 	@Override

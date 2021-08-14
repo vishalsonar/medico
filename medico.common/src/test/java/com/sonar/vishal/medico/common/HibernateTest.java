@@ -42,7 +42,7 @@ public class HibernateTest extends TestCase {
 	}
 
 	public HibernateTest() {
-		hibernate = new Hibernate();
+		hibernate = Hibernate.getInstance();
 	}
 
 	@Test

@@ -18,7 +18,7 @@ public class Logger {
 	private static String component;
 
 	static {
-		HIBERNATE = new Hibernate();
+		HIBERNATE = Hibernate.getInstance();
 	}
 
 	private Logger() {

@@ -20,7 +20,7 @@ public class LogLogic {
 	private Hibernate hibernate;
 
 	public LogLogic() {
-		hibernate = new Hibernate();
+		hibernate = Hibernate.getInstance();
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })

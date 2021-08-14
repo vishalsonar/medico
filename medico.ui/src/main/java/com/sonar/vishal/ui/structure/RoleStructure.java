@@ -1,9 +1,12 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
+import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.RoleData;
@@ -18,6 +21,7 @@ import com.sonar.vishal.ui.window.role.UpdateRoleWindow;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
@@ -68,9 +72,21 @@ public class RoleStructure implements CRUDStructure {
 
 	@Override
 	public void list() {
+		User thisUser = null;
+		Object userData = VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		if (userData instanceof User) {
+			thisUser = (User) userData;
+		}
 		backend = new RestBackend(Constant.GET_ROLE_LIST);
 		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
-		roleTablePagination.configurePagination(data);
+		List<Role> dataList = new ArrayList<>();
+		for (Role role : data) {
+			if (thisUser != null && thisUser.getRole().getId() == role.getId()) {
+				continue;
+			}
+			dataList.add(role);
+		}
+		roleTablePagination.configurePagination(dataList.toArray(new Role[dataList.size()]));
 	}
 
 	@Override
