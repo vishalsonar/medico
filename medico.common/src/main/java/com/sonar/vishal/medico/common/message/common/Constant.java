@@ -102,4 +102,5 @@ public class Constant {
 	
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
 	public static final String AES = "AES";
+	public static final String ADMIN = "admin";
 }

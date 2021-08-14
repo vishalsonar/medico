@@ -18,7 +18,7 @@ import com.sonar.vishal.medico.core.definition.BusinessLogic;
 public class StoreLogic implements BusinessLogic {
 
 	@Override
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "deprecation" })
 	public void getAll() {
 		StoreListData replyData = new StoreListData();
 		Session session = hibernate.getSession();
@@ -26,7 +26,7 @@ public class StoreLogic implements BusinessLogic {
 			Criteria criteria = session.createCriteria(Store.class);
 			criteria.createCriteria(Constant.ADDRESS);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Store> list = (List<Store>) hibernate.executeCriteria(session, criteria);
+			List<Store> list = (List<Store>) hibernate.<Store>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_STORE_LIST, Constant.NULL);
 			} else {

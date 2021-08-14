@@ -5,26 +5,31 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 
 import com.sonar.vishal.medico.common.Hibernate;
+import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.User;
 
 public class DataBaseInitializer {
 
 	private static final Hibernate HIBERNATE = Hibernate.getInstance();
+	
+	private DataBaseInitializer() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	private static User getUser() {
 		User user = new User();
 		Role role = getRole();
 		role.setId(1);
-		user.setUserName("admin");
-		user.setPassword("admin");
+		user.setUserName(Constant.ADMIN);
+		user.setPassword(Constant.ADMIN);
 		user.setRole(role);
 		return user;
 	}
 
 	private static Role getRole() {
 		Role role = new Role();
-		role.setName("admin");
+		role.setName(Constant.ADMIN);
 		role.setModule("Login,Option,Bill,Product,Patient,Store,User,Role");
 		return role;
 	}

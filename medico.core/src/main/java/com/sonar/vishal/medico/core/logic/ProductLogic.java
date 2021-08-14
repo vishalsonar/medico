@@ -18,14 +18,14 @@ import com.sonar.vishal.medico.core.definition.BusinessLogic;
 public class ProductLogic implements BusinessLogic {
 
 	@Override
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "deprecation" })
 	public void getAll() {
 		ProductListData replyData = new ProductListData();
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Product.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Product> list = (List<Product>) hibernate.executeCriteria(session, criteria);
+			List<Product> list = (List<Product>) hibernate.<Product>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_PRODUCT_LIST, Constant.NULL);
 			} else {

@@ -12,7 +12,7 @@ import com.sonar.vishal.medico.common.util.Logger;
 
 public class Hibernate {
 
-	private static volatile Hibernate hibernate;
+	private static Hibernate hibernate;
 
 	private Hibernate() {
 		// Do Nothing, Singleton Class.
@@ -83,8 +83,9 @@ public class Hibernate {
 		return session;
 	}
 
-	public synchronized List<?> executeCriteria(Session session, Criteria criteria) {
-		List<?> list = null;
+	@SuppressWarnings("unchecked")
+	public synchronized <T> List<T> executeCriteria(Session session, Criteria criteria) {
+		List<T> list = null;
 		try {
 			session.beginTransaction();
 			list = criteria.list();

@@ -23,19 +23,19 @@ public class LogLogic {
 		hibernate = Hibernate.getInstance();
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	public List<Log> getAll() {
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Log.class);
 			criteria.addOrder(Order.desc(LogUIConstant.ID_SMALL));
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			list = (List<Log>) hibernate.executeCriteria(session, criteria);
+			list = (List<Log>) hibernate.<Log>executeCriteria(session, criteria);
 		}
 		return list;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	public List<Log> getFilteredLog(LogData data) {
 		String component = data.getLog().getComponent();
 		String serverity = data.getLog().getSeverity();
@@ -54,7 +54,7 @@ public class LogLogic {
 				criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
 			}
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			list = (List<Log>) hibernate.executeCriteria(session, criteria);
+			list = (List<Log>) hibernate.<Log>executeCriteria(session, criteria);
 		}
 		return list;
 	}

@@ -18,14 +18,14 @@ import com.sonar.vishal.medico.core.definition.BusinessLogic;
 public class PatientLogic implements BusinessLogic {
 
 	@Override
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "deprecation" })
 	public void getAll() {
 		PatientListData replyData = new PatientListData();
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Patient.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Patient> list = (List<Patient>) hibernate.executeCriteria(session, criteria);
+			List<Patient> list = (List<Patient>) hibernate.<Patient>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_PATIENT_LIST, Constant.NULL);
 			} else {

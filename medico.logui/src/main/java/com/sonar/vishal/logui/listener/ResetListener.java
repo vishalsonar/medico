@@ -35,7 +35,7 @@ public class ResetListener implements ClickListener {
 		} else {
 			pagination.setTotalCount(data.size());
 			pagination.addPageChangeListener(new PaginationListener(table, data));
-			table.setItems(data.subList(0, 20));
+			table.setItems(data.subList(0, Math.min(20, data.size())));
 		}
 	}
 

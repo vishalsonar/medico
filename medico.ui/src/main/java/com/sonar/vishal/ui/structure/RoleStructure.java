@@ -15,13 +15,13 @@ import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.sonar.vishal.ui.util.UIUtil;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.role.AddRoleWindow;
 import com.sonar.vishal.ui.window.role.UpdateRoleWindow;
 import com.vaadin.event.selection.SelectionEvent;
 import com.vaadin.event.selection.SelectionListener;
 import com.vaadin.server.Page;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
@@ -72,11 +72,7 @@ public class RoleStructure implements CRUDStructure {
 
 	@Override
 	public void list() {
-		User thisUser = null;
-		Object userData = VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
-		if (userData instanceof User) {
-			thisUser = (User) userData;
-		}
+		User thisUser = UIUtil.getSessionUser();
 		backend = new RestBackend(Constant.GET_ROLE_LIST);
 		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
 		List<Role> dataList = new ArrayList<>();

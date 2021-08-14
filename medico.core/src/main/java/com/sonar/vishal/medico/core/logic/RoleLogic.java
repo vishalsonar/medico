@@ -18,14 +18,14 @@ import com.sonar.vishal.medico.core.definition.BusinessLogic;
 public class RoleLogic implements BusinessLogic {
 
 	@Override
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "deprecation" })
 	public void getAll() {
 		RoleListData replyData = new RoleListData();
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Role.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Role> list = (List<Role>) hibernate.executeCriteria(session, criteria);
+			List<Role> list = (List<Role>) hibernate.<Role>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_ROLE_LIST, Constant.NULL);
 			} else {
