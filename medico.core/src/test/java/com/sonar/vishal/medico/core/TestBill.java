@@ -31,6 +31,7 @@ public class TestBill extends UnitTest {
 		assertNotNull(store);
 		TestApi(data.getAddBillRequest(patient, store));
 		response = TestApi(data.getAllBillRequest());
+		TestApi(data.getPageBillRequest());
 		JsonObject billObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Bill bill = gson.fromJson(billObject, Bill.class);
 		assertNotNull(bill);

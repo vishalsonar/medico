@@ -41,6 +41,7 @@ public class DataBaseInitializer {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Role.class);
 			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			session.close();
 		}
 		return count;
 	}
@@ -52,6 +53,7 @@ public class DataBaseInitializer {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(User.class);
 			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			session.close();
 		}
 		return count;
 	}

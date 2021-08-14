@@ -9,6 +9,8 @@ public class PatientListData extends Data {
 
 	@SerializedName(value = "List")
 	private List<Patient> patientList;
+	@SerializedName(value = "Count")
+	private long totalRowCount;
 
 	public List<Patient> getPatientList() {
 		return patientList;
@@ -16,6 +18,14 @@ public class PatientListData extends Data {
 
 	public void setPatientList(List<Patient> patientList) {
 		this.patientList = patientList;
+	}
+
+	public long getTotalRowCount() {
+		return totalRowCount;
+	}
+
+	public void setTotalRowCount(long totalRowCount) {
+		this.totalRowCount = totalRowCount;
 	}
 
 }

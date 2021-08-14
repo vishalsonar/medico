@@ -9,6 +9,8 @@ public class ProductListData extends Data {
 
 	@SerializedName(value = "List")
 	private List<Product> productList;
+	@SerializedName(value = "Count")
+	private long totalRowCount;
 
 	public List<Product> getProductList() {
 		return productList;
@@ -16,6 +18,14 @@ public class ProductListData extends Data {
 
 	public void setProductList(List<Product> productList) {
 		this.productList = productList;
+	}
+
+	public long getTotalRowCount() {
+		return totalRowCount;
+	}
+
+	public void setTotalRowCount(long totalRowCount) {
+		this.totalRowCount = totalRowCount;
 	}
 
 }

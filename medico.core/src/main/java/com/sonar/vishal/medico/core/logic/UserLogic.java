@@ -5,12 +5,14 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Projections;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.common.structure.UserListData;
 import com.sonar.vishal.medico.common.util.Hashing;
@@ -27,6 +29,7 @@ public class UserLogic implements BusinessLogic {
 			Criteria criteria = session.createCriteria(User.class);
 			criteria.createCriteria(Constant.ROLE);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.setMaxResults(20);
 			List<User> list = hibernate.<User>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_USER_LIST, Constant.NULL);
@@ -34,6 +37,7 @@ public class UserLogic implements BusinessLogic {
 				setSucessMessage(Constant.GET_USER_LIST);
 			}
 			replyData.setUserList(list);
+			replyData.setTotalRowCount(getTotalRowCount());
 		} else {
 			setErrorMessage(Constant.GET_USER_LIST, Constant.NULL);
 		}
@@ -79,11 +83,53 @@ public class UserLogic implements BusinessLogic {
 		}
 		message.setData(replyData);
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public long getTotalRowCount() {
+		long count = 0;
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(User.class);
+			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			session.close();
+		}
+		return count;
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void getPage(int startIndex, int endIndex) {
+		UserListData replyData = new UserListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.createCriteria(Constant.ROLE);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.setFirstResult(startIndex);
+			criteria.setMaxResults(Math.abs(startIndex - endIndex));
+			List<User> list = hibernate.<User>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.GET_USER_PAGE, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.GET_USER_PAGE);
+			}
+			replyData.setUserList(list);
+			replyData.setTotalRowCount(getTotalRowCount());
+		} else {
+			setErrorMessage(Constant.GET_USER_PAGE, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
 		if (functionName.equals(Constant.GET_USER_LIST)) {
 			getAll();
+		}
+		if (functionName.equals(Constant.GET_USER_PAGE)) {
+			PageData message = (PageData) data;
+			getPage(message.getStartIndex(), message.getEndIndex());
 		}
 		if (functionName.equals(Constant.GET_USER)) {
 			IdData message = (IdData) data;
@@ -100,4 +146,5 @@ public class UserLogic implements BusinessLogic {
 		message.getHeader().setType(Constant.RESPONSE);
 		return message;
 	}
+
 }

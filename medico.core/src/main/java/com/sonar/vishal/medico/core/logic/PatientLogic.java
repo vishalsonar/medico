@@ -5,12 +5,14 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.Projections;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.PatientListData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
@@ -25,6 +27,7 @@ public class PatientLogic implements BusinessLogic {
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Patient.class);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.setMaxResults(20);
 			List<Patient> list = hibernate.<Patient>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_PATIENT_LIST, Constant.NULL);
@@ -32,6 +35,7 @@ public class PatientLogic implements BusinessLogic {
 				setSucessMessage(Constant.GET_PATIENT_LIST);
 			}
 			replyData.setPatientList(list);
+			replyData.setTotalRowCount(getTotalRowCount());
 		} else {
 			setErrorMessage(Constant.GET_PATIENT_LIST, Constant.NULL);
 		}
@@ -76,11 +80,52 @@ public class PatientLogic implements BusinessLogic {
 		}
 		message.setData(replyData);
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void getPage(int startIndex, int endIndex) {
+		PatientListData replyData = new PatientListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Patient.class);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.setFirstResult(startIndex);
+			criteria.setMaxResults(Math.abs(startIndex - endIndex));
+			List<Patient> list = hibernate.<Patient>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.GET_PATIENT_PAGE, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.GET_PATIENT_PAGE);
+			}
+			replyData.setPatientList(list);
+			replyData.setTotalRowCount(getTotalRowCount());
+		} else {
+			setErrorMessage(Constant.GET_PATIENT_PAGE, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public long getTotalRowCount() {
+		long count = 0;
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Patient.class);
+			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			session.close();
+		}
+		return count;
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
 		if (functionName.equals(Constant.GET_PATIENT_LIST)) {
 			getAll();
+		}
+		if (functionName.equals(Constant.GET_PATIENT_PAGE)) {
+			PageData message = (PageData) data;
+			getPage(message.getStartIndex(), message.getEndIndex());
 		}
 		if (functionName.equals(Constant.GET_PATIENT)) {
 			IdData message = (IdData) data;

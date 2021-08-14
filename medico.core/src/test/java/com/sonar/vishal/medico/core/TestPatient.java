@@ -19,6 +19,7 @@ public class TestPatient extends UnitTest {
 	public void test() throws InvalidKeyException, NoSuchAlgorithmException {
 		TestApi(data.getAddPatientRequest());
 		JsonObject response = TestApi(data.getAllPatientRequest());
+		TestApi(data.getPagePatientRequest());
 		JsonObject patientObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Patient patient = gson.fromJson(patientObject, Patient.class);
 		assertNotNull(patient);

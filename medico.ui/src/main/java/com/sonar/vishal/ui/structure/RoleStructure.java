@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.User;
@@ -74,7 +75,9 @@ public class RoleStructure implements CRUDStructure {
 	public void list() {
 		User thisUser = UIUtil.getSessionUser();
 		backend = new RestBackend(Constant.GET_ROLE_LIST);
-		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		Role[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
 		List<Role> dataList = new ArrayList<>();
 		for (Role role : data) {
 			if (thisUser != null && thisUser.getRole().getId() == role.getId()) {
@@ -82,7 +85,7 @@ public class RoleStructure implements CRUDStructure {
 			}
 			dataList.add(role);
 		}
-		roleTablePagination.configurePagination(dataList.toArray(new Role[dataList.size()]));
+		roleTablePagination.configurePagination(dataList.toArray(new Role[dataList.size()]), totalCount);
 	}
 
 	@Override

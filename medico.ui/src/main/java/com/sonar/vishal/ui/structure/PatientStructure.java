@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.structure;
 
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.rest.Backend;
@@ -71,8 +72,10 @@ public class PatientStructure implements CRUDStructure {
 	@Override
 	public void list() {
 		backend = new RestBackend(Constant.GET_PATIENT_LIST);
-		Patient[] data = (Patient[]) backend.doPostRespondData(Patient[].class);
-		patientTablePagination.configurePagination(data);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Patient[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		Patient[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Patient[].class);
+		patientTablePagination.configurePagination(data, totalCount);
 	}
 
 	@Override

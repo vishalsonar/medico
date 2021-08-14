@@ -2,7 +2,6 @@ package com.sonar.vishal.medico.common.rest;
 
 import java.security.Key;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.sonar.vishal.medico.common.message.common.Constant;
@@ -88,8 +87,7 @@ public class RestBackend implements Backend {
 			if (isMac) {
 				JsonObject responseData = responseObject.get(Constant.DATA).getAsJsonObject();
 				if (responseData.has(Constant.LIST)) {
-					JsonArray array = responseData.get(Constant.LIST).getAsJsonArray();
-					data = gson.fromJson(array, clazz);
+					data = responseData;
 				} else {
 					data = gson.fromJson(responseData, clazz);
 				}

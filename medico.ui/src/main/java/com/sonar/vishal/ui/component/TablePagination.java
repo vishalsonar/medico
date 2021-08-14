@@ -37,12 +37,12 @@ public class TablePagination<T> {
 		return splitLayout;
 	}
 
-	public void configurePagination(T[] data) {
+	public void configurePagination(T[] data, long totalCount) {
 		List<T> dataList = Arrays.asList(data);
-		int dataListCount = dataList.size();
 		table.setItems(dataList.subList(0, Math.min(20, dataList.size())));
 		PaginationListener<T> paginationListener = new PaginationListener<>(table, dataList);
-		pagination.setTotalCount(dataListCount);
+		pagination.setTotalCount(totalCount);
+		pagination.setCurrentPage(1);
 		pagination.addPageChangeListener(paginationListener);
 		SearchListener<T> searchListener = new SearchListener<>(table, dataList, pagination);
 		searchField.setValueChangeMode(ValueChangeMode.LAZY);

@@ -22,6 +22,7 @@ public class TestStore extends UnitTest {
 	public void test() throws InvalidKeyException, NoSuchAlgorithmException {
 		TestApi(data.getAddStoreRequest());
 		JsonObject response = TestApi(data.getAllStoreRequest());
+		TestApi(data.getPageStoreRequest());
 		JsonObject storeObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Store store = gson.fromJson(storeObject, Store.class);
 		assertNotNull(store);

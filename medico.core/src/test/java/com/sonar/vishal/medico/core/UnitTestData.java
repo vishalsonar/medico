@@ -21,6 +21,7 @@ import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
 import com.sonar.vishal.medico.common.structure.RoleData;
@@ -32,8 +33,10 @@ public class UnitTestData {
 	private Message message;
 	private Header header;
 	private String date;
+	private PageData pageData;
 
 	public UnitTestData() throws InvalidKeyException, NoSuchAlgorithmException {
+		pageData = new PageData();
 		message = new Message();
 		header = new Header();
 		date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()).toString();
@@ -43,11 +46,19 @@ public class UnitTestData {
 		header.setType(Constant.REQUEST);
 		header.setUuid(UUID.randomUUID().toString());
 		message.setHeader(header);
+		pageData.setStartIndex(0);
+		pageData.setEndIndex(10);
 	}
 
 	public Message getAllStoreRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_STORE_LIST);
+		return message;
+	}
+
+	public Message getPageStoreRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_STORE_PAGE);
 		return message;
 	}
 
@@ -86,6 +97,12 @@ public class UnitTestData {
 	public Message getAllUserRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_USER_LIST);
+		return message;
+	}
+
+	public Message getPageUserRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_USER_PAGE);
 		return message;
 	}
 
@@ -128,6 +145,12 @@ public class UnitTestData {
 		return message;
 	}
 
+	public Message getPageRoleRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_ROLE_PAGE);
+		return message;
+	}
+
 	public Message getAddRoleRequest() {
 		RoleData data = new RoleData();
 		data.setRole(TestData.getRole());
@@ -163,6 +186,12 @@ public class UnitTestData {
 	public Message getAllProductRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_PRODUCT_LIST);
+		return message;
+	}
+
+	public Message getPageProductRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_PRODUCT_PAGE);
 		return message;
 	}
 
@@ -204,6 +233,12 @@ public class UnitTestData {
 		return message;
 	}
 
+	public Message getPagePatientRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_PATIENT_PAGE);
+		return message;
+	}
+
 	public Message getAddPatientRequest() {
 		PatientData data = new PatientData();
 		data.setPatient(TestData.getPatient());
@@ -239,6 +274,12 @@ public class UnitTestData {
 	public Message getAllBillRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_BILL_LIST);
+		return message;
+	}
+
+	public Message getPageBillRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_BILL_PAGE);
 		return message;
 	}
 
@@ -296,6 +337,12 @@ public class UnitTestData {
 	public Message getAllLogRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_LOG_LIST);
+		return message;
+	}
+
+	public Message getPageLogRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_LOG_PAGE);
 		return message;
 	}
 

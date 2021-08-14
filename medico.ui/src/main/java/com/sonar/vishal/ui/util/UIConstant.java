@@ -18,6 +18,8 @@ public class UIConstant {
 
 	public static final String EMPTY = "";
 	public static final String COMMA = ",";
+	public static final String COUNT = "Count";
+	
 	public static final String REQUIRED_MANDATORY_FIELD = "Required Field is Empty";
 	public static final String INVALID_PASSWORD = "Invalid Password";
 	public static final String PASSWORD_MISMATCH = "Password Mismatch";

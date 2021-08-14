@@ -19,6 +19,7 @@ public class TestLog extends UnitTest {
 		Message response = data.getAllLogRequest();
 		assertNotNull(response);
 		TestApi(data.getLogRequest());
+		TestApi(data.getPageLogRequest());
 	}
 
 }

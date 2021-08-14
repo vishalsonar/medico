@@ -6,6 +6,10 @@ public interface BusinessLogic extends BussinessObject {
 
 	public void getAll();
 
+	public long getTotalRowCount();
+
+	public void getPage(int startIndex, int endIndex);
+
 	public void getById(String id);
 
 	public void saveOrUpdate(String functionName, Object data);

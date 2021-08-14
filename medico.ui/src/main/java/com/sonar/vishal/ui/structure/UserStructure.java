@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
@@ -74,7 +75,9 @@ public class UserStructure implements CRUDStructure {
 	public void list() {
 		User thisUser = UIUtil.getSessionUser();
 		backend = new RestBackend(Constant.GET_USER_LIST);
-		User[] data = (User[]) backend.doPostRespondData(User[].class);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		User[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
 		List<User> dataList = new ArrayList<>();
 		for (User user : data) {
 			if (thisUser != null && thisUser.getId() == user.getId()) {
@@ -83,7 +86,7 @@ public class UserStructure implements CRUDStructure {
 			user.update();
 			dataList.add(user);
 		}
-		userTablePagination.configurePagination(dataList.toArray(new User[dataList.size()]));
+		userTablePagination.configurePagination(dataList.toArray(new User[dataList.size()]), totalCount);
 	}
 
 	@Override

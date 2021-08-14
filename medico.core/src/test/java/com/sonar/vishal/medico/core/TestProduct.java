@@ -19,6 +19,7 @@ public class TestProduct extends UnitTest {
 	public void test() throws InvalidKeyException, NoSuchAlgorithmException {
 		TestApi(data.getAddProductRequest());
 		JsonObject response = TestApi(data.getAllProductRequest());
+		TestApi(data.getPageProductRequest());
 		JsonObject productObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Product product = gson.fromJson(productObject, Product.class);
 		assertNotNull(product);

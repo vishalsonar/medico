@@ -28,42 +28,49 @@ public class Constant {
 	public static final String LIST = "List";
 
 	public static final String GET_STORE_LIST = "GetStoreList";
+	public static final String GET_STORE_PAGE = "GetStorePage";
 	public static final String GET_STORE = "GetStore";
 	public static final String ADD_STORE = "AddStore";
 	public static final String UPDATE_STORE = "UpdateStore";
 	public static final String DELETE_STORE = "DeleteStore";
 
 	public static final String GET_PRODUCT_LIST = "GetProductList";
+	public static final String GET_PRODUCT_PAGE = "GetProductPage";
 	public static final String GET_PRODUCT = "GetProduct";
 	public static final String ADD_PRODUCT = "AddProduct";
 	public static final String UPDATE_PRODUCT = "UpdateProduct";
 	public static final String DELETE_PRODUCT = "DeleteProduct";
 
 	public static final String GET_BILL_LIST = "GetBillList";
+	public static final String GET_BILL_PAGE = "GetBillPage";
 	public static final String GET_BILL = "GetBill";
 	public static final String ADD_BILL = "AddBill";
 	public static final String UPDATE_BILL = "UpdateBill";
 	public static final String DELETE_BILL = "DeleteBill";
 
 	public static final String GET_USER_LIST = "GetUserList";
+	public static final String GET_USER_PAGE = "GetUserPage";
 	public static final String GET_USER = "GetUser";
 	public static final String ADD_USER = "AddUser";
 	public static final String UPDATE_USER = "UpdateUser";
 	public static final String DELETE_USER = "DeleteUser";
 
 	public static final String GET_ROLE_LIST = "GetRoleList";
+	public static final String GET_ROLE_PAGE = "GetRolePage";
 	public static final String GET_ROLE = "GetRole";
 	public static final String ADD_ROLE = "AddRole";
 	public static final String UPDATE_ROLE = "UpdateRole";
 	public static final String DELETE_ROLE = "DeleteRole";
 
 	public static final String GET_PATIENT_LIST = "GetPatientList";
+	public static final String GET_PATIENT_PAGE = "GetPatientPage";
 	public static final String GET_PATIENT = "GetPatient";
 	public static final String ADD_PATIENT = "AddPatient";
 	public static final String UPDATE_PATIENT = "UpdatePatient";
 	public static final String DELETE_PATIENT = "DeletePatient";
 	
 	public static final String GET_LOG_LIST = "GetLogList";
+	public static final String GET_LOG_PAGE = "GetLogPage";
 	public static final String GET_LOG = "GetLog";
 	public static final String ADD_LOG = "AddLog";
 	public static final String COMPONENT = "component";
