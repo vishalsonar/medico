@@ -12,6 +12,7 @@ import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.UserData;
+import com.sonar.vishal.medico.common.util.Hashing;
 import com.sonar.vishal.medico.core.adapter.BusinessLogicAdapter;
 
 public class LoginLogic extends BusinessLogicAdapter {
@@ -22,8 +23,8 @@ public class LoginLogic extends BusinessLogicAdapter {
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(User.class);
-			criteria.add(Restrictions.eq("userName", data.getUserName()));
-			criteria.add(Restrictions.eq("password", data.getPassword()));
+			criteria.add(Restrictions.eq(Constant.USERNAME, data.getUserName()));
+			criteria.add(Restrictions.eq(Constant.PASSWORD, Hashing.getHashValue(data.getPassword())));
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 			List<?> list = hibernate.executeCriteria(session, criteria);
 			if (list != null && list.size() == 1) {

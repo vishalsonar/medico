@@ -22,7 +22,7 @@ public class DataBaseInitializer {
 		Role role = getRole();
 		role.setId(1);
 		user.setUserName(Constant.ADMIN);
-		user.setPassword(Constant.ADMIN);
+		user.setPassword(Hashing.getHashValue(Constant.ADMIN));
 		user.setRole(role);
 		return user;
 	}

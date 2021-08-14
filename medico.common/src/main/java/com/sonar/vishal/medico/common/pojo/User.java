@@ -25,7 +25,7 @@ public class User implements Serializable {
 	private int id;
 	@Column(name = "username", nullable = false, length = 20)
 	private String userName;
-	@Column(name = "password", nullable = false, length = 20)
+	@Column(name = "password", nullable = false, length = 100)
 	private String password;
 	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "role_id", referencedColumnName = "id")

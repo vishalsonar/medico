@@ -6,6 +6,11 @@ public class Constant {
 		throw new IllegalStateException("Utility class");
 	}
 
+	public static final char CHAR_ZERO = '0';
+	
+	public static final String USERNAME = "userName";
+	public static final String PASSWORD = "password";
+	
 	public static final String SUCCESS = "Success";
 	public static final String ERROR = "Error";
 	public static final String ADDRESS = "address";
@@ -103,4 +108,5 @@ public class Constant {
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
 	public static final String AES = "AES";
 	public static final String ADMIN = "admin";
+	public static final String SHA3256 = "SHA3-256";
 }

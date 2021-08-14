@@ -13,6 +13,7 @@ import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.common.structure.UserListData;
+import com.sonar.vishal.medico.common.util.Hashing;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 
 public class UserLogic implements BusinessLogic {
@@ -56,6 +57,7 @@ public class UserLogic implements BusinessLogic {
 	public void saveOrUpdate(String functionName, Object data) {
 		Data replyData = new Data();
 		User user = (User) data;
+		user.setPassword(Hashing.getHashValue(user.getPassword()));
 		boolean result = hibernate.saveOrUpdate(user);
 		if (result) {
 			setSucessMessage(functionName);
