@@ -97,6 +97,7 @@ public class UIConstant {
 	public static final String CIN_NUMBER = "Cin Number";
 	public static final String GST = "GST";
 	public static final String FASSAI = "FASSAI";
+	public static final String BILL_NUMBER = "Bill Number";
 
 	public static final String DESCRIPTION = "Description";
 	public static final String PACK = "Pack";
@@ -137,6 +138,7 @@ public class UIConstant {
 	public static final String FILTER_ROLE = "Filter by role name...";
 	public static final String FILTER_STORE = "Filter by store name...";
 	public static final String FILTER_USER = "Filter by user name...";
+	public static final String FILTER_BILL = "Filter by patient name...";
 	
 	public static final String BARCODE_SEPERATOR = " - ";
 	public static final String GENERATE = "Generate";
@@ -145,4 +147,5 @@ public class UIConstant {
 	public static final String QR_SEPERATOR = " #### ";
 	
 	public static final String FILTER = "filter";
+	public static final String VIEW_BILL = "View Bill";
 }

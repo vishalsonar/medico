@@ -335,6 +335,7 @@ public class UnitTestData {
 		data.getBill().setPatient(patient);
 		data.getBill().setStore(store);
 		data.getBill().setProducts(Arrays.asList(productList));
+		data.getBill().setBillNumber("BILL12345");
 		message.setData(data);
 		message.getHeader().setFunction(Constant.ADD_BILL);
 		return message;
