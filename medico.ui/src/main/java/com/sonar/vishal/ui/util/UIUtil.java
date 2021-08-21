@@ -2,6 +2,9 @@ package com.sonar.vishal.ui.util;
 
 import java.util.regex.Pattern;
 
+import com.sonar.vishal.medico.common.pojo.User;
+import com.vaadin.server.VaadinSession;
+
 public class UIUtil {
 
 	public static final String STRING_REGEX = "[a-zA-Z]*";
@@ -110,5 +113,14 @@ public class UIUtil {
 			result = Pattern.matches(ADDRESS_REGEX, data);
 		}
 		return result;
+	}
+	
+	public static User getSessionUser() {
+		User thisUser = null;
+		Object userData = VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		if (userData instanceof User) {
+			thisUser = (User) userData;
+		}
+		return thisUser;
 	}
 }

@@ -3,6 +3,7 @@ package com.sonar.vishal.medico.core;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -21,9 +22,11 @@ import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
 import com.sonar.vishal.medico.common.structure.RoleData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.common.structure.StoreData;
 import com.sonar.vishal.medico.common.structure.UserData;
 
@@ -32,10 +35,14 @@ public class UnitTestData {
 	private Message message;
 	private Header header;
 	private String date;
+	private PageData pageData;
+	private SearchData searchData;
 
 	public UnitTestData() throws InvalidKeyException, NoSuchAlgorithmException {
+		pageData = new PageData();
 		message = new Message();
 		header = new Header();
+		searchData = new SearchData();
 		date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()).toString();
 		header.setDateTime(date);
 		header.setMessage(Constant.SUCCESS);
@@ -43,11 +50,26 @@ public class UnitTestData {
 		header.setType(Constant.REQUEST);
 		header.setUuid(UUID.randomUUID().toString());
 		message.setHeader(header);
+		pageData.setStartIndex(0);
+		pageData.setEndIndex(10);
 	}
 
 	public Message getAllStoreRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_STORE_LIST);
+		return message;
+	}
+
+	public Message getPageStoreRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_STORE_PAGE);
+		return message;
+	}
+	
+	public Message getSearchStoreRequest() {
+		searchData.setKeyword("sh");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_STORE);
 		return message;
 	}
 
@@ -89,6 +111,19 @@ public class UnitTestData {
 		return message;
 	}
 
+	public Message getPageUserRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_USER_PAGE);
+		return message;
+	}
+
+	public Message getSearchUserRequest() {
+		searchData.setKeyword("min");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_USER);
+		return message;
+	}
+	
 	public Message getAddUserRequest(Role role) {
 		UserData data = new UserData();
 		data.setUser(TestData.getUser());
@@ -127,6 +162,19 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_ROLE_LIST);
 		return message;
 	}
+	
+	public Message getSearchRoleRequest() {
+		searchData.setKeyword("min");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_ROLE);
+		return message;
+	}
+
+	public Message getPageRoleRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_ROLE_PAGE);
+		return message;
+	}
 
 	public Message getAddRoleRequest() {
 		RoleData data = new RoleData();
@@ -163,6 +211,19 @@ public class UnitTestData {
 	public Message getAllProductRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_PRODUCT_LIST);
+		return message;
+	}
+	
+	public Message getSearchProductRequest() {
+		searchData.setKeyword("ME");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_PRODUCT);
+		return message;
+	}
+
+	public Message getPageProductRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_PRODUCT_PAGE);
 		return message;
 	}
 
@@ -204,6 +265,19 @@ public class UnitTestData {
 		return message;
 	}
 
+	public Message getPagePatientRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_PATIENT_PAGE);
+		return message;
+	}
+	
+	public Message getSearchPatientRequest() {
+		searchData.setKeyword("pa");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_PATIENT);
+		return message;
+	}
+
 	public Message getAddPatientRequest() {
 		PatientData data = new PatientData();
 		data.setPatient(TestData.getPatient());
@@ -242,11 +316,26 @@ public class UnitTestData {
 		return message;
 	}
 
-	public Message getAddBillRequest(Patient patient, Store store) {
+	public Message getPageBillRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_BILL_PAGE);
+		return message;
+	}
+	
+	public Message getSearchBillRequest() {
+		searchData.setKeyword("name");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_BILL);
+		return message;
+	}
+
+	public Message getAddBillRequest(Patient patient, Store store, Product[] productList) {
 		BillData data = new BillData();
 		data.setBill(TestData.getBill());
 		data.getBill().setPatient(patient);
 		data.getBill().setStore(store);
+		data.getBill().setProducts(Arrays.asList(productList));
+		data.getBill().setBillNumber("BILL12345");
 		message.setData(data);
 		message.getHeader().setFunction(Constant.ADD_BILL);
 		return message;
@@ -296,6 +385,19 @@ public class UnitTestData {
 	public Message getAllLogRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_LOG_LIST);
+		return message;
+	}
+
+	public Message getPageLogRequest() {
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_LOG_PAGE);
+		return message;
+	}
+	
+	public Message getSearchLogRequest() {
+		searchData.setKeyword("error");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_LOG);
 		return message;
 	}
 

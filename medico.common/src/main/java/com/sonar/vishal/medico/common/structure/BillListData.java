@@ -9,6 +9,8 @@ public class BillListData extends Data {
 
 	@SerializedName(value = "List")
 	private List<Bill> billList;
+	@SerializedName(value = "Count")
+	private long totalRowCount;
 
 	public List<Bill> getBillList() {
 		return billList;
@@ -16,6 +18,14 @@ public class BillListData extends Data {
 
 	public void setBillList(List<Bill> billList) {
 		this.billList = billList;
+	}
+
+	public long getTotalRowCount() {
+		return totalRowCount;
+	}
+
+	public void setTotalRowCount(long totalRowCount) {
+		this.totalRowCount = totalRowCount;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import com.sonar.vishal.medico.common.util.DataBaseInitializer;
 import com.sonar.vishal.medico.common.util.Logger;
 import com.sonar.vishal.medico.common.util.LoggerMessage;
 
@@ -19,6 +20,7 @@ public class MedicoContextListener implements ServletContextListener {
 			Logger.setComponent(LoggerMessage.CORE);
 			Logger.setIp(InetAddress.getLocalHost().getHostAddress());
 			Logger.info(getClass().getName(), LoggerMessage.SERVER_INITIALIZE);
+			DataBaseInitializer.insertSuperUser();
 		} catch (UnknownHostException e) {
 			Logger.setIp(LoggerMessage.EMPTY);
 			Logger.error(getClass().getName(), LoggerMessage.UNKOWN_HOST_EXCEPTION);

@@ -14,7 +14,7 @@ public interface BussinessObject {
 
 	public static final Gson gson = new Gson();
 	public static final Message message = new Message();
-	public static final Hibernate hibernate = new Hibernate();
+	public static final Hibernate hibernate = Hibernate.getInstance();
 
 	public default Header getHeader() {
 		String date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());

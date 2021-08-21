@@ -5,10 +5,12 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Bill;
 import com.sonar.vishal.medico.common.pojo.Patient;
+import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Store;
 
 public class TestBill extends UnitTest {
@@ -29,13 +31,19 @@ public class TestBill extends UnitTest {
 		JsonObject storeObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Store store = gson.fromJson(storeObject, Store.class);
 		assertNotNull(store);
-		TestApi(data.getAddBillRequest(patient, store));
+		TestApi(data.getAddProductRequest());
+		TestApi(data.getAddProductRequest());
+		JsonArray productArray = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray();
+		Product[] productList = gson.fromJson(productArray, Product[].class);
+		TestApi(data.getAddBillRequest(patient, store, productList));
 		response = TestApi(data.getAllBillRequest());
+		TestApi(data.getPageBillRequest());
 		JsonObject billObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Bill bill = gson.fromJson(billObject, Bill.class);
 		assertNotNull(bill);
 		TestApi(data.getBillRequest(bill.getId()));
 		TestApi(data.getUpdateBillRequest(bill));
+		TestApi(data.getSearchBillRequest());
 		TestApi(data.getDeleteBillRequest(bill));
 	}
 

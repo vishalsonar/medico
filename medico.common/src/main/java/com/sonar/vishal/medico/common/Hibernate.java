@@ -12,20 +12,33 @@ import com.sonar.vishal.medico.common.util.Logger;
 
 public class Hibernate {
 
-	private boolean handleException(Session session) {
+	private static Hibernate hibernate;
+
+	private Hibernate() {
+		// Do Nothing, Singleton Class.
+	}
+
+	public static synchronized Hibernate getInstance() {
+		if (hibernate == null) {
+			hibernate = new Hibernate();
+		}
+		return hibernate;
+	}
+
+	private synchronized boolean handleException(Session session) {
 		if (session != null) {
 			session.getTransaction().rollback();
 		}
 		return false;
 	}
 
-	private void closeSession(Session session) {
+	private synchronized void closeSession(Session session) {
 		if (session != null) {
 			session.close();
 		}
 	}
 
-	public boolean delete(Class<?> clazz, int id) {
+	public synchronized boolean delete(Class<?> clazz, int id) {
 		boolean state = true;
 		Session session = null;
 		try {
@@ -42,7 +55,7 @@ public class Hibernate {
 		return state;
 	}
 
-	public boolean saveOrUpdate(Object object) {
+	public synchronized boolean saveOrUpdate(Object object) {
 		boolean state = true;
 		Session session = null;
 		try {
@@ -59,7 +72,7 @@ public class Hibernate {
 		return state;
 	}
 
-	public Session getSession() {
+	public synchronized Session getSession() {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -70,8 +83,9 @@ public class Hibernate {
 		return session;
 	}
 
-	public List<?> executeCriteria(Session session, Criteria criteria) {
-		List<?> list = null;
+	@SuppressWarnings("unchecked")
+	public synchronized <T> List<T> executeCriteria(Session session, Criteria criteria) {
+		List<T> list = null;
 		try {
 			session.beginTransaction();
 			list = criteria.list();
@@ -85,7 +99,7 @@ public class Hibernate {
 		return list;
 	}
 
-	public Object selectObjectById(Class<?> clazz, int id) {
+	public synchronized Object selectObjectById(Class<?> clazz, int id) {
 		Object object = null;
 		Session session = null;
 		try {
@@ -103,7 +117,7 @@ public class Hibernate {
 	}
 
 	@SuppressWarnings("deprecation")
-	public Object selectObjectById(Class<?> clazz, int id, String mappingCriteria) {
+	public synchronized Object selectObjectById(Class<?> clazz, int id, String mappingCriteria) {
 		Object object = null;
 		Session session = null;
 		try {

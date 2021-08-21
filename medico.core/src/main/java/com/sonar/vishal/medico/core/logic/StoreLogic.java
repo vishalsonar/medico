@@ -5,12 +5,17 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
+import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.common.structure.StoreData;
 import com.sonar.vishal.medico.common.structure.StoreListData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
@@ -18,7 +23,7 @@ import com.sonar.vishal.medico.core.definition.BusinessLogic;
 public class StoreLogic implements BusinessLogic {
 
 	@Override
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({ "deprecation" })
 	public void getAll() {
 		StoreListData replyData = new StoreListData();
 		Session session = hibernate.getSession();
@@ -26,13 +31,15 @@ public class StoreLogic implements BusinessLogic {
 			Criteria criteria = session.createCriteria(Store.class);
 			criteria.createCriteria(Constant.ADDRESS);
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			List<Store> list = (List<Store>) hibernate.executeCriteria(session, criteria);
+			criteria.setMaxResults(20);
+			List<Store> list = hibernate.<Store>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.GET_STORE_LIST, Constant.NULL);
 			} else {
 				setSucessMessage(Constant.GET_STORE_LIST);
 			}
 			replyData.setStoreList(list);
+			replyData.setTotalRowCount(getTotalRowCount());
 		} else {
 			setErrorMessage(Constant.GET_STORE_LIST, Constant.NULL);
 		}
@@ -77,11 +84,82 @@ public class StoreLogic implements BusinessLogic {
 		}
 		message.setData(replyData);
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void getPage(int startIndex, int endIndex) {
+		StoreListData replyData = new StoreListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Store.class);
+			criteria.createCriteria(Constant.ADDRESS);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.setFirstResult(startIndex);
+			criteria.setMaxResults(Math.abs(startIndex - endIndex));
+			List<Store> list = hibernate.<Store>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.GET_STORE_PAGE, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.GET_STORE_PAGE);
+			}
+			replyData.setStoreList(list);
+			replyData.setTotalRowCount(getTotalRowCount());
+		} else {
+			setErrorMessage(Constant.GET_STORE_PAGE, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public long getTotalRowCount() {
+		long count = 0;
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Store.class);
+			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			session.close();
+		}
+		return count;
+	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void search(String keyword) {
+		StoreListData replyData = new StoreListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Store.class);
+			criteria.createCriteria(Constant.ADDRESS);
+			criteria.add(Restrictions.like(Constant.NAME, keyword, MatchMode.ANYWHERE));
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			List<Store> list = hibernate.<Store>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.SEARCH_STORE, Constant.NULL);
+				replyData.setTotalRowCount(0);
+			} else {
+				setSucessMessage(Constant.SEARCH_STORE);
+				replyData.setTotalRowCount(list.size());
+			}
+			replyData.setStoreList(list);
+		} else {
+			setErrorMessage(Constant.SEARCH_STORE, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
 		if (functionName.equals(Constant.GET_STORE_LIST)) {
 			getAll();
+		}
+		if (functionName.equals(Constant.GET_STORE_PAGE)) {
+			PageData message = (PageData) data;
+			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_STORE)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_STORE)) {
 			IdData message = (IdData) data;

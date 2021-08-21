@@ -30,4 +30,19 @@ public class BusinessLogicAdapter implements BusinessLogic {
 		return null;
 	}
 
+	@Override
+	public void getPage(int startIndex, int endIndex) {
+		// Do nothing
+	}
+
+	@Override
+	public long getTotalRowCount() {
+		return 0L;
+	}
+
+	@Override
+	public void search(String keyword) {
+		// Do nothing
+	}
+
 }

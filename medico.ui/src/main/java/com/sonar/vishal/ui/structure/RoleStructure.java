@@ -1,9 +1,13 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Role;
+import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.RoleData;
@@ -12,6 +16,7 @@ import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.sonar.vishal.ui.util.UIUtil;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.role.AddRoleWindow;
 import com.sonar.vishal.ui.window.role.UpdateRoleWindow;
@@ -39,7 +44,7 @@ public class RoleStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(roleTablePagination.init(table));
+		layout.addComponent(roleTablePagination.init(table, UIConstant.FILTER_ROLE));
 	}
 
 	@Override
@@ -68,9 +73,19 @@ public class RoleStructure implements CRUDStructure {
 
 	@Override
 	public void list() {
+		User thisUser = UIUtil.getSessionUser();
 		backend = new RestBackend(Constant.GET_ROLE_LIST);
-		Role[] data = (Role[]) backend.doPostRespondData(Role[].class);
-		roleTablePagination.configurePagination(data);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		Role[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
+		List<Role> dataList = new ArrayList<>();
+		for (Role role : data) {
+			if (thisUser != null && thisUser.getRole().getId() == role.getId()) {
+				continue;
+			}
+			dataList.add(role);
+		}
+		roleTablePagination.configurePagination(dataList.toArray(new Role[dataList.size()]), totalCount);
 	}
 
 	@Override

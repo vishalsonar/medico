@@ -9,6 +9,8 @@ public class UserListData extends Data {
 
 	@SerializedName(value = "List")
 	private List<User> userList;
+	@SerializedName(value = "Count")
+	private long totalRowCount;
 
 	public List<User> getUserList() {
 		return userList;
@@ -16,6 +18,14 @@ public class UserListData extends Data {
 
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
+	}
+
+	public long getTotalRowCount() {
+		return totalRowCount;
+	}
+
+	public void setTotalRowCount(long totalRowCount) {
+		this.totalRowCount = totalRowCount;
 	}
 
 }

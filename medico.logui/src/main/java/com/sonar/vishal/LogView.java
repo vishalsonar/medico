@@ -126,15 +126,14 @@ public class LogView extends HorizontalSplitPanel implements View {
 				}
 			}
 		});
+		long totalRowCount = logLogic.getRowCount();
 		List<Log> data = logLogic.getAll();
 		if (data == null) {
 			component.getServerFailureNotification(LogUIConstant.INITIALIZATION_FAILED).show(Page.getCurrent());
 		} else {
-			int dataCount = data.size();
-			int subDataCount = dataCount <= 20 ? dataCount : 20;
-			pagination = component.getPagination(dataCount);
-			pagination.addPageChangeListener(new PaginationListener(table, data));
-			table.setItems(data.subList(0, subDataCount));
+			pagination = component.getPagination(totalRowCount);
+			pagination.addPageChangeListener(new PaginationListener(table));
+			table.setItems(data);
 		}
 		table.setSizeFull();
 		upperLayout.addComponent(pagination);

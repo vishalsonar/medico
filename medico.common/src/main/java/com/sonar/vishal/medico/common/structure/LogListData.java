@@ -9,6 +9,8 @@ public class LogListData extends Data {
 
 	@SerializedName(value = "List")
 	private List<Log> logList;
+	@SerializedName(value = "Count")
+	private long totalRowCount;
 
 	public List<Log> getLogList() {
 		return logList;
@@ -16,6 +18,14 @@ public class LogListData extends Data {
 
 	public void setLogList(List<Log> logList) {
 		this.logList = logList;
+	}
+
+	public long getTotalRowCount() {
+		return totalRowCount;
+	}
+
+	public void setTotalRowCount(long totalRowCount) {
+		this.totalRowCount = totalRowCount;
 	}
 
 }

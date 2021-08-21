@@ -1,7 +1,10 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
@@ -12,6 +15,7 @@ import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.component.TablePagination;
 import com.sonar.vishal.ui.definition.CRUDStructure;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.sonar.vishal.ui.util.UIUtil;
 import com.sonar.vishal.ui.window.MedicoWindow;
 import com.sonar.vishal.ui.window.user.AddUserWindow;
 import com.sonar.vishal.ui.window.user.UpdateUserWindow;
@@ -39,7 +43,7 @@ public class UserStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(userTablePagination.init(table));
+		layout.addComponent(userTablePagination.init(table, UIConstant.FILTER_USER));
 	}
 
 	@Override
@@ -69,12 +73,20 @@ public class UserStructure implements CRUDStructure {
 
 	@Override
 	public void list() {
+		User thisUser = UIUtil.getSessionUser();
 		backend = new RestBackend(Constant.GET_USER_LIST);
-		User[] data = (User[]) backend.doPostRespondData(User[].class);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		User[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
+		List<User> dataList = new ArrayList<>();
 		for (User user : data) {
+			if (thisUser != null && thisUser.getId() == user.getId()) {
+				continue;
+			}
 			user.update();
+			dataList.add(user);
 		}
-		userTablePagination.configurePagination(data);
+		userTablePagination.configurePagination(dataList.toArray(new User[dataList.size()]), totalCount);
 	}
 
 	@Override

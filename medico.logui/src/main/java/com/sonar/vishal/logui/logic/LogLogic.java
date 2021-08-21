@@ -6,6 +6,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.logui.component.LogUIConstant;
@@ -20,22 +21,49 @@ public class LogLogic {
 	private Hibernate hibernate;
 
 	public LogLogic() {
-		hibernate = new Hibernate();
+		hibernate = Hibernate.getInstance();
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	public List<Log> getAll() {
 		Session session = hibernate.getSession();
 		if (session != null) {
 			Criteria criteria = session.createCriteria(Log.class);
 			criteria.addOrder(Order.desc(LogUIConstant.ID_SMALL));
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			list = (List<Log>) hibernate.executeCriteria(session, criteria);
+			criteria.setMaxResults(20);
+			list = hibernate.<Log>executeCriteria(session, criteria);
+		}
+		return list;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public long getRowCount() {
+		long count = 0;
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Log.class);
+			count = (long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+			session.close();
+		}
+		return count;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public List<Log> getPage(int startIndex, int endIndex) {
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Log.class);
+			criteria.addOrder(Order.desc(LogUIConstant.ID_SMALL));
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.setFirstResult(startIndex);
+			criteria.setMaxResults(Math.abs(startIndex - endIndex));
+			list = hibernate.<Log>executeCriteria(session, criteria);
 		}
 		return list;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "deprecation" })
 	public List<Log> getFilteredLog(LogData data) {
 		String component = data.getLog().getComponent();
 		String serverity = data.getLog().getSeverity();
@@ -54,7 +82,7 @@ public class LogLogic {
 				criteria.add(Restrictions.between(Constant.DATE_TIME, startDate, endDate));
 			}
 			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-			list = (List<Log>) hibernate.executeCriteria(session, criteria);
+			list = hibernate.<Log>executeCriteria(session, criteria);
 		}
 		return list;
 	}

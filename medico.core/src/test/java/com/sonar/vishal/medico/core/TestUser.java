@@ -25,6 +25,8 @@ public class TestUser extends UnitTest {
 		assertNotNull(role);
 		TestApi(data.getAddUserRequest(role));
 		response = TestApi(data.getAllUserRequest());
+		TestApi(data.getPageUserRequest());
+		TestApi(data.getSearchUserRequest());
 		JsonObject userObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		User user = gson.fromJson(userObject, User.class);
 		assertNotNull(user);

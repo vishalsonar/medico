@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.structure;
 
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.medico.common.rest.Backend;
@@ -39,7 +40,7 @@ public class StoreStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(storeTablePagination.init(table));
+		layout.addComponent(storeTablePagination.init(table, UIConstant.FILTER_STORE));
 	}
 
 	@Override
@@ -79,8 +80,10 @@ public class StoreStructure implements CRUDStructure {
 	@Override
 	public void list() {
 		backend = new RestBackend(Constant.GET_STORE_LIST);
-		Store[] data = (Store[]) backend.doPostRespondData(Store[].class);
-		storeTablePagination.configurePagination(data);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Store[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		Store[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Store[].class);
+		storeTablePagination.configurePagination(data, totalCount);
 	}
 
 	@Override

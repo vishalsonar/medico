@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.structure;
 
 import java.util.Optional;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.rest.Backend;
@@ -39,9 +40,25 @@ public class ProductStructure implements CRUDStructure {
 		table = new Grid<>();
 		table.setSizeFull();
 		table.setSelectionMode(SelectionMode.SINGLE);
-		layout.addComponent(productTablePagination.init(table));
+		layout.addComponent(productTablePagination.init(table, UIConstant.FILTER_PRODUCT));
 	}
-	
+
+	public Grid<Product> getTable() {
+		return table;
+	}
+
+	public void setTable(Grid<Product> table) {
+		this.table = table;
+	}
+
+	public Product getSelectedProduct() {
+		return selectedProduct;
+	}
+
+	public void setSelectedProduct(Product selectedProduct) {
+		this.selectedProduct = selectedProduct;
+	}
+
 	@Override
 	public Object get() {
 		list();
@@ -78,8 +95,10 @@ public class ProductStructure implements CRUDStructure {
 	@Override
 	public void list() {
 		backend = new RestBackend(Constant.GET_PRODUCT_LIST);
-		Product[] data = (Product[]) backend.doPostRespondData(Product[].class);
-		productTablePagination.configurePagination(data);
+		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Product[].class);
+		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
+		Product[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Product[].class);
+		productTablePagination.configurePagination(data, totalCount);
 	}
 
 	@Override

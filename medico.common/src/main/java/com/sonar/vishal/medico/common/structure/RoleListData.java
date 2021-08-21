@@ -9,6 +9,8 @@ public class RoleListData extends Data {
 
 	@SerializedName(value = "List")
 	private List<Role> roleList;
+	@SerializedName(value = "Count")
+	private long totalRowCount;
 
 	public List<Role> getRoleList() {
 		return roleList;
@@ -16,6 +18,14 @@ public class RoleListData extends Data {
 
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
+	}
+
+	public long getTotalRowCount() {
+		return totalRowCount;
+	}
+
+	public void setTotalRowCount(long totalRowCount) {
+		this.totalRowCount = totalRowCount;
 	}
 
 }

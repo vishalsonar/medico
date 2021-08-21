@@ -42,7 +42,7 @@ public class HibernateTest extends TestCase {
 	}
 
 	public HibernateTest() {
-		hibernate = new Hibernate();
+		hibernate = Hibernate.getInstance();
 	}
 
 	@Test
@@ -118,14 +118,14 @@ public class HibernateTest extends TestCase {
 		criteria = session.createCriteria(Store.class);
 		criteria.createCriteria("address");
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		list = (List<Store>) hibernate.executeCriteria(session, criteria);
+		list = (List<Store>) hibernate.<Store>executeCriteria(session, criteria);
 		assertNotNull(list);
 		bill.setStore((Store) list.get(0));
 
 		session = hibernate.getSession();
 		criteria = session.createCriteria(Product.class);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		list = (List<Product>) hibernate.executeCriteria(session, criteria);
+		list = (List<Product>) hibernate.<Product>executeCriteria(session, criteria);
 		assertNotNull(list);
 		bill.setPatient(patient);
 		bill.setProducts((List<Product>) list.subList(0, 0));

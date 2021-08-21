@@ -29,13 +29,15 @@ public class ResetListener implements ClickListener {
 
 	@Override
 	public void buttonClick(ClickEvent event) {
+		long totalRowCount = logLogic.getRowCount();
 		List<Log> data = logLogic.getAll();
 		if (data == null) {
 			component.getServerFailureNotification(LogUIConstant.INITIALIZATION_FAILED).show(Page.getCurrent());
 		} else {
-			pagination.setTotalCount(data.size());
-			pagination.addPageChangeListener(new PaginationListener(table, data));
-			table.setItems(data.subList(0, 20));
+			pagination.setTotalCount(totalRowCount);
+			pagination.setCurrentPage(1);
+			pagination.addPageChangeListener(new PaginationListener(table));
+			table.setItems(data);
 		}
 	}
 

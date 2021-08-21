@@ -101,6 +101,7 @@ public class TestData {
 		list.add(getProduct());
 		bill.setPatient(getPatient());
 		bill.setProducts(list);
+		bill.setBillNumber("BILL23242");
 		return bill;
 	}
 }
