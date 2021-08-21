@@ -2,6 +2,7 @@
 
 #### Development Status
 <a href="https://github.com/vishalsonar/medico"><img src="https://img.shields.io/badge/Work-InProgress-red.svg"/></a>
+<a href="https://github.com/vishalsonar/medico"><img src="https://img.shields.io/badge/version-1.0.0&#8208;SNAPSHOT-blue.svg"/></a>
 ---
 
 #### TravisCI Build Status
