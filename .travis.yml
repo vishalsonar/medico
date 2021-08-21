@@ -16,6 +16,6 @@ before_install:
 addons:
  sonarcloud:
   organization: "vishalsonar"
-script: mvn clean install sonar:sonar -Dsonar.projectKey=vishalsonar_medico -DskipTests=false -Dmaven.javadoc.skip=true -B -V
+script: mvn clean install deploy --settings mvn-settings.xml -Dgithub.server.username=vishalsonar -Dgithub.server.password=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 sonar:sonar -Dsonar.projectKey=vishalsonar_medico -DskipTests=false -Dmaven.javadoc.skip=true -B -V
 notification:
  email: vsonar908@gmail.com
