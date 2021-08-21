@@ -44,7 +44,7 @@ public class Component {
 		field.setMaxLength(50);
 		field.setResponsive(true);
 		field.setHeight(UIConstant.NUMBER_30);
-		field.setWidth(80, Unit.PERCENTAGE);
+		field.setWidth(95, Unit.PERCENTAGE);
 		return field;
 	}
 

@@ -143,4 +143,6 @@ public class UIConstant {
 	public static final String PLEASE_SELECT_ROW_GENERATE = "Please select row to generate";
 	public static final String ERROR_GENERATING_BARCODE = "Error while generating barcode";
 	public static final String QR_SEPERATOR = " #### ";
+	
+	public static final String FILTER = "filter";
 }

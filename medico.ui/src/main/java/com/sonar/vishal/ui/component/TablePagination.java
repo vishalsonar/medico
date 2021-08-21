@@ -5,9 +5,10 @@ import java.util.List;
 
 import com.sonar.vishal.ui.listener.PaginationListener;
 import com.sonar.vishal.ui.listener.SearchListener;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.addon.pagination.Pagination;
 import com.vaadin.server.Sizeable.Unit;
-import com.vaadin.shared.ui.ValueChangeMode;
+import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.TextField;
@@ -18,14 +19,21 @@ public class TablePagination<T> {
 	private Pagination pagination;
 	private Grid<T> table;
 	private TextField searchField;
+	private Button searchButton;
 
 	public VerticalSplitPanel init(Grid<T> table, String searchPlaceholder) {
 		this.table = table;
+		searchButton = Component.getInstance().getFriendlyButton(UIConstant.FILTER, UIConstant.NUMBER_100);
 		VerticalSplitPanel splitLayout = new VerticalSplitPanel();
 		HorizontalSplitPanel searchAndPaginationSplit = new HorizontalSplitPanel();
+		HorizontalSplitPanel searchSplit = new HorizontalSplitPanel();
 		pagination = Component.getInstance().getPagination();
 		searchField = Component.getInstance().getSearchField(searchPlaceholder);
-		searchAndPaginationSplit.addComponent(searchField);
+		searchSplit.addComponents(searchField, searchButton);
+		searchSplit.setLocked(true);
+		searchSplit.setSplitPosition(70, Unit.PERCENTAGE);
+		searchSplit.setSizeFull();
+		searchAndPaginationSplit.addComponent(searchSplit);
 		searchAndPaginationSplit.addComponent(pagination);
 		searchAndPaginationSplit.setLocked(true);
 		searchAndPaginationSplit.setSplitPosition(40, Unit.PERCENTAGE);
@@ -44,9 +52,8 @@ public class TablePagination<T> {
 		pagination.setTotalCount(totalCount);
 		pagination.setCurrentPage(1);
 		pagination.addPageChangeListener(paginationListener);
-		SearchListener<T> searchListener = new SearchListener<>(table, dataList, pagination);
-		searchField.setValueChangeMode(ValueChangeMode.LAZY);
-		searchField.addValueChangeListener(searchListener);
+		SearchListener<T> searchListener = new SearchListener<>(table, dataList, pagination, searchField);
+		searchButton.addClickListener(searchListener);
 	}
 
 }

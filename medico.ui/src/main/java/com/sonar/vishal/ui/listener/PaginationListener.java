@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
+import com.sonar.vishal.medico.common.pojo.Bill;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -75,6 +76,13 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Store[].class);
 			Store[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Store[].class);
+			list = (List<T>) Arrays.asList(data);
+		}
+		if (refrence instanceof Bill) {
+			backend = new RestBackend(Constant.GET_BILL_PAGE);
+			Backend.message.setData(pageData);
+			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Bill[].class);
+			Bill[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
 			list = (List<T>) Arrays.asList(data);
 		}
 	}
