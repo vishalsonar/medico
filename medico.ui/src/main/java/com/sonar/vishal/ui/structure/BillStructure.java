@@ -21,7 +21,6 @@ public class BillStructure implements GenerateStructure, CRUDStructure {
 
 	private VerticalLayout layout;
 	private Grid<Bill> table;
-	private RestBackend backend;
 	private Bill selectedBill;
 	private TablePagination<Bill> patientTablePagination;
 
@@ -61,7 +60,7 @@ public class BillStructure implements GenerateStructure, CRUDStructure {
 
 	@Override
 	public void list() {
-		backend = new RestBackend(Constant.GET_BILL_LIST);
+		RestBackend backend = new RestBackend(Constant.GET_BILL_LIST);
 		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Bill[].class);
 		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
 		Bill[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
@@ -71,7 +70,7 @@ public class BillStructure implements GenerateStructure, CRUDStructure {
 	@Override
 	public void generate() {
 		if (selectedBill != null) {
-			
+			// TODO: show bill as PNG.
 		}
 	}
 
