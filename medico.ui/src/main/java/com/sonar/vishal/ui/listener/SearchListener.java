@@ -34,7 +34,6 @@ public class SearchListener<T> implements ClickListener {
 	private Pagination pagination;
 	private TextField searchField;
 	private transient RestBackend backend;
-	private transient SearchData searchData;
 
 	public SearchListener(Grid<T> table, List<T> list, Pagination pagination, TextField searchField) {
 		this.table = table;
@@ -82,7 +81,7 @@ public class SearchListener<T> implements ClickListener {
 			setBackend(Constant.SEARCH_ROLE, searchValue);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
 			Role[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
-			List<Role> roleList = new ArrayList<Role>(Arrays.asList(data));
+			List<Role> roleList = new ArrayList<>(Arrays.asList(data));
 			User thisUser = UIUtil.getSessionUser();
 			if (thisUser != null) {
 				Role role = thisUser.getRole();
@@ -93,7 +92,7 @@ public class SearchListener<T> implements ClickListener {
 			setBackend(Constant.SEARCH_USER, searchValue);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
 			User[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
-			List<User> userList = new ArrayList<User>(Arrays.asList(data));
+			List<User> userList = new ArrayList<>(Arrays.asList(data));
 			User thisUser = UIUtil.getSessionUser();
 			if (thisUser != null) {
 				filteredList = (List<T>) userList.stream().filter(item -> !item.getUserName().equals(thisUser.getUserName())).collect(Collectors.toList());
@@ -116,7 +115,7 @@ public class SearchListener<T> implements ClickListener {
 	
 	private void setBackend(String functionName, String keyword) {
 		backend = new RestBackend(functionName);
-		searchData = new SearchData();
+		SearchData searchData = new SearchData();
 		searchData.setKeyword(keyword);
 		Backend.message.setData(searchData);
 	}
