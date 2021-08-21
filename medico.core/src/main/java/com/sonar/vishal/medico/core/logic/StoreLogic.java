@@ -136,11 +136,12 @@ public class StoreLogic implements BusinessLogic {
 			List<Store> list = hibernate.<Store>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.SEARCH_STORE, Constant.NULL);
+				replyData.setTotalRowCount(0);
 			} else {
 				setSucessMessage(Constant.SEARCH_STORE);
+				replyData.setTotalRowCount(list.size());
 			}
 			replyData.setStoreList(list);
-			replyData.setTotalRowCount(list.size());
 		} else {
 			setErrorMessage(Constant.SEARCH_STORE, Constant.NULL);
 		}

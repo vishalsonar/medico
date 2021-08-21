@@ -133,11 +133,12 @@ public class PatientLogic implements BusinessLogic {
 			List<Patient> list = hibernate.<Patient>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.SEARCH_PATIENT, Constant.NULL);
+				replyData.setTotalRowCount(0);
 			} else {
 				setSucessMessage(Constant.SEARCH_PATIENT);
+				replyData.setTotalRowCount(list.size());
 			}
 			replyData.setPatientList(list);
-			replyData.setTotalRowCount(list.size());
 		} else {
 			setErrorMessage(Constant.SEARCH_PATIENT, Constant.NULL);
 		}

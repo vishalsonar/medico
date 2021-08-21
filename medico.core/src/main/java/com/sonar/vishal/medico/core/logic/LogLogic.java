@@ -157,11 +157,12 @@ public class LogLogic implements BusinessLogic {
 			List<Log> list = hibernate.<Log>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.SEARCH_LOG, Constant.NULL);
+				replyData.setTotalRowCount(0);
 			} else {
 				setSucessMessage(Constant.SEARCH_LOG);
+				replyData.setTotalRowCount(list.size());
 			}
 			replyData.setLogList(list);
-			replyData.setTotalRowCount(list.size());
 		} else {
 			setErrorMessage(Constant.SEARCH_LOG, Constant.NULL);
 		}

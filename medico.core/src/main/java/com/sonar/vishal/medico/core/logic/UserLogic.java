@@ -138,11 +138,12 @@ public class UserLogic implements BusinessLogic {
 			List<User> list = hibernate.<User>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.SEARCH_USER, Constant.NULL);
+				replyData.setTotalRowCount(0);
 			} else {
 				setSucessMessage(Constant.SEARCH_USER);
+				replyData.setTotalRowCount(list.size());
 			}
 			replyData.setUserList(list);
-			replyData.setTotalRowCount(list.size());
 		} else {
 			setErrorMessage(Constant.SEARCH_USER, Constant.NULL);
 		}

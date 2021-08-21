@@ -133,11 +133,12 @@ public class ProductLogic implements BusinessLogic {
 			List<Product> list = hibernate.<Product>executeCriteria(session, criteria);
 			if (list == null) {
 				setErrorMessage(Constant.SEARCH_PRODUCT, Constant.NULL);
+				replyData.setTotalRowCount(0);
 			} else {
 				setSucessMessage(Constant.SEARCH_PRODUCT);
+				replyData.setTotalRowCount(list.size());
 			}
 			replyData.setProductList(list);
-			replyData.setTotalRowCount(list.size());
 		} else {
 			setErrorMessage(Constant.SEARCH_PRODUCT, Constant.NULL);
 		}
