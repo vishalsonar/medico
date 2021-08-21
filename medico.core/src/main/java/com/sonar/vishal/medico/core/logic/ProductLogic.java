@@ -5,7 +5,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
@@ -15,6 +17,7 @@ import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.ProductData;
 import com.sonar.vishal.medico.common.structure.ProductListData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 
 public class ProductLogic implements BusinessLogic {
@@ -117,6 +120,29 @@ public class ProductLogic implements BusinessLogic {
 		}
 		return count;
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void search(String keyword) {
+		ProductListData replyData = new ProductListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Product.class);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.add(Restrictions.like(Constant.DESCRIPTION, keyword, MatchMode.ANYWHERE));
+			List<Product> list = hibernate.<Product>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.SEARCH_PRODUCT, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.SEARCH_PRODUCT);
+			}
+			replyData.setProductList(list);
+			replyData.setTotalRowCount(list.size());
+		} else {
+			setErrorMessage(Constant.SEARCH_PRODUCT, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
@@ -126,6 +152,10 @@ public class ProductLogic implements BusinessLogic {
 		if (functionName.equals(Constant.GET_PRODUCT_PAGE)) {
 			PageData message = (PageData) data;
 			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_PRODUCT)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_PRODUCT)) {
 			IdData message = (IdData) data;

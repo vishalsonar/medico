@@ -3,6 +3,7 @@ package com.sonar.vishal.medico.core;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
 import com.sonar.vishal.medico.common.structure.RoleData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.common.structure.StoreData;
 import com.sonar.vishal.medico.common.structure.UserData;
 
@@ -34,11 +36,13 @@ public class UnitTestData {
 	private Header header;
 	private String date;
 	private PageData pageData;
+	private SearchData searchData;
 
 	public UnitTestData() throws InvalidKeyException, NoSuchAlgorithmException {
 		pageData = new PageData();
 		message = new Message();
 		header = new Header();
+		searchData = new SearchData();
 		date = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()).toString();
 		header.setDateTime(date);
 		header.setMessage(Constant.SUCCESS);
@@ -59,6 +63,13 @@ public class UnitTestData {
 	public Message getPageStoreRequest() {
 		message.setData(pageData);
 		message.getHeader().setFunction(Constant.GET_STORE_PAGE);
+		return message;
+	}
+	
+	public Message getSearchStoreRequest() {
+		searchData.setKeyword("sh");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_STORE);
 		return message;
 	}
 
@@ -106,6 +117,13 @@ public class UnitTestData {
 		return message;
 	}
 
+	public Message getSearchUserRequest() {
+		searchData.setKeyword("min");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_USER);
+		return message;
+	}
+	
 	public Message getAddUserRequest(Role role) {
 		UserData data = new UserData();
 		data.setUser(TestData.getUser());
@@ -142,6 +160,13 @@ public class UnitTestData {
 	public Message getAllRoleRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_ROLE_LIST);
+		return message;
+	}
+	
+	public Message getSearchRoleRequest() {
+		searchData.setKeyword("min");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_ROLE);
 		return message;
 	}
 
@@ -186,6 +211,13 @@ public class UnitTestData {
 	public Message getAllProductRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_PRODUCT_LIST);
+		return message;
+	}
+	
+	public Message getSearchProductRequest() {
+		searchData.setKeyword("ME");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_PRODUCT);
 		return message;
 	}
 
@@ -238,6 +270,13 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_PATIENT_PAGE);
 		return message;
 	}
+	
+	public Message getSearchPatientRequest() {
+		searchData.setKeyword("pa");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_PATIENT);
+		return message;
+	}
 
 	public Message getAddPatientRequest() {
 		PatientData data = new PatientData();
@@ -282,12 +321,20 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_BILL_PAGE);
 		return message;
 	}
+	
+	public Message getSearchBillRequest() {
+		searchData.setKeyword("name");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_BILL);
+		return message;
+	}
 
-	public Message getAddBillRequest(Patient patient, Store store) {
+	public Message getAddBillRequest(Patient patient, Store store, Product[] productList) {
 		BillData data = new BillData();
 		data.setBill(TestData.getBill());
 		data.getBill().setPatient(patient);
 		data.getBill().setStore(store);
+		data.getBill().setProducts(Arrays.asList(productList));
 		message.setData(data);
 		message.getHeader().setFunction(Constant.ADD_BILL);
 		return message;
@@ -343,6 +390,13 @@ public class UnitTestData {
 	public Message getPageLogRequest() {
 		message.setData(pageData);
 		message.getHeader().setFunction(Constant.GET_LOG_PAGE);
+		return message;
+	}
+	
+	public Message getSearchLogRequest() {
+		searchData.setKeyword("error");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_LOG);
 		return message;
 	}
 

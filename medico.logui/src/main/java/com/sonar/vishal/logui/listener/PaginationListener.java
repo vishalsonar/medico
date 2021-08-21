@@ -12,7 +12,7 @@ public class PaginationListener implements PaginationChangeListener {
 
 	private static final long serialVersionUID = -662219306642379510L;
 	private Grid<Log> table;
-	private LogLogic logLogic;
+	private transient LogLogic logLogic;
 
 	public PaginationListener(Grid<Log> table) {
 		this.table = table;

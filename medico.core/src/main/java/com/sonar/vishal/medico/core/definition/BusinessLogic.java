@@ -12,6 +12,8 @@ public interface BusinessLogic extends BussinessObject {
 
 	public void getById(String id);
 
+	public void search(String keyword);
+
 	public void saveOrUpdate(String functionName, Object data);
 
 	public void delete(Object data);

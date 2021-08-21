@@ -5,7 +5,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
@@ -13,6 +15,7 @@ import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.common.structure.StoreData;
 import com.sonar.vishal.medico.common.structure.StoreListData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
@@ -119,6 +122,30 @@ public class StoreLogic implements BusinessLogic {
 		}
 		return count;
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void search(String keyword) {
+		StoreListData replyData = new StoreListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Store.class);
+			criteria.createCriteria(Constant.ADDRESS);
+			criteria.add(Restrictions.like(Constant.NAME, keyword, MatchMode.ANYWHERE));
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			List<Store> list = hibernate.<Store>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.SEARCH_STORE, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.SEARCH_STORE);
+			}
+			replyData.setStoreList(list);
+			replyData.setTotalRowCount(list.size());
+		} else {
+			setErrorMessage(Constant.SEARCH_STORE, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
@@ -128,6 +155,10 @@ public class StoreLogic implements BusinessLogic {
 		if (functionName.equals(Constant.GET_STORE_PAGE)) {
 			PageData message = (PageData) data;
 			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_STORE)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_STORE)) {
 			IdData message = (IdData) data;

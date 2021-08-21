@@ -65,6 +65,9 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		if (!isDirty) {
+			if (getComponentCount() > 0) {
+				removeAllComponents();
+			}
 			setUI();
 			displayUI();
 			if (addButton != null && updateButton != null && deleteButton != null) {
@@ -85,7 +88,9 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 		this.setSplitPosition(16, Unit.PERCENTAGE);
 		this.setLocked(true);
 		UI.getCurrent().setContent(this);
-		isDirty = true;
+		if (this instanceof LoginView || this instanceof OptionView) {
+			isDirty = true;
+		}
 	}
 
 	public void addListener() {

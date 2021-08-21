@@ -5,7 +5,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
@@ -13,6 +15,7 @@ import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.common.structure.UserListData;
 import com.sonar.vishal.medico.common.util.Hashing;
@@ -121,6 +124,30 @@ public class UserLogic implements BusinessLogic {
 		}
 		message.setData(replyData);
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void search(String keyword) {
+		UserListData replyData = new UserListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(User.class);
+			criteria.createCriteria(Constant.ROLE);
+			criteria.add(Restrictions.like(Constant.USERNAME, keyword, MatchMode.ANYWHERE));
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			List<User> list = hibernate.<User>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.SEARCH_USER, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.SEARCH_USER);
+			}
+			replyData.setUserList(list);
+			replyData.setTotalRowCount(list.size());
+		} else {
+			setErrorMessage(Constant.SEARCH_USER, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
@@ -130,6 +157,10 @@ public class UserLogic implements BusinessLogic {
 		if (functionName.equals(Constant.GET_USER_PAGE)) {
 			PageData message = (PageData) data;
 			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_USER)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_USER)) {
 			IdData message = (IdData) data;

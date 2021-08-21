@@ -20,6 +20,7 @@ public class TestRole extends UnitTest {
 		TestApi(data.getAddRoleRequest());
 		JsonObject response = TestApi(data.getAllRoleRequest());
 		TestApi(data.getPageRoleRequest());
+		TestApi(data.getSearchRoleRequest());
 		JsonObject roleObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Role role = gson.fromJson(roleObject, Role.class);
 		assertNotNull(role);

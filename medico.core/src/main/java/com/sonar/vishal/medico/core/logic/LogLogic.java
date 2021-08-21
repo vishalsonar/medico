@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -15,6 +16,7 @@ import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LogListData;
 import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 
 public class LogLogic implements BusinessLogic {
@@ -142,6 +144,29 @@ public class LogLogic implements BusinessLogic {
 		}
 		return count;
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void search(String keyword) {
+		LogListData replyData = new LogListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Log.class);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.add(Restrictions.like(Constant.MESSAGE, keyword, MatchMode.ANYWHERE));
+			List<Log> list = hibernate.<Log>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.SEARCH_LOG, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.SEARCH_LOG);
+			}
+			replyData.setLogList(list);
+			replyData.setTotalRowCount(list.size());
+		} else {
+			setErrorMessage(Constant.SEARCH_LOG, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
@@ -151,6 +176,10 @@ public class LogLogic implements BusinessLogic {
 		if (functionName.equals(Constant.GET_LOG_PAGE)) {
 			PageData message = (PageData) data;
 			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_LOG)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_LOG)) {
 			LogData message = (LogData) data;

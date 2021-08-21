@@ -26,9 +26,16 @@ public class Constant {
 	public static final String MAC = "MAC";
 	public static final String HEADER = "Header";
 	public static final String LIST = "List";
+	
+	public static final String NAME = "name";
+	public static final String DESCRIPTION = "description";
+	public static final String PATIENT_NAME = "patientName";
+	public static final String MESSAGE = "message";
+	public static final String BILL_SEARCH_TOKEN = "patient.patientname";
 
 	public static final String GET_STORE_LIST = "GetStoreList";
 	public static final String GET_STORE_PAGE = "GetStorePage";
+	public static final String SEARCH_STORE = "SearchStore";
 	public static final String GET_STORE = "GetStore";
 	public static final String ADD_STORE = "AddStore";
 	public static final String UPDATE_STORE = "UpdateStore";
@@ -36,6 +43,7 @@ public class Constant {
 
 	public static final String GET_PRODUCT_LIST = "GetProductList";
 	public static final String GET_PRODUCT_PAGE = "GetProductPage";
+	public static final String SEARCH_PRODUCT = "SearchProduct";
 	public static final String GET_PRODUCT = "GetProduct";
 	public static final String ADD_PRODUCT = "AddProduct";
 	public static final String UPDATE_PRODUCT = "UpdateProduct";
@@ -43,6 +51,7 @@ public class Constant {
 
 	public static final String GET_BILL_LIST = "GetBillList";
 	public static final String GET_BILL_PAGE = "GetBillPage";
+	public static final String SEARCH_BILL = "SearchBill";
 	public static final String GET_BILL = "GetBill";
 	public static final String ADD_BILL = "AddBill";
 	public static final String UPDATE_BILL = "UpdateBill";
@@ -50,6 +59,7 @@ public class Constant {
 
 	public static final String GET_USER_LIST = "GetUserList";
 	public static final String GET_USER_PAGE = "GetUserPage";
+	public static final String SEARCH_USER = "SearchUser";
 	public static final String GET_USER = "GetUser";
 	public static final String ADD_USER = "AddUser";
 	public static final String UPDATE_USER = "UpdateUser";
@@ -57,6 +67,7 @@ public class Constant {
 
 	public static final String GET_ROLE_LIST = "GetRoleList";
 	public static final String GET_ROLE_PAGE = "GetRolePage";
+	public static final String SEARCH_ROLE = "SearchRole";
 	public static final String GET_ROLE = "GetRole";
 	public static final String ADD_ROLE = "AddRole";
 	public static final String UPDATE_ROLE = "UpdateRole";
@@ -64,6 +75,7 @@ public class Constant {
 
 	public static final String GET_PATIENT_LIST = "GetPatientList";
 	public static final String GET_PATIENT_PAGE = "GetPatientPage";
+	public static final String SEARCH_PATIENT = "SearchPatient";
 	public static final String GET_PATIENT = "GetPatient";
 	public static final String ADD_PATIENT = "AddPatient";
 	public static final String UPDATE_PATIENT = "UpdatePatient";
@@ -71,6 +83,7 @@ public class Constant {
 	
 	public static final String GET_LOG_LIST = "GetLogList";
 	public static final String GET_LOG_PAGE = "GetLogPage";
+	public static final String SEARCH_LOG = "SearchLog";
 	public static final String GET_LOG = "GetLog";
 	public static final String ADD_LOG = "AddLog";
 	public static final String COMPONENT = "component";

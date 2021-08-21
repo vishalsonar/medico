@@ -1,6 +1,7 @@
 package com.sonar.vishal.medico.core.logic;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,6 +16,7 @@ import com.sonar.vishal.medico.common.structure.BillListData;
 import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 
 public class BillLogic implements BusinessLogic {
@@ -121,6 +123,16 @@ public class BillLogic implements BusinessLogic {
 		}
 		return count;
 	}
+	
+	@Override
+	public void search(String keyword) {
+		getAll();
+		BillListData listData = (BillListData) message.getData();
+		List<Bill> list = listData.getBillList();
+		list = list.stream().filter(bill -> bill.getPatient().getPatientName().contains(keyword)).collect(Collectors.toList());
+		listData.setBillList(list);
+		message.setData(listData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
@@ -130,6 +142,10 @@ public class BillLogic implements BusinessLogic {
 		if (functionName.equals(Constant.GET_BILL_PAGE)) {
 			PageData message = (PageData) data;
 			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_BILL)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_BILL)) {
 			IdData message = (IdData) data;

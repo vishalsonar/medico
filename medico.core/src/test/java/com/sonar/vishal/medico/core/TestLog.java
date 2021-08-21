@@ -20,6 +20,7 @@ public class TestLog extends UnitTest {
 		assertNotNull(response);
 		TestApi(data.getLogRequest());
 		TestApi(data.getPageLogRequest());
+		TestApi(data.getSearchLogRequest());
 	}
 
 }

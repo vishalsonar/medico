@@ -20,6 +20,7 @@ public class TestProduct extends UnitTest {
 		TestApi(data.getAddProductRequest());
 		JsonObject response = TestApi(data.getAllProductRequest());
 		TestApi(data.getPageProductRequest());
+		TestApi(data.getSearchProductRequest());
 		JsonObject productObject = response.get(Constant.DATA).getAsJsonObject().get(Constant.LIST).getAsJsonArray().get(0).getAsJsonObject();
 		Product product = gson.fromJson(productObject, Product.class);
 		assertNotNull(product);

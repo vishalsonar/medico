@@ -5,7 +5,9 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
@@ -15,6 +17,7 @@ import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.PatientListData;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 
 public class PatientLogic implements BusinessLogic {
@@ -117,6 +120,29 @@ public class PatientLogic implements BusinessLogic {
 		}
 		return count;
 	}
+	
+	@Override
+	@SuppressWarnings("deprecation")
+	public void search(String keyword) {
+		PatientListData replyData = new PatientListData();
+		Session session = hibernate.getSession();
+		if (session != null) {
+			Criteria criteria = session.createCriteria(Patient.class);
+			criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+			criteria.add(Restrictions.like(Constant.PATIENT_NAME, keyword, MatchMode.ANYWHERE));
+			List<Patient> list = hibernate.<Patient>executeCriteria(session, criteria);
+			if (list == null) {
+				setErrorMessage(Constant.SEARCH_PATIENT, Constant.NULL);
+			} else {
+				setSucessMessage(Constant.SEARCH_PATIENT);
+			}
+			replyData.setPatientList(list);
+			replyData.setTotalRowCount(list.size());
+		} else {
+			setErrorMessage(Constant.SEARCH_PATIENT, Constant.NULL);
+		}
+		message.setData(replyData);
+	}
 
 	@Override
 	public Message execute(String functionName, Object data) {
@@ -126,6 +152,10 @@ public class PatientLogic implements BusinessLogic {
 		if (functionName.equals(Constant.GET_PATIENT_PAGE)) {
 			PageData message = (PageData) data;
 			getPage(message.getStartIndex(), message.getEndIndex());
+		}
+		if (functionName.equals(Constant.SEARCH_PATIENT)) {
+			SearchData message = (SearchData) data;
+			search(message.getKeyword());
 		}
 		if (functionName.equals(Constant.GET_PATIENT)) {
 			IdData message = (IdData) data;
