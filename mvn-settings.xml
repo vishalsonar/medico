@@ -23,7 +23,7 @@
 	<servers>
 		<server>
 			<id>github</id>
-			<username>${github.server.username}</username>
+			<username>vishalsonar</username>
 			<password>${github.server.password}</password>
 		</server>
 	</servers>

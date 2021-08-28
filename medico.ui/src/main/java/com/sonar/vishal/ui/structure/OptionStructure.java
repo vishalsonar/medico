@@ -1,8 +1,10 @@
 package com.sonar.vishal.ui.structure;
 
 import com.sonar.vishal.ui.definition.Structure;
+import com.sonar.vishal.ui.enumeration.Access;
 import com.sonar.vishal.ui.listener.LogoutListener;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.sonar.vishal.ui.util.UIUtil;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.GridLayout;
@@ -28,13 +30,16 @@ public class OptionStructure implements Structure {
 	public Object get() {
 		Button logoutButton = COMPONENT.getOptionButton(UIConstant.LOGOUT, UIConstant.EMPTY, VaadinIcons.SIGN_OUT);
 		logoutButton.addClickListener(new LogoutListener());
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.BILL, UIConstant.S_BILL, VaadinIcons.ALIGN_JUSTIFY));
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.BARCODE, UIConstant.S_BARCODE, VaadinIcons.BARCODE));
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.PRODUCT, UIConstant.S_PRODUCT, VaadinIcons.CLIPBOARD_CROSS));
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.PATIENT, UIConstant.S_PATIENT, VaadinIcons.USER_HEART));
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.STORE, UIConstant.S_STORE, VaadinIcons.SHOP));
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.USER, UIConstant.S_USER, VaadinIcons.USER));
-		grid.addComponent(COMPONENT.getOptionButton(UIConstant.ROLE, UIConstant.S_ROLE, VaadinIcons.TASKS));
+		String[] accessArray = UIUtil.getSessionUser().getRole().getModule().split(UIConstant.COMMA);
+		for (String accessString : accessArray) {
+			if (Access.contains(accessString)) {
+				String lowerCase = accessString.toLowerCase();
+				String label = lowerCase.substring(0, 1).toUpperCase() + lowerCase.substring(1);
+				if (!label.equals(UIConstant.LOGIN)) {
+					grid.addComponent(COMPONENT.getOptionButton(label, lowerCase, Access.getIcon(accessString)));
+				}
+			}
+		}
 		grid.addComponent(COMPONENT.getOptionButton(UIConstant.CHANGE_PASSWORD, UIConstant.S_CHANGE_PASSWORD, VaadinIcons.RETWEET));
 		grid.addComponent(logoutButton);
 		return panel;
