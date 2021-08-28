@@ -45,7 +45,7 @@ public enum Access {
 
 	public static boolean isLoginAllow(String accessString) {
 		List<String> accessList = Arrays.asList(accessString.split(UIConstant.COMMA));
-		return accessList.stream().filter(item -> item.equals(UIConstant.LOGIN.toUpperCase())).findAny().isPresent();
+		return accessList.stream().anyMatch(item -> item.equals(UIConstant.LOGIN.toUpperCase()));
 	}
 
 	public static String[] getAsStringArray() {
