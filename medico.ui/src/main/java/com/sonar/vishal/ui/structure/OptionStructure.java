@@ -31,10 +31,11 @@ public class OptionStructure implements Structure {
 		Button logoutButton = COMPONENT.getOptionButton(UIConstant.LOGOUT, UIConstant.EMPTY, VaadinIcons.SIGN_OUT);
 		logoutButton.addClickListener(new LogoutListener());
 		String[] accessArray = UIUtil.getSessionUser().getRole().getModule().split(UIConstant.COMMA);
+		String lowerCase, label = null;
 		for (String accessString : accessArray) {
 			if (Access.contains(accessString)) {
-				String lowerCase = accessString.toLowerCase();
-				String label = lowerCase.substring(0, 1).toUpperCase() + lowerCase.substring(1);
+				lowerCase = accessString.toLowerCase();
+				label = lowerCase.substring(0, 1).toUpperCase() + lowerCase.substring(1);
 				if (!label.equals(UIConstant.LOGIN)) {
 					grid.addComponent(COMPONENT.getOptionButton(label, lowerCase, Access.getIcon(accessString)));
 				}

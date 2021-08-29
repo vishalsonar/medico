@@ -148,4 +148,6 @@ public class UIConstant {
 	
 	public static final String FILTER = "filter";
 	public static final String VIEW_BILL = "View Bill";
+	public static final String USER_NAME_EXIST = "Username already exists";
+	public static final String ROLE_NAME_EXIST = "Rolename already exists";
 }
