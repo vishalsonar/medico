@@ -28,10 +28,11 @@ public class OptionStructure implements Structure {
 
 	@Override
 	public Object get() {
+		String label = null;
+		String lowerCase = null;
 		Button logoutButton = COMPONENT.getOptionButton(UIConstant.LOGOUT, UIConstant.EMPTY, VaadinIcons.SIGN_OUT);
 		logoutButton.addClickListener(new LogoutListener());
 		String[] accessArray = UIUtil.getSessionUser().getRole().getModule().split(UIConstant.COMMA);
-		String lowerCase, label = null;
 		for (String accessString : accessArray) {
 			if (Access.contains(accessString)) {
 				lowerCase = accessString.toLowerCase();
