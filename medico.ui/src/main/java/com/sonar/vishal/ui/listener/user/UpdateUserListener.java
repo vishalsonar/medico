@@ -31,6 +31,7 @@ public class UpdateUserListener extends CRUDListener {
 	protected void doAction() {
 		try {
 			Backend.message.setData(logic.process(userBinder, passwordBinder, id));
+			Backend.message.getHeader().setFunction(Constant.UPDATE_USER);
 			doPostRespondHeader(Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 		} catch (MedicoValidationException e) {
 			notifyError(e.getMessage());

@@ -11,7 +11,7 @@ public enum Access {
 
 	LOGIN(VaadinIcons.ARROWS_LONG_RIGHT), BILL(VaadinIcons.ALIGN_JUSTIFY), BARCODE(VaadinIcons.BARCODE),
 	PRODUCT(VaadinIcons.CLIPBOARD_CROSS), PATIENT(VaadinIcons.USER_HEART), STORE(VaadinIcons.SHOP),
-	USER(VaadinIcons.USER), ROLE(VaadinIcons.TASKS),;
+	USER(VaadinIcons.USER), ROLE(VaadinIcons.TASKS), ACCESS(VaadinIcons.USER_CHECK);
 
 	private final VaadinIcons icon;
 

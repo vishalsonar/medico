@@ -1,5 +1,6 @@
 package com.sonar.vishal.ui.listener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,8 +15,10 @@ import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.addon.pagination.PaginationChangeListener;
 import com.vaadin.addon.pagination.PaginationResource;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 
 public class PaginationListener<T> implements PaginationChangeListener {
@@ -42,6 +45,9 @@ public class PaginationListener<T> implements PaginationChangeListener {
 	@SuppressWarnings("unchecked")
 	private void createPageList() {
 		RestBackend backend = null;
+		if (list == null || list.isEmpty()) {
+			return;
+		}
 		T refrence = list.get(0);
 		if (refrence instanceof Patient) {
 			backend = new RestBackend(Constant.GET_PATIENT_PAGE);
@@ -62,14 +68,31 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
 			Role[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
-			list = (List<T>) Arrays.asList(data);
+			ArrayList<Role> roleList = new ArrayList<Role>(Arrays.asList(data));
+			User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+			list = new ArrayList<T>();
+			for (Role role : roleList) {
+				if (currentUser.getRole().getName().equals(role.getName())) {
+					continue;
+				}
+				list.add((T) role);
+			}
 		}
 		if (refrence instanceof User) {
 			backend = new RestBackend(Constant.GET_USER_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
 			User[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
-			list = (List<T>) Arrays.asList(data);
+			ArrayList<User> userList = new ArrayList<User>(Arrays.asList(data));
+			User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+			list = new ArrayList<T>();
+			for (User user : userList) {
+				if (user.getUserName().equals(currentUser.getUserName()) && user.getId() == currentUser.getId()) {
+					continue;
+				}
+				user.update();
+				list.add((T) user);
+			}
 		}
 		if (refrence instanceof Store) {
 			backend = new RestBackend(Constant.GET_STORE_PAGE);

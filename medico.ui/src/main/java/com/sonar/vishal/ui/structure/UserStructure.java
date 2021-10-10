@@ -32,9 +32,9 @@ public class UserStructure implements CRUDStructure {
 
 	private VerticalLayout layout;
 	private Grid<User> table;
-	private RestBackend backend;
-	private User selectedUser;
-	private Notification notification;
+	protected RestBackend backend;
+	protected User selectedUser;
+	protected Notification notification;
 	private TablePagination<User> userTablePagination;
 
 	public UserStructure() {
@@ -53,6 +53,7 @@ public class UserStructure implements CRUDStructure {
 		table.addColumn(User::getUserName).setCaption(UIConstant.NAME);
 		table.addColumn(User::getPassword).setCaption(UIConstant.PASSWORD);
 		table.addColumn(User::getRoleAsString).setCaption(UIConstant.ROLE);
+		table.addColumn(User::getLoginAttempt).setCaption(UIConstant.ATTEMPT);
 		table.addSelectionListener(new SelectionListener<User>() {
 			private static final long serialVersionUID = 1L;
 

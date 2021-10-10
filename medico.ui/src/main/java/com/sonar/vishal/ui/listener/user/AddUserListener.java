@@ -30,6 +30,7 @@ public class AddUserListener extends CRUDListener {
 	protected void doAction() {
 		try {
 			Backend.message.setData(logic.process(userBinder, passwordBinder, null));
+			Backend.message.getHeader().setFunction(Constant.ADD_USER);
 			doPostRespondHeader(Constant.ADD_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 		} catch (MedicoValidationException e) {
 			notifyError(e.getMessage());

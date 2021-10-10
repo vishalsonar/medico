@@ -22,6 +22,9 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vishalsonar_medico&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=vishalsonar_medico)
 ---
 
+#### Build Project
+`mvn clean install --settings mvn-settings.xml -Dmaven.test.skip=true`
+
 #### License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  <br/>
 Distributed under the `Apache License 2.0` License. See `LICENSE` for more information.

@@ -97,6 +97,7 @@ public class Constant {
 	public static final String REQUEST_URL = URL + "/api/process/request";
 	public static final String APPLICATION_JSON = "application/json";
 
+	public static final String USER_LOGIN_LOCKED = "User Login Locked";
 	public static final String LOGIN_FAILURE_MESSAGE = "Invalid Credentials";
 	public static final String GENERAL_ERROR_MESSAGE = "Operation Failed";
 	public static final String VALIDATION_EXCEPTION = "Please Enter Required Feilds";

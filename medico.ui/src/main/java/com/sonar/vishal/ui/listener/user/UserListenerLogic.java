@@ -26,6 +26,8 @@ public class UserListenerLogic implements BiListenerLogic<Binder<User>, Binder<P
 		childBinder.writeBean(password);
 		if (id != null) {
 			user.setId(id);
+		} else {
+			user.setLoginAttempt(0);
 		}
 		user.setRole(UserRoleValueListener.selectedRole);
 		data.setUser(user);

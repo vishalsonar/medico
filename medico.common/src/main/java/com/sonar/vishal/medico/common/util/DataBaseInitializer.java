@@ -30,7 +30,7 @@ public class DataBaseInitializer {
 	private static Role getRole() {
 		Role role = new Role();
 		role.setName(Constant.ADMIN);
-		role.setModule("LOGIN,BILL,BARCODE,PRODUCT,PATIENT,STORE,USER,ROLE");
+		role.setModule("LOGIN,BILL,BARCODE,PRODUCT,PATIENT,STORE,USER,ROLE,ACCESS");
 		return role;
 	}
 
