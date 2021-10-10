@@ -118,5 +118,4 @@ public class GenericView extends HorizontalSplitPanel implements View {
 				&& Objects.equals(leftLayout, other.leftLayout) && Objects.equals(logo, other.logo)
 				&& Objects.equals(rightLayout, other.rightLayout);
 	}
-	
 }
