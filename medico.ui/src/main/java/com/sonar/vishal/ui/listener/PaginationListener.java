@@ -47,9 +47,6 @@ public class PaginationListener<T> implements PaginationChangeListener {
 	@SuppressWarnings("unchecked")
 	private void createPageList() {
 		RestBackend backend = null;
-		if (list == null || list.isEmpty()) {
-			return;
-		}
 		T refrence = list.get(0);
 		if (refrence instanceof Patient) {
 			backend = new RestBackend(Constant.GET_PATIENT_PAGE);
