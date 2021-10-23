@@ -38,16 +38,15 @@ public class PaginationListener<T> implements PaginationChangeListener {
 	public void changed(PaginationResource event) {
 		pageData.setStartIndex(event.fromIndex());
 		pageData.setEndIndex(event.toIndex());
-		createPageList();
+		if (list != null || !list.isEmpty()) {
+			createPageList();
+		}
 		table.setItems(list);
 	}
 
 	@SuppressWarnings("unchecked")
 	private void createPageList() {
 		RestBackend backend = null;
-		if (list == null || list.isEmpty()) {
-			return;
-		}
 		T refrence = list.get(0);
 		if (refrence instanceof Patient) {
 			backend = new RestBackend(Constant.GET_PATIENT_PAGE);
@@ -68,31 +67,14 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
 			Role[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
-			ArrayList<Role> roleList = new ArrayList<Role>(Arrays.asList(data));
-			User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
-			list = new ArrayList<T>();
-			for (Role role : roleList) {
-				if (currentUser.getRole().getName().equals(role.getName())) {
-					continue;
-				}
-				list.add((T) role);
-			}
+			filterRole(new ArrayList<>(Arrays.asList(data)));
 		}
 		if (refrence instanceof User) {
 			backend = new RestBackend(Constant.GET_USER_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
 			User[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
-			ArrayList<User> userList = new ArrayList<User>(Arrays.asList(data));
-			User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
-			list = new ArrayList<T>();
-			for (User user : userList) {
-				if (user.getUserName().equals(currentUser.getUserName()) && user.getId() == currentUser.getId()) {
-					continue;
-				}
-				user.update();
-				list.add((T) user);
-			}
+			filterUser(new ArrayList<>(Arrays.asList(data)));
 		}
 		if (refrence instanceof Store) {
 			backend = new RestBackend(Constant.GET_STORE_PAGE);
@@ -107,6 +89,31 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Bill[].class);
 			Bill[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
 			list = (List<T>) Arrays.asList(data);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void filterUser(ArrayList<User> userList) {
+		User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		list = new ArrayList<>();
+		for (User user : userList) {
+			if (user.getId() == currentUser.getId()) {
+				continue;
+			}
+			user.update();
+			list.add((T) user);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void filterRole(ArrayList<Role> roleList) {
+		User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		list = new ArrayList<>();
+		for (Role role : roleList) {
+			if (currentUser.getRole().getName().equals(role.getName())) {
+				continue;
+			}
+			list.add((T) role);
 		}
 	}
 }

@@ -71,7 +71,7 @@ public class UserAccessStructure extends UserStructure implements GenericStructu
 	public void buttonThreeaction() {
 		UserData userData = new UserData();
 		selectedUser.setLoginAttempt(0);
-		selectedUser.setPassword(UIConstant.RESET_PASSWORD_STRING);
+		selectedUser.setPassword(UIConstant.RESET_STRING);
 		userData.setUser(selectedUser);
 		doPostRespondHeader(userData, Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 	}

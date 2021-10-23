@@ -7,7 +7,7 @@ import com.vaadin.ui.Button.ClickListener;
 public class GenericButtonListener implements ClickListener {
 
 	private static final long serialVersionUID = -7459906845038147424L;
-	private GenericStructure structure;
+	private transient GenericStructure structure;
 	private int token;
 
 	public GenericButtonListener(GenericStructure structure, int token) {

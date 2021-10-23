@@ -157,5 +157,5 @@ public class UIConstant {
 	public static final String VIEW_BILL = "View Bill";
 	public static final String USER_NAME_EXIST = "Username already exists";
 	public static final String ROLE_NAME_EXIST = "Rolename already exists";
-	public static final String RESET_PASSWORD_STRING = "Welcome@123";
+	public static final String RESET_STRING = "welcome@123.";
 }

@@ -72,7 +72,7 @@ public class LoginLogic extends BusinessLogicAdapter {
 
 	private void updateLoginAttempt(String userName) {
 		User user = getUserByName(userName);
-		if (user.getLoginAttempt() <= 3) {
+		if (user!= null && user.getLoginAttempt() <= 3) {
 			user.setLoginAttempt(user.getLoginAttempt() + 1);
 			hibernate.saveOrUpdate(user);
 		}
