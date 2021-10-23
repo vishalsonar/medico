@@ -72,20 +72,17 @@ public class UserAccessStructure extends UserStructure implements GenericStructu
 
 	@Override
 	public void buttonThreeaction() {
-		UserData userData = new UserData();
-		selectedUser.setLoginAttempt(0);
-		selectedUser.setPassword(getResetPassword());
-		userData.setUser(selectedUser);
-		doPostRespondHeader(userData, Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
-	}
-	
-	private String getResetPassword() {
 		Properties property = Reader.loadProperties(this, UIConstant.PROPERTIES_FILE_NAME);
 		String password = property.getProperty(UIConstant.RESET_STRING_LITERAL);
 		if (password == null) {
-			password = UIConstant.RESET_STRING;
+			notifyError(UIConstant.RESET_PASSWORD_FAILED);
+			return;
 		}
-		return password;
+		UserData userData = new UserData();
+		selectedUser.setLoginAttempt(0);
+		selectedUser.setPassword(password);
+		userData.setUser(selectedUser);
+		doPostRespondHeader(userData, Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 	}
 
 }

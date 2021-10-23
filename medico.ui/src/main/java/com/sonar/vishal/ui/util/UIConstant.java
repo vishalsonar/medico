@@ -158,7 +158,7 @@ public class UIConstant {
 	public static final String USER_NAME_EXIST = "Username already exists";
 	public static final String ROLE_NAME_EXIST = "Rolename already exists";
 	
-	public static final String RESET_STRING = "welcome@123.";
+	public static final String RESET_PASSWORD_FAILED = "Error while password reset";
 	public static final String RESET_STRING_LITERAL = "RESET_STRING";
 	public static final String PROPERTIES_FILE_NAME = "constant.properties";
 }

@@ -6,6 +6,10 @@ import java.util.Properties;
 
 public class Reader {
 
+	private Reader() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	public static Properties loadProperties(Object object, String fileName) {
 		Properties properties = new Properties();
 		try {
