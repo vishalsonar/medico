@@ -38,7 +38,7 @@ public class PaginationListener<T> implements PaginationChangeListener {
 	public void changed(PaginationResource event) {
 		pageData.setStartIndex(event.fromIndex());
 		pageData.setEndIndex(event.toIndex());
-		if (list != null || !list.isEmpty()) {
+		if (list != null && !list.isEmpty()) {
 			createPageList();
 		}
 		table.setItems(list);

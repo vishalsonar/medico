@@ -1,8 +1,11 @@
 package com.sonar.vishal.ui.structure;
 
+import java.util.Properties;
+
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.structure.UserData;
+import com.sonar.vishal.medico.common.util.Reader;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.definition.GenericStructure;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -71,9 +74,18 @@ public class UserAccessStructure extends UserStructure implements GenericStructu
 	public void buttonThreeaction() {
 		UserData userData = new UserData();
 		selectedUser.setLoginAttempt(0);
-		selectedUser.setPassword(UIConstant.RESET_STRING);
+		selectedUser.setPassword(getResetPassword());
 		userData.setUser(selectedUser);
 		doPostRespondHeader(userData, Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
+	}
+	
+	private String getResetPassword() {
+		Properties property = Reader.loadProperties(this, UIConstant.PROPERTIES_FILE_NAME);
+		String password = property.getProperty(UIConstant.RESET_STRING_LITERAL);
+		if (password == null) {
+			password = UIConstant.RESET_STRING;
+		}
+		return password;
 	}
 
 }
