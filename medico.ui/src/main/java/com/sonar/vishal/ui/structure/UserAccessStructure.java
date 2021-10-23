@@ -84,5 +84,14 @@ public class UserAccessStructure extends UserStructure implements GenericStructu
 		userData.setUser(selectedUser);
 		doPostRespondHeader(userData, Constant.UPDATE_USER_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 	}
+	
+	private String getResetPassword() {
+		Properties property = Reader.loadProperties(this, UIConstant.PROPERTIES_FILE_NAME);
+		String password = property.getProperty(UIConstant.RESET_STRING_LITERAL);
+		if (password == null) {
+			password = UIConstant.RESET_STRING;
+		}
+		return password;
+	}
 
 }
