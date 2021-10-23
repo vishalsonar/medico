@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Bill;
+import com.sonar.vishal.medico.common.pojo.Notification;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -15,6 +16,7 @@ import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
+import com.sonar.vishal.medico.common.structure.NotificationSearchData;
 import com.sonar.vishal.medico.common.structure.SearchData;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -110,6 +112,13 @@ public class SearchListener<T> implements ClickListener {
 			Bill[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
 			filteredList = (List<T>) Arrays.asList(data);
 		}
+		if (entry instanceof Notification) {
+			setBackend(Constant.SEARCH_NOTIFICATION, searchValue);
+			Backend.message.setData(getNotificationSearchData(searchValue));
+			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Notification[].class);
+			Notification[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Notification[].class);
+			filteredList = (List<T>) Arrays.asList(data);
+		}
 		return filteredList;
 	}
 	
@@ -118,6 +127,15 @@ public class SearchListener<T> implements ClickListener {
 		SearchData searchData = new SearchData();
 		searchData.setKeyword(keyword);
 		Backend.message.setData(searchData);
+	}
+	
+	private NotificationSearchData getNotificationSearchData(String keyword) {
+		NotificationSearchData searchData = new NotificationSearchData();
+		Notification notification = new Notification();
+		notification.setUser(UIUtil.getSessionUser());
+		searchData.setKeyword(keyword);
+		searchData.setNotification(notification);
+		return searchData;
 	}
 
 }

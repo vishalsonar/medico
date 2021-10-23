@@ -7,6 +7,7 @@ import com.sonar.vishal.ui.listener.PaginationListener;
 import com.sonar.vishal.ui.listener.SearchListener;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.addon.pagination.Pagination;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Sizeable.Unit;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
@@ -24,6 +25,7 @@ public class TablePagination<T> {
 	public VerticalSplitPanel init(Grid<T> table, String searchPlaceholder) {
 		this.table = table;
 		searchButton = Component.getInstance().getFriendlyButton(UIConstant.FILTER, UIConstant.NUMBER_100);
+		searchButton.setIcon(VaadinIcons.SEARCH);
 		VerticalSplitPanel splitLayout = new VerticalSplitPanel();
 		HorizontalSplitPanel searchAndPaginationSplit = new HorizontalSplitPanel();
 		HorizontalSplitPanel searchSplit = new HorizontalSplitPanel();

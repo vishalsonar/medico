@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Bill;
+import com.sonar.vishal.medico.common.pojo.Notification;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -14,8 +15,10 @@ import com.sonar.vishal.medico.common.pojo.Store;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
+import com.sonar.vishal.medico.common.structure.NotificationPageData;
 import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.sonar.vishal.ui.util.UIUtil;
 import com.vaadin.addon.pagination.PaginationChangeListener;
 import com.vaadin.addon.pagination.PaginationResource;
 import com.vaadin.server.VaadinSession;
@@ -88,6 +91,19 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Bill[].class);
 			Bill[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
+			list = (List<T>) Arrays.asList(data);
+		}
+		if (refrence instanceof Notification) {
+			backend = new RestBackend(Constant.GET_NOTIFICATION_PAGE);
+			NotificationPageData pageData = new NotificationPageData();
+			Notification notification = new Notification();
+			notification.setUser(UIUtil.getSessionUser());
+			pageData.setStartIndex(this.pageData.getStartIndex());
+			pageData.setEndIndex(this.pageData.getEndIndex());
+			pageData.setNotification(notification);
+			Backend.message.setData(pageData);
+			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Notification[].class);
+			Notification[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Notification[].class);
 			list = (List<T>) Arrays.asList(data);
 		}
 	}

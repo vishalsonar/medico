@@ -9,6 +9,9 @@ import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.NotificationData;
+import com.sonar.vishal.medico.common.structure.NotificationPageData;
+import com.sonar.vishal.medico.common.structure.NotificationSearchData;
 import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
@@ -22,6 +25,7 @@ import com.sonar.vishal.medico.core.logic.BillLogic;
 import com.sonar.vishal.medico.core.logic.KeyLogic;
 import com.sonar.vishal.medico.core.logic.LogLogic;
 import com.sonar.vishal.medico.core.logic.LoginLogic;
+import com.sonar.vishal.medico.core.logic.NotificationLogic;
 import com.sonar.vishal.medico.core.logic.PatientLogic;
 import com.sonar.vishal.medico.core.logic.ProductLogic;
 import com.sonar.vishal.medico.core.logic.RoleLogic;
@@ -82,6 +86,16 @@ public class RequestAdapter implements BusinessAdapter {
 			}
 			if (functionName.contains("Search")) {
 				messageData = gson.fromJson(dataObject, SearchData.class);
+			}
+			if (functionName.contains("Notification")) {
+				logic = new NotificationLogic();
+				messageData = gson.fromJson(dataObject, NotificationData.class);
+				if (functionName.contains("Page")) {
+					messageData = gson.fromJson(dataObject, NotificationPageData.class);
+				}
+				if (functionName.contains("Search")) {
+					messageData = gson.fromJson(dataObject, NotificationSearchData.class);
+				}
 			}
 			Message responesMessage = logic.execute(functionName, messageData);
 			response = gson.toJson(responesMessage);

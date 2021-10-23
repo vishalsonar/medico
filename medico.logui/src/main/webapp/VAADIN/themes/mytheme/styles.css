@@ -1621,8 +1621,8 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .v-caption {
-	font-size: 14px;
-	font-weight: 400;
+	font-size: 16px;
+	font-weight: 700;
 	padding-bottom: 0.3em;
 	padding-left: 1px;
 }
@@ -2326,10 +2326,9 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .v-button-small {
 	height: 31px;
 	padding: 0 14px;
-	
-	
-	font-size: 14px;
-	
+	font-size: 16px;
+	font-weight: 700;
+	font-size: 16px;
 	border-radius: 4px;
 }
 
@@ -2344,10 +2343,8 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .v-button-large {
 	height: 44px;
 	padding: 0 19px;
-	
-	
 	font-size: 20px;
-	
+	font-weight: 700;
 	border-radius: 4px;
 }
 
@@ -4113,6 +4110,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .v-grid-header, .mytheme .v-grid-header-deco {
 	top: 0;
+	font-weight: 700;
 }
 
 .mytheme .v-grid-footer, .mytheme .v-grid-footer-deco {
@@ -4316,6 +4314,7 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .v-grid-row > td, .mytheme .v-grid-editor-cells > div {
 	border-left: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
+	font-weight: 500;
 }
 
 .mytheme .v-grid-row > td:first-child, .mytheme .v-grid-editor-cells > div:first-child {
@@ -4657,10 +4656,10 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .v-grid-header .v-grid-cell {
-	background-color: #fafafa;
-	background-image: -webkit-linear-gradient(top, #fafafa 2%, #efefef 98%);
-	background-image: linear-gradient(to bottom,#fafafa 2%, #efefef 98%);
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
+	 background-color: #fafafa;
+     background-image: -webkit-linear-gradient(top, #fafafa 2%, #efefef 98%);
+     background-image: linear-gradient(to bottom,#fafafa 2%, #efefef 98%);
+     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .mytheme .v-grid-header .v-grid-cell.dragged {
@@ -4875,7 +4874,7 @@ div.v-layout.v-horizontal.v-widget {
 	height: 37px;
 	border-radius: 4px;
 	padding: 4px 9px;
-	border: 1px solid #c5c5c5;
+	border: 1px solid #000000;
 	background: white;
 	color: #474747;
 	-webkit-box-shadow: inset 0 1px 0 #f7f7f7, 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -10908,6 +10907,7 @@ div.v-layout.v-horizontal.v-widget {
 	-moz-user-select: text;
 	-ms-user-select: text;
 	user-select: text;
+	font-weight: 700;
 }
 
 .mytheme .v-label.v-disabled {

@@ -21,5 +21,6 @@
 		<mapping class="com.sonar.vishal.medico.common.pojo.Role"/>
 		<mapping class="com.sonar.vishal.medico.common.pojo.User"/>
 		<mapping class="com.sonar.vishal.medico.common.pojo.Log"/>
+		<mapping class="com.sonar.vishal.medico.common.pojo.Notification"/>
 	</session-factory>
 </hibernate-configuration>

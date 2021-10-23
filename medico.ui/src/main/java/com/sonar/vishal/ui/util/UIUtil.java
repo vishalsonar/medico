@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.util;
 
 import java.util.regex.Pattern;
 
+import com.sonar.vishal.medico.common.pojo.Notification;
 import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
@@ -125,6 +126,12 @@ public class UIUtil {
 			thisUser = (User) userData;
 		}
 		return thisUser;
+	}
+	
+	public static Notification getThisUserNotification() {
+		Notification notification = new Notification();
+		notification.setUser(getSessionUser());
+		return notification;
 	}
 
 	public static RestBackend getSearchBackend(String functionName, String keyword) {
