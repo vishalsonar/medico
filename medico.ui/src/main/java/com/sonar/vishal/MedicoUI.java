@@ -56,6 +56,7 @@ public class MedicoUI extends UI {
 		getNavigatorUI().addView(UIConstant.S_CHANGE_PASSWORD, new ChangePasswordView());
 		getNavigatorUI().addView(UIConstant.S_BARCODE, new BarcodeView());
 		getNavigatorUI().addView(UIConstant.S_BILL, new BillView());
+		getNavigatorUI().addView(UIConstant.S_ACCESS, new UserAccessView());
 		getNavigatorUI().navigateTo(UIConstant.EMPTY);
 		getNavigatorUI().addViewChangeListener(new ChangeListener());
 	}

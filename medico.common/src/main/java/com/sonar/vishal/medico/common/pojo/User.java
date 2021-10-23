@@ -27,11 +27,13 @@ public class User implements Serializable {
 	private String userName;
 	@Column(name = "password", nullable = false, length = 100)
 	private String password;
-	@OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinColumn(name = "role_id", referencedColumnName = "id")
 	private Role role;
 	@Transient
 	private String roleAsString;
+	@Column(name = "attempt")
+	private int loginAttempt;
 
 	public int getId() {
 		return id;
@@ -71,6 +73,14 @@ public class User implements Serializable {
 
 	public void setRoleAsString(String roleAsString) {
 		this.roleAsString = roleAsString;
+	}
+
+	public int getLoginAttempt() {
+		return loginAttempt;
+	}
+
+	public void setLoginAttempt(int loginAttempt) {
+		this.loginAttempt = loginAttempt;
 	}
 
 	public void update() {

@@ -48,6 +48,9 @@ public class UIConstant {
 	public static final String S_BARCODE = "barcode";
 	public static final String S_CHANGE_PASSWORD = "changePassword";
 	public static final String LOGOUT = "Logout";
+	public static final String ACCESS = "Access";
+	public static final String S_ACCESS = "access";
+	public static final String ATTEMPT = "Attempt";
 	
 	public static final String SUBMIT = "Submit";
 	public static final String CANCEL = "Cancel";
@@ -56,6 +59,10 @@ public class UIConstant {
 	public static final String NUMBER_500_PX = "500px";
 	public static final String ID = "Id";
 
+	public static final String LOCK_USER = "Lock User";
+	public static final String UNLOCK_USER = "Unlock User";
+	public static final String RESET_PASSWORD = "Reset Password";
+	
 	public static final String ADD_USER = "Add User";
 	public static final String UPDATE_USER = "Update User";
 	public static final String DELETE_USER = "Delete User";
@@ -148,4 +155,10 @@ public class UIConstant {
 	
 	public static final String FILTER = "filter";
 	public static final String VIEW_BILL = "View Bill";
+	public static final String USER_NAME_EXIST = "Username already exists";
+	public static final String ROLE_NAME_EXIST = "Rolename already exists";
+	
+	public static final String RESET_PASSWORD_FAILED = "Error while password reset";
+	public static final String RESET_STRING_LITERAL = "RESET_STRING";
+	public static final String PROPERTIES_FILE_NAME = "constant.properties";
 }

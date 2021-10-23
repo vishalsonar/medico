@@ -1,5 +1,6 @@
 package com.sonar.vishal.ui.listener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,8 +15,10 @@ import com.sonar.vishal.medico.common.pojo.User;
 import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.PageData;
+import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.addon.pagination.PaginationChangeListener;
 import com.vaadin.addon.pagination.PaginationResource;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 
 public class PaginationListener<T> implements PaginationChangeListener {
@@ -35,7 +38,9 @@ public class PaginationListener<T> implements PaginationChangeListener {
 	public void changed(PaginationResource event) {
 		pageData.setStartIndex(event.fromIndex());
 		pageData.setEndIndex(event.toIndex());
-		createPageList();
+		if (list != null && !list.isEmpty()) {
+			createPageList();
+		}
 		table.setItems(list);
 	}
 
@@ -62,14 +67,14 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
 			Role[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
-			list = (List<T>) Arrays.asList(data);
+			filterRole(new ArrayList<>(Arrays.asList(data)));
 		}
 		if (refrence instanceof User) {
 			backend = new RestBackend(Constant.GET_USER_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
 			User[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
-			list = (List<T>) Arrays.asList(data);
+			filterUser(new ArrayList<>(Arrays.asList(data)));
 		}
 		if (refrence instanceof Store) {
 			backend = new RestBackend(Constant.GET_STORE_PAGE);
@@ -84,6 +89,31 @@ public class PaginationListener<T> implements PaginationChangeListener {
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Bill[].class);
 			Bill[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
 			list = (List<T>) Arrays.asList(data);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void filterUser(ArrayList<User> userList) {
+		User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		list = new ArrayList<>();
+		for (User user : userList) {
+			if (user.getId() == currentUser.getId()) {
+				continue;
+			}
+			user.update();
+			list.add((T) user);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void filterRole(ArrayList<Role> roleList) {
+		User currentUser = (User) VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
+		list = new ArrayList<>();
+		for (Role role : roleList) {
+			if (currentUser.getRole().getName().equals(role.getName())) {
+				continue;
+			}
+			list.add((T) role);
 		}
 	}
 }

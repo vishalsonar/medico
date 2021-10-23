@@ -2,6 +2,7 @@ package com.sonar.vishal.ui.validator;
 
 import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.util.Hashing;
 import com.sonar.vishal.ui.definition.Validator;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.util.UIConstant;
@@ -18,7 +19,7 @@ public class PasswordDataValidator implements Validator<Password> {
 		Object userObject = VaadinSession.getCurrent().getSession().getAttribute(UIConstant.S_USER);
 		User user = (User) userObject;
 		String currentPassword = user.getPassword();
-		String password = data.getPassword();
+		String password = Hashing.getHashValue(data.getPassword());
 		String newPassword = data.getNewPassword();
 		String confirmPassword = data.getConfirmPassword();
 		if (currentPassword.trim().length() == 0 || password.trim().length() == 0) {

@@ -3,6 +3,9 @@ package com.sonar.vishal.ui.util;
 import java.util.regex.Pattern;
 
 import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.rest.Backend;
+import com.sonar.vishal.medico.common.rest.RestBackend;
+import com.sonar.vishal.medico.common.structure.SearchData;
 import com.vaadin.server.VaadinSession;
 
 public class UIUtil {
@@ -122,5 +125,13 @@ public class UIUtil {
 			thisUser = (User) userData;
 		}
 		return thisUser;
+	}
+
+	public static RestBackend getSearchBackend(String functionName, String keyword) {
+		RestBackend backend = new RestBackend(functionName);
+		SearchData searchData = new SearchData();
+		searchData.setKeyword(keyword);
+		Backend.message.setData(searchData);
+		return backend;
 	}
 }

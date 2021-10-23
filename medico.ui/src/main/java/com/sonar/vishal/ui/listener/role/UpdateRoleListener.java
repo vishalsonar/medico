@@ -28,6 +28,7 @@ public class UpdateRoleListener extends CRUDListener {
 	protected void doAction() {
 		try {
 			Backend.message.setData(logic.process(roleBinder, id));
+			Backend.message.getHeader().setFunction(Constant.UPDATE_ROLE);
 			doPostRespondHeader(Constant.UPDATE_ROLE_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 		} catch (MedicoValidationException e) {
 			notifyError(e.getMessage());

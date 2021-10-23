@@ -1,4 +1,9 @@
-# Medico
+# Medico 
+
+#### Development Status
+<a href="https://github.com/vishalsonar/medico"><img src="https://img.shields.io/badge/Work-InProgress-red.svg"/></a>
+<a href="https://github.com/vishalsonar/medico"><img src="https://img.shields.io/badge/version-1.0.0&#8208;SNAPSHOT-blue.svg"/></a>
+---
 
 #### TravisCI Build Status
 [![Build Status](https://travis-ci.com/vishalsonar/medico.svg?branch=main)](https://travis-ci.com/vishalsonar/medico)
@@ -16,6 +21,9 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=vishalsonar_medico&metric=sqale_index)](https://sonarcloud.io/dashboard?id=vishalsonar_medico)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=vishalsonar_medico&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=vishalsonar_medico)
 ---
+
+#### Build Project
+`mvn clean install --settings mvn-settings.xml -Dmaven.test.skip=true`
 
 #### License
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  <br/>

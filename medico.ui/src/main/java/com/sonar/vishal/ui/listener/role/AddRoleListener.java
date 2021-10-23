@@ -27,6 +27,7 @@ public class AddRoleListener extends CRUDListener {
 	protected void doAction() {
 		try {
 			Backend.message.setData(logic.process(roleBinder, null));
+			Backend.message.getHeader().setFunction(Constant.ADD_ROLE);
 			doPostRespondHeader(Constant.ADD_ROLE_SUCCESS_MESSAGE, Constant.GENERAL_ERROR_MESSAGE);
 		} catch (MedicoValidationException e) {
 			notifyError(e.getMessage());

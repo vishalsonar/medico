@@ -65,16 +65,16 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	@Override
 	public void enter(ViewChangeEvent event) {
 		if (!isDirty) {
-			if (getComponentCount() > 0) {
-				removeAllComponents();
-			}
-			setUI();
-			displayUI();
-			if (addButton != null && updateButton != null && deleteButton != null) {
-				addListener();
-			}
-			if (generateButton != null) {
-				addGenerateListener();
+			boolean hasComponent = getComponentCount() > 0;
+			if (!hasComponent) {
+				setUI();
+				displayUI();
+				if (addButton != null && updateButton != null && deleteButton != null) {
+					addListener();
+				}
+				if (generateButton != null) {
+					addGenerateListener();
+				}
 			}
 		}
 	}

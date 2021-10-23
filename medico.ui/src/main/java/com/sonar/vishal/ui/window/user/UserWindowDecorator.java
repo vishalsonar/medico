@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Password;
 import com.sonar.vishal.medico.common.pojo.Role;
 import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.listener.user.UserRoleValueListener;
@@ -29,7 +31,8 @@ public class UserWindowDecorator {
 	
 	public UserWindowDecorator() {
 		RestBackend backend = new RestBackend(Constant.GET_ROLE_LIST);
-		roles = (Role[]) backend.doPostRespondData(Role[].class);
+		JsonObject roleListObject = (JsonObject) backend.doPostRespondData(Role[].class);
+		roles = Backend.gson.fromJson(roleListObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
 		Component component = Component.getInstance();
 		name = component.getTextField(UIConstant.NAME, UIConstant.USER_NAME, UIConstant.FIELD_LENGTH_300);
 		password = component.getPasswordField(UIConstant.PASSWORD, UIConstant.PASSWORD, UIConstant.FIELD_LENGTH_300);

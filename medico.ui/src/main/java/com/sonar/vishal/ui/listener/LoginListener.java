@@ -14,6 +14,7 @@ import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
+import com.sonar.vishal.ui.enumeration.Access;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.sonar.vishal.ui.validator.LoginDataValidator;
@@ -62,7 +63,7 @@ public class LoginListener implements ClickListener {
 			this.backend = new RestBackend(Constant.LOGIN);
 			Backend.message.setData(data);
 			UserData userData = (UserData) this.backend.doPostRespondData(UserData.class);
-			if (userData != null && userData.getUser() != null && userData.getUser().getRole() != null) {
+			if (userData != null && userData.getUser() != null && userData.getUser().getRole() != null && Access.isLoginAllow(userData.getUser().getRole().getModule())) {
 				LoggerApi.setUserId(String.valueOf(userData.getUser().getId()));
 				notification = Component.getInstance().getSuccessNotification(Constant.SUCCESS, UIConstant.LOGGED_IN_SUCCESS);
 				VaadinSession.getCurrent().getSession().setAttribute(UIConstant.S_USER, userData.getUser());
