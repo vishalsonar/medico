@@ -71,7 +71,7 @@ public class MedicoUI extends UI {
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "MedicoUI", asyncSupported = true)
-	@VaadinServletConfiguration(ui = MedicoUI.class, productionMode = true)
+	@VaadinServletConfiguration(ui = MedicoUI.class, productionMode = false)
 	public static class LoginServlet extends VaadinServlet {
 		private static final long serialVersionUID = -6974150639907912054L;
 	}
