@@ -48,6 +48,14 @@ public class Constant {
 	public static final String ADD_PRODUCT = "AddProduct";
 	public static final String UPDATE_PRODUCT = "UpdateProduct";
 	public static final String DELETE_PRODUCT = "DeleteProduct";
+	
+	public static final String GET_NOTIFICATION_LIST = "GetNotificationList";
+	public static final String GET_NOTIFICATION_PAGE = "GetNotificationPage";
+	public static final String SEARCH_NOTIFICATION = "SearchNotification";
+	public static final String GET_NOTIFICATION = "GetNotification";
+	public static final String ADD_NOTIFICATION = "AddNotification";
+	public static final String UPDATE_NOTIFICATION = "UpdateNotification";
+	public static final String DELETE_NOTIFICATION = "DeleteNotification";
 
 	public static final String GET_BILL_LIST = "GetBillList";
 	public static final String GET_BILL_PAGE = "GetBillPage";
@@ -92,7 +100,7 @@ public class Constant {
 
 	public static final String GET_KEY = "GetKey";
 
-	public static final String URL = "http://localhost:8080/medico.core/rest";
+	public static final String URL = "http://localhost:8080/medico.core-1.0.0-SNAPSHOT/rest";
 	public static final String KEY_URL = URL + "/api/process/key";
 	public static final String REQUEST_URL = URL + "/api/process/request";
 	public static final String APPLICATION_JSON = "application/json";
@@ -103,6 +111,7 @@ public class Constant {
 	public static final String VALIDATION_EXCEPTION = "Please Enter Required Feilds";
 	public static final String SELECT_ROW_TO_UPDATE = "Please Select row to Update";
 	public static final String SELECT_ROW_TO_DELETE = "Please Select row to Delete";
+	public static final String INVALID_USER_NAME = "Invalid UserName";
 
 	public static final String ADD_ROLE_SUCCESS_MESSAGE = "Role Added";
 	public static final String UPDATE_ROLE_SUCCESS_MESSAGE = "Role Updated";
@@ -130,4 +139,5 @@ public class Constant {
 	public static final String AES = "AES";
 	public static final String ADMIN = "admin";
 	public static final String SHA3256 = "SHA3-256";
+	public static final String USER_ID = "user.id";
 }

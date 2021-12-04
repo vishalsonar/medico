@@ -9,6 +9,7 @@ import com.sonar.vishal.medico.common.message.common.Now;
 import com.sonar.vishal.medico.common.pojo.Address;
 import com.sonar.vishal.medico.common.pojo.Bill;
 import com.sonar.vishal.medico.common.pojo.Log;
+import com.sonar.vishal.medico.common.pojo.Notification;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -121,5 +122,12 @@ public class TestData {
 		log.setUserId("1");
 		log.setClassName("com.sonar.vishal.medico.core.TestData");
 		return log;
+	}
+
+	public static Notification getNotificationData(User user) {
+		Notification notification = new Notification();
+		notification.setUser(user);
+		notification.setMessage(RandomStringUtils.randomAlphanumeric(10));
+		return notification;
 	}
 }

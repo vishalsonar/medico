@@ -45,7 +45,7 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 	
 	public MedicoView(String logoString, String generate) {
 		this(logoString);
-		generateButton = component.getMenuButton(generate, VaadinIcons.BARCODE);
+		generateButton = component.getMenuButton(generate, VaadinIcons.QRCODE);
 		generateButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		Button gotoOption = component.gotoOptionButton();
 		leftLayout.addComponents(gotoOption, generateButton);
@@ -53,9 +53,9 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 
 	public MedicoView(String logoString, String add, String update, String delete) {
 		this(logoString);
-		addButton = component.getMenuButton(add, VaadinIcons.FILE_ADD);
-		updateButton = component.getMenuButton(update, VaadinIcons.FILE_REFRESH);
-		deleteButton = component.getMenuButton(delete, VaadinIcons.FILE_REMOVE);
+		addButton = component.getMenuButton(add, VaadinIcons.INSERT);
+		updateButton = component.getMenuButton(update, VaadinIcons.REFRESH);
+		deleteButton = component.getMenuButton(delete, VaadinIcons.WARNING);
 		addButton.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 		deleteButton.addStyleName(ValoTheme.BUTTON_DANGER);
 		Button gotoOption = component.gotoOptionButton();
@@ -85,10 +85,10 @@ public class MedicoView extends HorizontalSplitPanel implements View {
 
 	public void displayUI() {
 		this.addComponents(leftLayout, rightLayout);
-		this.setSplitPosition(16, Unit.PERCENTAGE);
+		this.setSplitPosition(18, Unit.PERCENTAGE);
 		this.setLocked(true);
 		UI.getCurrent().setContent(this);
-		if (this instanceof LoginView || this instanceof OptionView) {
+		if (this instanceof LoginView || this instanceof OptionView || this instanceof ChangePasswordView) {
 			isDirty = true;
 		}
 	}

@@ -9,7 +9,9 @@
 		<version>${revision}</version>
 	</parent>
 	<artifactId>medico.pos</artifactId>
-	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	<name>medico.pos</name>
+	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
 			<groupId>org.openjfx</groupId>

@@ -9,7 +9,7 @@ public class BarcodeView extends MedicoView {
 	private static final long serialVersionUID = -4648781378839035263L;
 
 	public BarcodeView() {
-		super(UIConstant.BARCODE, UIConstant.GENERATE);
+		super(UIConstant.BARCODE, UIConstant.GENERATE_BARCODE);
 	}
 
 	@Override

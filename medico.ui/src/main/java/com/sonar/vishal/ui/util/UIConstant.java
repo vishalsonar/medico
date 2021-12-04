@@ -9,6 +9,7 @@ public class UIConstant {
 	public static final String MEDICO = "Medico";
 	public static final int PASSWORD_MIN_LENGTH = 8;
 	public static final int TWENTY = 20;
+	public static final String NAVIGATOR = "navigator";
 	
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
 	public static final String NUMBER_30 = "30";
@@ -29,8 +30,9 @@ public class UIConstant {
 	public static final String LOGIN = "Login";
 	public static final String NUMBER_400_PX = "400px";
 	public static final String NUMBER_200_PX = "200px";
-	public static final String FORGOT_PASSWORD = "forgot password!";
+	public static final String FORGOT_PASSWORD = "forgot password?";
 	public static final String OPTION_PAGE_PATH = "./OptionPage";
+	public static final String SIGN_IN = "Sign in";
 	
 	public static final String BILL = "Bill";
 	public static final String S_BILL = "bill";
@@ -51,11 +53,15 @@ public class UIConstant {
 	public static final String ACCESS = "Access";
 	public static final String S_ACCESS = "access";
 	public static final String ATTEMPT = "Attempt";
+	public static final String S_FORGOT_PASSWORD_URL = "forgotPassword";
+	public static final String NOTIFICATION = "Notification";
+	public static final String S_NOTIFICATION = "notification";
 	
 	public static final String SUBMIT = "Submit";
 	public static final String CANCEL = "Cancel";
 	public static final String PRINT = "Print";
 	public static final String NUMBER_100 = "100";
+	public static final String NUMBER_200 = "200";
 	public static final String NUMBER_500_PX = "500px";
 	public static final String ID = "Id";
 
@@ -78,6 +84,9 @@ public class UIConstant {
 	public static final String ADD_STORE = "Add Store";
 	public static final String UPDATE_STORE = "Update Store";
 	public static final String DELETE_STORE = "Delete Store";
+	public static final String ADD_NOTIFICATION = "Add Notification";
+	public static final String UPDATE_NOTIFICATION = "Update Notification";
+	public static final String DELETE_NOTIFICATION = "Delete Notification";
 
 	public static final String FIELD_LENGTH_300 = "300";
 	public static final String NAME = "Name";
@@ -139,6 +148,7 @@ public class UIConstant {
 	public static final String ALL_FIELDS_MANDATORY = "Please Enter Missing Fields";
 	public static final String NO_DATA_FOUND = "No Data Found";
 	public static final String NO_DATA_FOUND_MESSAGE = "Please try other combination";
+	public static final String RESET_PASSWORD_SUBMIT = "Request for Reset Password sent";
 	
 	public static final String FILTER_PATIENT = "Filter by patient name...";
 	public static final String FILTER_PRODUCT = "Filter by product name...";
@@ -146,9 +156,10 @@ public class UIConstant {
 	public static final String FILTER_STORE = "Filter by store name...";
 	public static final String FILTER_USER = "Filter by user name...";
 	public static final String FILTER_BILL = "Filter by patient name...";
+	public static final String FILTER_NOTIFICATION = "Filter by message...";
 	
 	public static final String BARCODE_SEPERATOR = " - ";
-	public static final String GENERATE = "Generate";
+	public static final String GENERATE_BARCODE = "Generate Barcode";
 	public static final String PLEASE_SELECT_ROW_GENERATE = "Please select row to generate";
 	public static final String ERROR_GENERATING_BARCODE = "Error while generating barcode";
 	public static final String QR_SEPERATOR = " #### ";
@@ -161,4 +172,8 @@ public class UIConstant {
 	public static final String RESET_PASSWORD_FAILED = "Error while password reset";
 	public static final String RESET_STRING_LITERAL = "RESET_STRING";
 	public static final String PROPERTIES_FILE_NAME = "constant.properties";
+	public static final String MESSAGES = "Messages";
+	public static final String PASSWORD_RESET_REQUIRED = "Password reset required for user name: ";
+	public static final String NOTIFICATION_DELETED = "Notification deleted";
+	public static final String NOTIFICATION_DELETE_FAILED = "Error while deleting Notification";
 }

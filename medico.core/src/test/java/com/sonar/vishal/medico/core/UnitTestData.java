@@ -11,6 +11,7 @@ import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.message.common.Now;
 import com.sonar.vishal.medico.common.pojo.Bill;
+import com.sonar.vishal.medico.common.pojo.Notification;
 import com.sonar.vishal.medico.common.pojo.Patient;
 import com.sonar.vishal.medico.common.pojo.Product;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -22,6 +23,9 @@ import com.sonar.vishal.medico.common.structure.Header;
 import com.sonar.vishal.medico.common.structure.IdData;
 import com.sonar.vishal.medico.common.structure.LogData;
 import com.sonar.vishal.medico.common.structure.LoginData;
+import com.sonar.vishal.medico.common.structure.NotificationData;
+import com.sonar.vishal.medico.common.structure.NotificationPageData;
+import com.sonar.vishal.medico.common.structure.NotificationSearchData;
 import com.sonar.vishal.medico.common.structure.PageData;
 import com.sonar.vishal.medico.common.structure.PatientData;
 import com.sonar.vishal.medico.common.structure.ProductData;
@@ -54,6 +58,65 @@ public class UnitTestData {
 		pageData.setEndIndex(10);
 	}
 
+	public Message getAllNotificationRequest(User user) {
+		NotificationData data = new NotificationData();
+		data.setNotification(TestData.getNotificationData(user));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_NOTIFICATION_LIST);
+		return message;
+	}
+
+	public Message getPageNotificationRequest(User user) {
+		NotificationPageData pageData = new NotificationPageData();
+		pageData.setNotification(TestData.getNotificationData(user));
+		pageData.setStartIndex(0);
+		pageData.setEndIndex(10);
+		message.setData(pageData);
+		message.getHeader().setFunction(Constant.GET_NOTIFICATION_PAGE);
+		return message;
+	}
+
+	public Message getSearchNotificationRequest(User user) {
+		NotificationSearchData searchData = new NotificationSearchData();
+		searchData.setNotification(TestData.getNotificationData(user));
+		searchData.setKeyword("pass");
+		message.setData(searchData);
+		message.getHeader().setFunction(Constant.SEARCH_NOTIFICATION);
+		return message;
+	}
+
+	public Message getAddNotificationRequest(User user) {
+		NotificationData data = new NotificationData();
+		data.setNotification(TestData.getNotificationData(user));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.ADD_NOTIFICATION);
+		return message;
+	}
+
+	public Message getUpdateNotificationRequest(Notification notification) {
+		NotificationData data = new NotificationData();
+		data.setNotification(notification);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.UPDATE_NOTIFICATION);
+		return message;
+	}
+
+	public Message getDeleteNotificationRequest(Notification notification) {
+		NotificationData data = new NotificationData();
+		data.setNotification(notification);
+		message.setData(data);
+		message.getHeader().setFunction(Constant.DELETE_NOTIFICATION);
+		return message;
+	}
+
+	public Message getNotificationRequest(int id) {
+		IdData data = new IdData();
+		data.setId(String.valueOf(id));
+		message.setData(data);
+		message.getHeader().setFunction(Constant.GET_NOTIFICATION);
+		return message;
+	}
+
 	public Message getAllStoreRequest() {
 		message.setData(new Data());
 		message.getHeader().setFunction(Constant.GET_STORE_LIST);
@@ -65,7 +128,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_STORE_PAGE);
 		return message;
 	}
-	
+
 	public Message getSearchStoreRequest() {
 		searchData.setKeyword("sh");
 		message.setData(searchData);
@@ -123,7 +186,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.SEARCH_USER);
 		return message;
 	}
-	
+
 	public Message getAddUserRequest(Role role) {
 		UserData data = new UserData();
 		data.setUser(TestData.getUser());
@@ -162,7 +225,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_ROLE_LIST);
 		return message;
 	}
-	
+
 	public Message getSearchRoleRequest() {
 		searchData.setKeyword("min");
 		message.setData(searchData);
@@ -213,7 +276,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_PRODUCT_LIST);
 		return message;
 	}
-	
+
 	public Message getSearchProductRequest() {
 		searchData.setKeyword("ME");
 		message.setData(searchData);
@@ -270,7 +333,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_PATIENT_PAGE);
 		return message;
 	}
-	
+
 	public Message getSearchPatientRequest() {
 		searchData.setKeyword("pa");
 		message.setData(searchData);
@@ -321,7 +384,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_BILL_PAGE);
 		return message;
 	}
-	
+
 	public Message getSearchBillRequest() {
 		searchData.setKeyword("name");
 		message.setData(searchData);
@@ -393,7 +456,7 @@ public class UnitTestData {
 		message.getHeader().setFunction(Constant.GET_LOG_PAGE);
 		return message;
 	}
-	
+
 	public Message getSearchLogRequest() {
 		searchData.setKeyword("error");
 		message.setData(searchData);

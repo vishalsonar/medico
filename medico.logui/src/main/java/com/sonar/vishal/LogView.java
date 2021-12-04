@@ -68,10 +68,10 @@ public class LogView extends HorizontalSplitPanel implements View {
 		rightSplitPanel.addComponent(upperLayout);
 		rightSplitPanel.addComponent(rightLayout);
 		rightSplitPanel.setLocked(true);
-		rightSplitPanel.setSplitPosition(20, Unit.PERCENTAGE);
+		rightSplitPanel.setSplitPosition(18, Unit.PERCENTAGE);
 		rightSplitPanel.setSizeFull();
 		this.addComponents(leftLayout, rightSplitPanel);
-		this.setSplitPosition(20, Unit.PERCENTAGE);
+		this.setSplitPosition(22, Unit.PERCENTAGE);
 		this.setLocked(true);
 		UI.getCurrent().setContent(this);
 	}
@@ -85,7 +85,6 @@ public class LogView extends HorizontalSplitPanel implements View {
 		DateTimeField startDateTimeField = component.getDataTimeField(LogUIConstant.SELECT_START_DATE);
 		DateTimeField endDateTimeField = component.getDataTimeField(LogUIConstant.SELECT_END_DATE);
 		leftLayout.addComponent(component.getLogo(LogUIConstant.LOGUI));
-		leftLayout.addComponent(component.getLabel(LogUIConstant.SELECT_FILTER_CRITERIA));
 		leftLayout.addComponent(componentComboBox);
 		leftLayout.addComponent(severityComboBox);
 		leftLayout.addComponent(startDateTimeField);

@@ -51,9 +51,7 @@ public class UserStructure implements CRUDStructure {
 		list();
 		table.addColumn(User::getId).setCaption(UIConstant.ID);
 		table.addColumn(User::getUserName).setCaption(UIConstant.NAME);
-		table.addColumn(User::getPassword).setCaption(UIConstant.PASSWORD);
 		table.addColumn(User::getRoleAsString).setCaption(UIConstant.ROLE);
-		table.addColumn(User::getLoginAttempt).setCaption(UIConstant.ATTEMPT);
 		table.addSelectionListener(new SelectionListener<User>() {
 			private static final long serialVersionUID = 1L;
 

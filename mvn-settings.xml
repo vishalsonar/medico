@@ -24,7 +24,7 @@
 		<server>
 			<id>github</id>
 			<username>vishalsonar</username>
-			<password>${github.server.password}</password>
+			<password>${github.token}</password>
 		</server>
 	</servers>
 	<mirrors>

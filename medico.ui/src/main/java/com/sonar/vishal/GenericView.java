@@ -18,9 +18,9 @@ import com.vaadin.ui.VerticalLayout;
 public class GenericView extends HorizontalSplitPanel implements View {
 
 	private static final long serialVersionUID = -4882359431088310472L;
-	private Button buttonOne;
-	private Button buttonTwo;
-	private Button buttonThree;
+	protected Button buttonOne;
+	protected Button buttonTwo;
+	protected Button buttonThree;
 	protected final VerticalLayout leftLayout;
 	protected final Label logo;
 	protected VerticalLayout rightLayout;
@@ -90,7 +90,7 @@ public class GenericView extends HorizontalSplitPanel implements View {
 
 	public void displayUI() {
 		this.addComponents(leftLayout, rightLayout);
-		this.setSplitPosition(16, Unit.PERCENTAGE);
+		this.setSplitPosition(18, Unit.PERCENTAGE);
 		this.setLocked(true);
 		UI.getCurrent().setContent(this);
 	}

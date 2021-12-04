@@ -9,7 +9,7 @@
 	</parent>
 	<artifactId>medico.core</artifactId>
 	<packaging>war</packaging>
-	<name>medico.core Maven Webapp</name>
+	<name>medico.core</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -33,9 +33,5 @@
 			<version>${javax.servlet-api.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
 	</dependencies>
-	<build>
-		<finalName>medico.core</finalName>
-	</build>
 </project>

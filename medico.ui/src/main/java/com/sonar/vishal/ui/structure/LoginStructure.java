@@ -2,13 +2,14 @@ package com.sonar.vishal.ui.structure;
 
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.ui.definition.Structure;
+import com.sonar.vishal.ui.listener.ForgotPasswordLinkListener;
 import com.sonar.vishal.ui.listener.LoginListener;
 import com.sonar.vishal.ui.util.UIConstant;
 import com.vaadin.data.Binder;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Link;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -36,12 +37,15 @@ public class LoginStructure implements Structure {
 	public Object get() {
 		TextField userName = COMPONENT.getTextField(UIConstant.USER_NAME, UIConstant.USER_NAME, UIConstant.NUMBER_200_PX);
 		PasswordField password = COMPONENT.getPasswordField(UIConstant.PASSWORD, UIConstant.PASSWORD, UIConstant.NUMBER_200_PX);
-		Button loginButton = COMPONENT.getFriendlyButton(UIConstant.LOGIN, UIConstant.NUMBER_100);
-		Link link = COMPONENT.getLink(UIConstant.FORGOT_PASSWORD, UIConstant.OPTION_PAGE_PATH);
-		formLayout.addComponents(login, userName, password, loginButton, link);
+		Button loginButton = COMPONENT.getFriendlyButton(UIConstant.LOGIN, UIConstant.NUMBER_200);
+		Button forgotPasswordButton = COMPONENT.getButton(UIConstant.FORGOT_PASSWORD, UIConstant.NUMBER_200);
+		forgotPasswordButton.addStyleName(ValoTheme.BUTTON_LINK);
+		loginButton.setIcon(VaadinIcons.SIGN_IN);
+		formLayout.addComponents(login, userName, password, loginButton, forgotPasswordButton);
 		binder.bind(userName, LoginData::getUserName, LoginData::setUserName);
 		binder.bind(password, LoginData::getPassword, LoginData::setPassword);
 		loginButton.addClickListener(new LoginListener(binder, data));
+		forgotPasswordButton.addClickListener(new ForgotPasswordLinkListener(userName, password));
 		return panel;
 	}
 }
