@@ -31,6 +31,6 @@ jobs:
       run: mvn -B package --file pom.xml -s $GITHUB_WORKSPACE/mvn-settings.xml -Dmaven.test.skip=true
 
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/mvn-settings.xml -Dmaven.test.skip=true -Dgithub.server.password=$GITHUB_TOKEN
+      run: mvn deploy -s $GITHUB_WORKSPACE/mvn-settings.xml -Dmaven.test.skip=true -Dgithub.server.password=${GITHUB_TOKEN}
       env:
         GITHUB_TOKEN: ${{ github.token }}
