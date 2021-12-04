@@ -29,7 +29,7 @@ public class UserListenerLogic implements BiListenerLogic<Binder<User>, Binder<P
 		} else {
 			user.setLoginAttempt(0);
 		}
-		user.setRole(UserRoleValueListener.selectedRole);
+		user.setRole(UserRoleValueListener.getSelectedRole());
 		data.setUser(user);
 		new UserDataValidation(password.getConfirmPassword()).doValidation(data);
 		if (id == null) {

@@ -9,6 +9,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.Role;
@@ -172,5 +173,10 @@ public class RoleLogic implements BusinessLogic {
 		}
 		message.getHeader().setType(Constant.RESPONSE);
 		return message;
+	}
+
+	@Override
+	public Data fromJson(JsonObject dataObject) {
+		return gson.fromJson(dataObject, RoleData.class);
 	}
 }

@@ -11,6 +11,7 @@ import com.sonar.vishal.medico.common.util.LoggerApi;
 import com.sonar.vishal.ui.component.Component;
 import com.sonar.vishal.ui.exception.MedicoValidationException;
 import com.sonar.vishal.ui.util.UIConstant;
+import com.sonar.vishal.ui.util.UIUtil;
 import com.sonar.vishal.ui.validator.ForgotPasswordValidator;
 import com.vaadin.data.Binder;
 import com.vaadin.server.Page;
@@ -39,7 +40,7 @@ public class ForgotPasswordListener implements ClickListener {
 			binder.writeBean(data);
 			new ForgotPasswordValidator().doValidation(data);
 			Notification notificationInput = new Notification();
-			notificationInput.setMessage(UIConstant.PASSWORD_RESET_REQUIRED + data.getUserName());
+			notificationInput.setMessage(UIUtil.getMessageDateTime() + UIConstant.COLON_COLON + UIConstant.PASSWORD_RESET_REQUIRED + data.getUserName());
 			NotificationData notificationData = new NotificationData();
 			notificationData.setNotification(notificationInput);
 			Backend.message.setData(notificationData);

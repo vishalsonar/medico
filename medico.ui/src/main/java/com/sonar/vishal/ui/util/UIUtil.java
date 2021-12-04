@@ -1,5 +1,7 @@
 package com.sonar.vishal.ui.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import com.sonar.vishal.medico.common.pojo.Notification;
@@ -140,5 +142,9 @@ public class UIUtil {
 		searchData.setKeyword(keyword);
 		Backend.message.setData(searchData);
 		return backend;
+	}
+	
+	public static String getMessageDateTime() {
+		return new SimpleDateFormat(UIConstant.MESSAGE_TIME_FORMAT).format(new Date());
 	}
 }

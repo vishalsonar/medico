@@ -1,6 +1,8 @@
 package com.sonar.vishal.medico.core.adapter;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Message;
+import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.core.definition.BusinessLogic;
 
 public class BusinessLogicAdapter implements BusinessLogic {
@@ -43,6 +45,11 @@ public class BusinessLogicAdapter implements BusinessLogic {
 	@Override
 	public void search(String keyword) {
 		// Do nothing
+	}
+
+	@Override
+	public Data fromJson(JsonObject dataObject) {
+		return null;
 	}
 
 }

@@ -67,7 +67,9 @@ public class MedicoUI extends UI {
 			navigator.addViewChangeListener(new ChangeListener());
 			setNavigatorUI(navigator);
 		}
-		getNavigatorUI().navigateTo(UIConstant.EMPTY);
+		if (getNavigatorUI() != null) {
+			getNavigatorUI().navigateTo(UIConstant.EMPTY);
+		}
 	}
 
 	@WebServlet(urlPatterns = "/*", name = "MedicoUI", asyncSupported = true)
