@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.pojo.Notification;
+import com.sonar.vishal.medico.common.rest.Backend;
 import com.sonar.vishal.medico.common.rest.RestBackend;
 import com.sonar.vishal.medico.common.structure.NotificationData;
 import com.sonar.vishal.medico.common.util.LoggerApi;
@@ -59,11 +60,11 @@ public class NotificationStructure implements GenericStructure {
 	}
 
 	private void list() {
-		Notification notification = UIUtil.getThisUserNotification();
+		Notification userNotification = UIUtil.getThisUserNotification();
 		NotificationData notificationData = new NotificationData();
-		notificationData.setNotification(notification);
+		notificationData.setNotification(userNotification);
 		backend = new RestBackend(Constant.GET_NOTIFICATION_LIST);
-		RestBackend.message.setData(notificationData);
+		Backend.message.setData(notificationData);
 		JsonObject responseObject = (JsonObject) backend.doPostRespondData(Notification[].class);
 		long totalCount = responseObject.get(UIConstant.COUNT).getAsLong();
 		Notification[] data = GSON.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Notification[].class);
@@ -87,7 +88,7 @@ public class NotificationStructure implements GenericStructure {
 		NotificationData data = new NotificationData();
 		data.setNotification(selectedNotification);
 		backend = new RestBackend(Constant.DELETE_NOTIFICATION);
-		RestBackend.message.setData(data);
+		Backend.message.setData(data);
 		if (backend.doPostRespondHeader()) {
 			notifySuccess(UIConstant.NOTIFICATION_DELETED);
 		} else {

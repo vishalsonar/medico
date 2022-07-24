@@ -1,6 +1,8 @@
 package com.sonar.vishal.medico.core.definition;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Message;
+import com.sonar.vishal.medico.common.structure.Data;
 
 public interface BusinessLogic extends BussinessObject {
 
@@ -19,4 +21,6 @@ public interface BusinessLogic extends BussinessObject {
 	public void delete(Object data);
 
 	public Message execute(String functionName, Object data);
+
+	public Data fromJson(JsonObject dataObject);
 }

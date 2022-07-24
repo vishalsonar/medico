@@ -50,58 +50,58 @@ public class PaginationListener<T> implements PaginationChangeListener {
 	@SuppressWarnings("unchecked")
 	private void createPageList() {
 		RestBackend backend = null;
-		T refrence = list.get(0);
-		if (refrence instanceof Patient) {
+		T reference = list.get(0);
+		if (reference instanceof Patient) {
 			backend = new RestBackend(Constant.GET_PATIENT_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Patient[].class);
 			Patient[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Patient[].class);
 			list = (List<T>) Arrays.asList(data);
 		}
-		if (refrence instanceof Product) {
+		if (reference instanceof Product) {
 			backend = new RestBackend(Constant.GET_PRODUCT_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Product[].class);
 			Product[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Product[].class);
 			list = (List<T>) Arrays.asList(data);
 		}
-		if (refrence instanceof Role) {
+		if (reference instanceof Role) {
 			backend = new RestBackend(Constant.GET_ROLE_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Role[].class);
 			Role[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Role[].class);
 			filterRole(new ArrayList<>(Arrays.asList(data)));
 		}
-		if (refrence instanceof User) {
+		if (reference instanceof User) {
 			backend = new RestBackend(Constant.GET_USER_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(User[].class);
 			User[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), User[].class);
 			filterUser(new ArrayList<>(Arrays.asList(data)));
 		}
-		if (refrence instanceof Store) {
+		if (reference instanceof Store) {
 			backend = new RestBackend(Constant.GET_STORE_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Store[].class);
 			Store[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Store[].class);
 			list = (List<T>) Arrays.asList(data);
 		}
-		if (refrence instanceof Bill) {
+		if (reference instanceof Bill) {
 			backend = new RestBackend(Constant.GET_BILL_PAGE);
 			Backend.message.setData(pageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Bill[].class);
 			Bill[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Bill[].class);
 			list = (List<T>) Arrays.asList(data);
 		}
-		if (refrence instanceof Notification) {
+		if (reference instanceof Notification) {
 			backend = new RestBackend(Constant.GET_NOTIFICATION_PAGE);
-			NotificationPageData pageData = new NotificationPageData();
+			NotificationPageData notificationPageData = new NotificationPageData();
 			Notification notification = new Notification();
 			notification.setUser(UIUtil.getSessionUser());
-			pageData.setStartIndex(this.pageData.getStartIndex());
-			pageData.setEndIndex(this.pageData.getEndIndex());
-			pageData.setNotification(notification);
-			Backend.message.setData(pageData);
+			notificationPageData.setStartIndex(this.pageData.getStartIndex());
+			notificationPageData.setEndIndex(this.pageData.getEndIndex());
+			notificationPageData.setNotification(notification);
+			Backend.message.setData(notificationPageData);
 			JsonObject responseObject = (JsonObject) backend.doPostRespondData(Notification[].class);
 			Notification[] data = Backend.gson.fromJson(responseObject.get(Constant.LIST).getAsJsonArray(), Notification[].class);
 			list = (List<T>) Arrays.asList(data);

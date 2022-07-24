@@ -12,6 +12,7 @@ public class UIConstant {
 	public static final String NAVIGATOR = "navigator";
 	
 	public static final String DATA_TIME_FORMAT = "yyyyMMddhhmmss";
+	public static final String MESSAGE_TIME_FORMAT = "dd-MM-yyyy hh:mm:ss";
 	public static final String NUMBER_30 = "30";
 	public static final String MODULE = "module";
 	public static final String AES = "AES";
@@ -20,6 +21,8 @@ public class UIConstant {
 	public static final String EMPTY = "";
 	public static final String COMMA = ",";
 	public static final String COUNT = "Count";
+	public static final String COLON = ":";
+	public static final String COLON_COLON = " :: ";
 	
 	public static final String REQUIRED_MANDATORY_FIELD = "Required Field is Empty";
 	public static final String INVALID_PASSWORD = "Invalid Password";

@@ -2,16 +2,16 @@ package com.sonar.vishal.medico.common.pojo;
 
 public class Password {
 
-	private String password;
+	private String oldPassword;
 	private String newPassword;
 	private String confirmPassword;
 
 	public String getPassword() {
-		return password;
+		return oldPassword;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.oldPassword = password;
 	}
 
 	public String getNewPassword() {

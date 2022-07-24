@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Projections;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.Bill;
@@ -161,6 +162,11 @@ public class BillLogic implements BusinessLogic {
 		}
 		message.getHeader().setType(Constant.RESPONSE);
 		return message;
+	}
+
+	@Override
+	public Data fromJson(JsonObject dataObject) {
+		return gson.fromJson(dataObject, BillData.class);
 	}
 
 }

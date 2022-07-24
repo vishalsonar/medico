@@ -7,9 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Restrictions;
 
+import com.google.gson.JsonObject;
 import com.sonar.vishal.medico.common.message.common.Constant;
 import com.sonar.vishal.medico.common.message.common.Message;
 import com.sonar.vishal.medico.common.pojo.User;
+import com.sonar.vishal.medico.common.structure.Data;
 import com.sonar.vishal.medico.common.structure.LoginData;
 import com.sonar.vishal.medico.common.structure.UserData;
 import com.sonar.vishal.medico.common.util.Hashing;
@@ -86,5 +88,10 @@ public class LoginLogic extends BusinessLogicAdapter {
 		}
 		message.getHeader().setType(Constant.RESPONSE);
 		return message;
+	}
+	
+	@Override
+	public Data fromJson(JsonObject dataObject) {
+		return gson.fromJson(dataObject, LoginData.class);
 	}
 }
